@@ -1,0 +1,25 @@
+# API keys - never commit these
+.env
+
+# Generated site (too large, rebuilt locally)
+site/
+
+# Raw scraped data (large, reproducible)
+data/raw/
+data/images/
+data/update_log.jsonl
+data/update_state.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.Python
+
+# LaTeX auxiliary files
+report.aux
+report.log
+report.out
+
+# macOS
+.DS_Store

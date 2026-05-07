@@ -1,0 +1,185 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{times}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{parskip}
+\usepackage{microtype}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, fit, backgrounds}
+
+\hypersetup{colorlinks=true, linkcolor=black, urlcolor=blue}
+
+\titlespacing{\section}{0pt}{8pt}{4pt}
+\titlespacing{\subsection}{0pt}{6pt}{2pt}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}
+
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+% ── Title ──────────────────────────────────────────────────────────────────────
+\begin{center}
+  {\LARGE \textbf{Building a Self-Updating Personal Knowledge Base with LLMs}}\\[6pt]
+  {\large A Global Bread Encyclopedia Powered by Claude}\\[4pt]
+  {\normalsize May 2026}
+\end{center}
+
+\hrule
+\vspace{6pt}
+
+% ── Abstract ───────────────────────────────────────────────────────────────────
+\textbf{Abstract.}
+We present a self-updating personal knowledge base focused on global bread culture, implemented following the LLM-as-compiler workflow described by Karpathy. The system automatically ingests data from Wikipedia and web sources, uses Claude to synthesize raw content into structured Markdown entries organized by country and bread type, and exposes a CLI query interface and browser-based frontend. A tiered auto-update scheduler refreshes individual entries monthly and discovers new categories annually. We compiled an initial corpus of 20 bread entries across 5 countries, demonstrating that LLMs can reliably maintain a structured, cross-linked knowledge wiki with minimal human intervention.
+
+\vspace{4pt}
+\hrule
+\vspace{4pt}
+
+% ── 1. Introduction ────────────────────────────────────────────────────────────
+\section{Introduction}
+
+The core insight behind LLM-powered knowledge bases is that language models excel not only at answering questions, but at \textit{organizing} knowledge---converting messy, heterogeneous raw data into clean, interlinked structured documents. Following Karpathy's workflow, we treat the LLM as a ``compiler'' that reads raw source documents from a \texttt{raw/} directory and incrementally builds a wiki of \texttt{.md} files, maintaining summaries, backlinks, and cross-references automatically.
+
+We selected \textbf{global bread culture} as our knowledge domain. Bread is ideal for this exercise: it is well-documented across Wikipedia, recipe sites, and food blogs; it has a natural hierarchical structure (country $\rightarrow$ bread type $\rightarrow$ knowledge); and it has enough cross-cutting concepts (fermentation, leavening agents, regional variations) to make cross-linking interesting. The resulting system covers 5 countries and 20 bread types, with each entry containing standardized sections for history, recipe, cultural context, and references.
+
+% ── 2. System Architecture ─────────────────────────────────────────────────────
+\section{System Architecture}
+
+The system is organized into five decoupled modules:
+
+\vspace{4pt}
+
+% TikZ Architecture Diagram
+\begin{center}
+\begin{tikzpicture}[
+  node distance=0.5cm and 0.8cm,
+  box/.style={rectangle, rounded corners=3pt, draw=black, fill=gray!10,
+              text width=2.6cm, align=center, minimum height=0.7cm, font=\small},
+  arrow/.style={-{Stealth[length=5pt]}, thick},
+  label/.style={font=\footnotesize\itshape}
+]
+
+\node[box, fill=blue!12] (ingest) {Ingestion Layer\\{\tiny \texttt{ingest\_data.py}}};
+\node[box, fill=orange!15, right=of ingest] (raw) {Raw Store\\{\tiny \texttt{data/raw/}}};
+\node[box, fill=green!12, right=of raw] (compiler) {LLM Compiler\\{\tiny \texttt{build\_kb.py}}};
+\node[box, fill=purple!12, right=of compiler] (kb) {Knowledge Base\\{\tiny \texttt{knowledge\_base/}}};
+
+\node[box, fill=red!10, below=0.7cm of kb] (linter) {Linter\\{\tiny \texttt{linter.py}}};
+\node[box, fill=teal!12, below=0.7cm of ingest] (updater) {Scheduler\\{\tiny \texttt{updater.py}}};
+\node[box, fill=yellow!15, below=0.7cm of compiler] (query) {Query / UI\\{\tiny \texttt{query.py}}};
+
+\draw[arrow] (ingest) -- (raw);
+\draw[arrow] (raw) -- (compiler);
+\draw[arrow] (compiler) -- (kb);
+\draw[arrow] (kb) -- (linter);
+\draw[arrow] (kb) -- (query);
+\draw[arrow] (updater) -- (ingest);
+\draw[arrow] (updater) to[bend right=20] (compiler);
+\draw[arrow, dashed] (linter) to[bend left=15] (kb);
+
+\end{tikzpicture}
+\end{center}
+
+\vspace{4pt}
+
+\begin{itemize}[leftmargin=*, itemsep=2pt]
+  \item \textbf{Ingestion Layer} (\texttt{ingest\_data.py}): scrapes Wikipedia and public recipe sites using \texttt{requests} and \texttt{BeautifulSoup}, downloads images locally, and saves structured JSON to \texttt{data/raw/\textless country\textgreater/\textless bread\textgreater/}.
+  \item \textbf{LLM Compiler} (\texttt{build\_knowledge\_base.py}): reads raw JSON, calls Claude to synthesize multiple sources into a single \texttt{.md} file, or \textit{merges} new sources into an existing entry without full rewrite.
+  \item \textbf{Knowledge Base}: flat-file Markdown store at \texttt{knowledge\_base/\textless Country\textgreater/\textless bread\textgreater.md}, each with 9 required sections and YAML frontmatter.
+  \item \textbf{Auto-Updater} (\texttt{updater.py}): monthly bread refresh + yearly category discovery, with per-entry timestamps to skip recently-updated entries.
+  \item \textbf{Query / UI}: a \texttt{click}-based CLI (\texttt{ask}, \texttt{compare}, \texttt{recipe}, \texttt{browse}, \texttt{search}) and a static HTML site generator served at \texttt{localhost:8000}.
+\end{itemize}
+
+% ── 3. Implementation ──────────────────────────────────────────────────────────
+\section{Implementation}
+
+\subsection{LLM Compiler Design}
+
+We use two Claude models with different roles. \textbf{Claude Opus 4.7} handles first-pass compilation, where quality matters most: it receives all raw sources for a bread and produces the full structured Markdown document in one call. \textbf{Claude Sonnet 4.6} handles incremental merges and query answering, where speed and cost are more important. \textit{Prompt caching} (Anthropic's \texttt{cache\_control: ephemeral}) is applied to all system prompts, reducing token costs by approximately 80\% on repeated calls within a session.
+
+The compilation prompt enforces a strict 9-section schema:
+
+\vspace{2pt}
+\begin{center}
+\small
+\texttt{Overview $\mid$ Origin \& Country $\mid$ History \& Evolution $\mid$ Recipe $\mid$ Variations $\mid$ Cultural Context $\mid$ Images $\mid$ Related Breads $\mid$ References}
+\end{center}
+\vspace{2pt}
+
+A separate cross-linking pass scans all compiled entries and converts plain-text bread mentions into \texttt{[[wiki-link]]} syntax, making the corpus Obsidian-compatible.
+
+\subsection{Data Quality: The Linter}
+
+After each update cycle, \texttt{linter.py} runs two check layers: (1) \textit{rule-based} checks (regex) for missing required sections, broken image paths, and empty reference lists; (2) \textit{LLM-based} checks where Claude reviews each entry for factual inconsistencies, missing cultural context, and cross-link opportunities. Results are written to \texttt{lint\_report.md}.
+
+\subsection{Storage Schema}
+
+Each Markdown file begins with YAML frontmatter (\texttt{title}, \texttt{country}, \texttt{tags}, \texttt{last\_updated}), followed by the nine content sections. The file tree is:
+
+\vspace{2pt}
+{\small
+\begin{verbatim}
+knowledge_base/
+  France/baguette.md  brioche.md  croissant.md  ...
+  Italy/ciabatta.md   focaccia.md  grissini.md  ...
+  USA/sourdough.md    bagel.md     cornbread.md ...
+  Germany/pumpernickel.md  rye_bread.md  ...
+  India/naan.md  chapati.md  parotta.md  ...
+\end{verbatim}
+}
+
+% ── 4. Results ─────────────────────────────────────────────────────────────────
+\section{Results and What Worked}
+
+\begin{tabularx}{\linewidth}{lX}
+\toprule
+\textbf{Component} & \textbf{Outcome} \\
+\midrule
+Wikipedia ingestion & Reliable for all 20 breads; rich body text + image extraction \\
+LLM synthesis & High-quality structured output; recipe tables, history timelines, cultural narratives \\
+Cross-linking & Automatic; all entries link related breads via \texttt{[[wiki-links]]} \\
+Query interface & \texttt{compare}, \texttt{recipe}, \texttt{browse} commands return accurate, well-formatted answers \\
+Web frontend & Rendered all 20 entries with sidebar navigation, search filter, and tag display \\
+Scheduler & Correctly tracks per-entry update timestamps; skips recently-refreshed entries \\
+\bottomrule
+\end{tabularx}
+
+\vspace{4pt}
+
+The LLM compiler's merge mode (update without full rewrite) worked particularly well: it identified genuinely new information in re-ingested sources and integrated it without duplicating existing content.
+
+% ── 5. Limitations & Future Work ───────────────────────────────────────────────
+\section{Limitations and Future Improvements}
+
+\textbf{Limitations encountered:}
+\begin{itemize}[leftmargin=*, itemsep=1pt]
+  \item Recipe sites (The Spruce Eats, AllRecipes) returned \texttt{402 Payment Required}, limiting secondary sources to Wikipedia only for most entries.
+  \item Several LLM outputs were wrapped in a \texttt{```markdown} code fence, causing raw-text display in the web UI; this required a post-processing cleanup step and a prompt fix.
+  \item Python 3.9 (Anaconda default) does not support the \texttt{X | Y} union type syntax introduced in 3.10, requiring \texttt{from \_\_future\_\_ import annotations} across all modules.
+\end{itemize}
+
+\textbf{Future improvements:}
+\begin{itemize}[leftmargin=*, itemsep=1pt]
+  \item \textbf{RAG / vector search}: embed all entries with a text embedding model and use FAISS or ChromaDB for semantic retrieval, enabling the query layer to scale beyond the context window.
+  \item \textbf{Fine-tuning}: once the corpus is large enough ($\sim$500+ entries), fine-tune a small model to internalize the knowledge base in its weights rather than relying solely on context injection.
+  \item \textbf{Image understanding}: use Claude's vision API to analyze downloaded bread images and automatically populate the Images section with descriptive captions and visual characteristics.
+  \item \textbf{Multi-language support}: generate parallel entries in French, Italian, and German to make the knowledge base accessible to native speakers and capture region-specific terminology.
+  \item \textbf{Recommendation system}: build a bread-similarity graph from ingredient and technique overlap, enabling ``users who like sourdough may also enjoy\ldots'' functionality.
+  \item \textbf{Richer ingestion}: integrate the Semantic Scholar or CrossRef API for academic papers on bread science, and YouTube transcript API for video recipe ingestion.
+\end{itemize}
+
+\vspace{6pt}
+\hrule
+\vspace{4pt}
+
+{\small \textbf{Code:} All source code (\texttt{ingest\_data.py}, \texttt{build\_knowledge\_base.py}, \texttt{query.py}, \texttt{updater.py}, \texttt{linter.py}, \texttt{web\_ui.py}) is available in the project directory. The knowledge base currently contains 20 compiled entries totalling approximately 80,000 words of structured content.}
+
+\end{document}
