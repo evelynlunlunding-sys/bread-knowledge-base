@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Croissant — Bread Knowledge Base</title>
+  <style>
+    :root {
+      --bg: #fdf8f0; --surface: #fff; --text: #2c2416;
+      --accent: #c07a2a; --sidebar-bg: #3b2a1a; --sidebar-text: #f5e6d0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Georgia', serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; }
+    #sidebar { width: 260px; min-height: 100vh; background: var(--sidebar-bg); color: var(--sidebar-text); padding: 24px 16px; position: fixed; overflow-y: auto; }
+    #sidebar h1 { font-size: 1.1rem; margin-bottom: 4px; color: var(--accent); }
+    #sidebar .tagline { font-size: 0.75rem; opacity: 0.7; margin-bottom: 20px; }
+    #sidebar input { width: 100%; padding: 6px 8px; border-radius: 4px; border: none; font-size: 0.85rem; margin-bottom: 16px; }
+    #sidebar details summary { cursor: pointer; font-weight: bold; padding: 4px 0; color: var(--accent); font-size: 0.9rem; }
+    #sidebar ul { list-style: none; padding-left: 12px; margin-top: 4px; }
+    #sidebar ul li a { color: var(--sidebar-text); text-decoration: none; font-size: 0.85rem; line-height: 1.9; opacity: 0.85; }
+    #sidebar ul li a:hover { color: var(--accent); opacity: 1; }
+    #main { margin-left: 260px; flex: 1; padding: 40px 60px; max-width: 900px; }
+    #main h1 { font-size: 2rem; color: var(--text); border-bottom: 2px solid var(--accent); padding-bottom: 8px; margin-bottom: 24px; }
+    #main h2 { font-size: 1.4rem; margin-top: 32px; margin-bottom: 12px; color: var(--accent); }
+    #main h3 { font-size: 1.1rem; margin-top: 20px; margin-bottom: 8px; }
+    #main p { line-height: 1.8; margin-bottom: 12px; }
+    #main table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+    #main th { background: var(--accent); color: white; padding: 8px 12px; text-align: left; }
+    #main td { padding: 7px 12px; border-bottom: 1px solid #e8d5b0; }
+    #main tr:nth-child(even) td { background: #faf4e8; }
+    #main ul, #main ol { padding-left: 24px; margin-bottom: 12px; line-height: 1.9; }
+    #main img { max-width: 100%; border-radius: 6px; margin: 12px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+    #main code { background: #f0e8d5; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 0.9em; }
+    #main pre { background: #f0e8d5; padding: 16px; border-radius: 6px; overflow-x: auto; margin: 12px 0; }
+    #main blockquote { border-left: 3px solid var(--accent); padding-left: 16px; color: #5a4030; margin: 12px 0; }
+    .tag { display: inline-block; background: var(--accent); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin: 2px; }
+    .frontmatter { background: #faf0d8; border: 1px solid #e0c890; border-radius: 6px; padding: 12px 16px; margin-bottom: 24px; font-size: 0.85rem; }
+    a { color: var(--accent); }
+    @media (max-width: 768px) { #sidebar { display: none; } #main { margin-left: 0; padding: 24px 20px; } }
+  </style>
+</head>
+<body>
+  <nav id="sidebar">
+    <h1>🍞 Bread KB</h1>
+    <p class="tagline">Global Bread Knowledge Base</p>
+    <input type="text" id="search" placeholder="Search breads…" oninput="filterNav(this.value)">
+    <div id="nav"><details open><summary>🏳 France</summary><ul>
+<li><a href="../France/baguette.html">Baguette</a></li>
+<li><a href="../France/brioche.html">Brioche</a></li>
+<li><a href="../France/croissant.html">Croissant</a></li>
+<li><a href="../France/pain_de_campagne.html">Pain De Campagne</a></li>
+</ul></details>
+<details open><summary>🏳 Germany</summary><ul>
+<li><a href="../Germany/pretzel.html">Pretzel</a></li>
+<li><a href="../Germany/pumpernickel.html">Pumpernickel</a></li>
+<li><a href="../Germany/rye_bread.html">Rye Bread</a></li>
+<li><a href="../Germany/vollkornbrot.html">Vollkornbrot</a></li>
+</ul></details>
+<details open><summary>🏳 India</summary><ul>
+<li><a href="../India/chapati.html">Chapati</a></li>
+<li><a href="../India/naan.html">Naan</a></li>
+<li><a href="../India/parotta.html">Parotta</a></li>
+<li><a href="../India/pav.html">Pav</a></li>
+</ul></details>
+<details open><summary>🏳 Italy</summary><ul>
+<li><a href="../Italy/ciabatta.html">Ciabatta</a></li>
+<li><a href="../Italy/focaccia.html">Focaccia</a></li>
+<li><a href="../Italy/grissini.html">Grissini</a></li>
+<li><a href="../Italy/pane_di_casa.html">Pane Di Casa</a></li>
+</ul></details>
+<details open><summary>🏳 USA</summary><ul>
+<li><a href="../USA/bagel.html">Bagel</a></li>
+<li><a href="../USA/cornbread.html">Cornbread</a></li>
+<li><a href="../USA/pretzel.html">Pretzel</a></li>
+<li><a href="../USA/sourdough.html">Sourdough</a></li>
+</ul></details></div>
+  </nav>
+  <main id="main">
+    <div class="frontmatter"><strong>Country:</strong> France &nbsp;|&nbsp; <strong>Updated:</strong> 2025-01-20 &nbsp;|&nbsp; <span class="tag">viennoiserie</span> <span class="tag">laminated-dough</span> <span class="tag">breakfast</span> <span class="tag">pastry</span> <span class="tag">french-bread</span> <span class="tag">butter</span> <span class="tag">yeast-leavened</span></div><h1>Croissant</h1>
+<h2>Overview</h2>
+<p>The croissant is an iconic French <em>viennoiserie</em> — a crescent-shaped pastry made from a laminated, yeast-leavened dough that occupies a delicious middle ground between bread and puff pastry. Characterized by its golden, flaky exterior and tender, honeycombed interior, the croissant achieves its signature texture through <em>lamination</em>: the painstaking process of folding sheets of butter into dough to create dozens of paper-thin alternating layers. Buttery, aromatic, and architecturally complex, it is a staple of the European continental breakfast and a benchmark by which bakers around the world measure their craft.</p>
+<h2>Origin &amp; Country</h2>
+<p>While the croissant is unambiguously French in its modern form, its lineage is Austrian. The pastry descends from the Viennese <strong>kipferl</strong>, a crescent-shaped baked good documented in Austria since at least the 13th century. The transformation from kipferl to croissant occurred in Paris during the 19th and early 20th centuries, making the croissant a cultural hybrid: an Austrian silhouette executed with French pastry technique.</p>
+<ul>
+<li><strong>Country of origin (modern form):</strong> France</li>
+<li><strong>Ancestral origin:</strong> Austria (Vienna)</li>
+<li><strong>Category:</strong> Viennoiserie (laminated yeast pastry)</li>
+</ul>
+<h2>History &amp; Evolution</h2>
+<h3>Ancient and Medieval Roots</h3>
+<p>Crescent-shaped breads have been baked in Europe since at least the Renaissance, and crescent-shaped cakes may date back to antiquity. The Austrian <strong>kipferl</strong> — plain, or filled with nuts and other ingredients — is documented from the 13th century onward and is considered a culinary cousin of pastries like rugelach.</p>
+<h3>The Viennese Bakery in Paris</h3>
+<p>The pivotal moment in croissant history came in 1838 or 1839, when Austrian artillery officer <strong>August Zang</strong> opened the <em>Boulangerie Viennoise</em> at 92, rue de Richelieu, Paris. The bakery served Viennese specialties — the kipferl and the Vienna loaf among them — and quickly became fashionable. It inspired a wave of French imitators and effectively gave birth to the concept of <em>viennoiserie</em>. Although Zang returned to Austria in 1848 to pursue a career as a press magnate, his bakery's influence endured, and contemporary writers praised "the succulent products of the Boulangerie Viennoise."</p>
+<h3>Becoming French</h3>
+<p>The French adaptation of the kipferl was named for its shape: <em>croissant</em> ("crescent"). The word appears in print as early as 1853, listed among "fantasy or luxury breads," and references to croissants as an established French bread go back to around 1850. Early 19th-century recipes describe non-laminated versions. The decisive innovation — substituting the kipferl's brioche-style dough with a <strong>yeast-leavened laminated dough</strong> — took place in the early 20th century. The first known recipe matching the modern croissant appears in <strong>1905</strong>.</p>
+<h3>Industrialization and Globalization</h3>
+<p>In the late 1970s, the croissant entered a new era with the development of <strong>factory-made, frozen, preformed dough</strong>. This allowed unskilled bakery staff to produce fresh-baked croissants on demand, fueling the rise of croissant-focused fast-food chains such as <strong>La Croissanterie</strong> — France's answer to American fast food. By 2008, an estimated <strong>30–40% of croissants</strong> sold in French bakeries and patisseries were baked from frozen dough. The croissant's appeal has since become global, finding a place on breakfast tables from Tokyo to New York.</p>
+<h2>Recipe</h2>
+<p>This recipe yields approximately <strong>12 classic croissants</strong>. Plan ahead: the process spans roughly 12–24 hours due to multiple chilling stages.</p>
+<h3>Ingredients</h3>
+<p><strong>Détrempe (base dough):</strong><br />
+| Ingredient | Quantity |<br />
+|---|---|<br />
+| Bread flour | 500 g |<br />
+| Whole milk (cold) | 140 ml |<br />
+| Water (cold) | 140 ml |<br />
+| Granulated sugar | 55 g |<br />
+| Salt | 12 g |<br />
+| Instant yeast | 11 g |<br />
+| Unsalted butter (softened) | 40 g |</p>
+<p><strong>Beurrage (butter block):</strong><br />
+| Ingredient | Quantity |<br />
+|---|---|<br />
+| High-fat European-style unsalted butter | 280 g |</p>
+<p><strong>Egg wash:</strong><br />
+| Ingredient | Quantity |<br />
+|---|---|<br />
+| Egg | 1 |<br />
+| Milk | 1 tbsp |</p>
+<h3>Method</h3>
+<ol>
+<li>
+<p><strong>Mix the détrempe.</strong> Combine flour, milk, water, sugar, salt, yeast, and softened butter. Knead briefly until a shaggy but cohesive dough forms — avoid developing too much gluten. Shape into a flat rectangle, wrap, and refrigerate at least 6 hours (preferably overnight).</p>
+</li>
+<li>
+<p><strong>Prepare the butter block.</strong> Pound and shape the cold butter between two sheets of parchment into a 20 × 15 cm rectangle of even thickness. Chill until firm but pliable.</p>
+</li>
+<li>
+<p><strong>Lock in the butter.</strong> Roll the détrempe into a rectangle roughly twice the size of the butter block. Place the butter on one half, fold the dough over, and seal the edges.</p>
+</li>
+<li>
+<p><strong>Laminate (three folds).</strong> Roll the dough into a long rectangle (about 60 cm long), then fold in thirds like a letter. Wrap and chill 30–45 minutes. Repeat this rolling and folding <strong>two more times</strong>, chilling between each turn. The dough will end up with <strong>27 layers</strong> of butter.</p>
+</li>
+<li>
+<p><strong>Shape.</strong> Roll the laminated dough to roughly 4 mm thick. Cut into long isosceles triangles (about 10 cm wide at the base, 25 cm tall). Make a small notch in the base of each triangle, then roll from base to tip, gently stretching as you go. Curve the ends inward to form a crescent.</p>
+</li>
+<li>
+<p><strong>Proof.</strong> Place on a parchment-lined tray, brush with egg wash, and proof at warm room temperature (24–26 °C, never warmer or the butter will leak) for 2–3 hours, until visibly puffy and jiggly.</p>
+</li>
+<li>
+<p><strong>Bake.</strong> Brush again with egg wash. Bake at <strong>220 °C (425 °F)</strong> for 5 minutes, then reduce to <strong>190 °C (375 °F)</strong> and bake another 12–15 minutes, until deeply golden and crisp. Cool on a rack.</p>
+</li>
+</ol>
+<h2>Variations</h2>
+<ul>
+<li><strong>Croissant au beurre</strong> — Made entirely with butter; the gold standard. Traditionally shaped straight (not curved) to distinguish from margarine versions.</li>
+<li><strong>Croissant ordinaire</strong> — Made with margarine or a butter-margarine blend; traditionally shaped curved.</li>
+<li><strong>Pain au chocolat</strong> — Same laminated dough, but rolled rectangular around batons of dark chocolate.</li>
+<li><strong>Pain aux raisins</strong> — A spiral pastry of laminated dough with crème pâtissière and rum-soaked raisins.</li>
+<li><strong>Almond croissant (croissant aux amandes)</strong> — Day-old croissants soaked in syrup, filled with frangipane, topped with sliced almonds, and re-baked.</li>
+<li><strong>Cruffin</strong> — A modern hybrid of croissant dough baked in muffin tins.</li>
+<li><strong>Kipferl</strong> — The Austrian ancestor; smaller, denser, often nut-filled, made without lamination.</li>
+<li><strong>Cornetto</strong> — The Italian cousin; sweeter, softer, often enriched with eggs and lemon zest.</li>
+</ul>
+<h2>Cultural Context</h2>
+<p>In France, the croissant is the cornerstone of the <strong>petit déjeuner</strong>, traditionally enjoyed dunked into a bowl of café au lait or hot chocolate. Buying fresh croissants from the local <em>boulangerie</em> on Sunday morning is a deeply rooted ritual in French family life.</p>
+<p>The croissant has long served as a culinary ambassador, becoming a near-universal symbol of "French" breakfast culture abroad. The 1970s–80s rise of the <strong>croissanterie</strong> — fast-food shops selling filled croissants as sandwiches — represents a uniquely French response to globalization, attempting to reclaim quick-service dining on French gastronomic terms.</p>
+<p>A persistent legend ties the croissant's crescent shape to the 1683 <strong>Siege of Vienna</strong>, claiming Viennese bakers shaped pastries to mock the Ottoman crescent after the city's deliverance. Most food historians regard this as charming folklore rather than fact, though it endures in popular retellings.</p>
+<p>The croissant also carries class and quality signifiers: the distinction between <em>au beurre</em> (curved-shape rule reversed by tradition: straight) and <em>ordinaire</em> (curved) reflects France's deep concern with provenance and authenticity. In 2008, knowing that nearly half of all "fresh" croissants came from frozen dough sparked debate about artisanal craft versus industrial convenience — a tension still alive in French baking today.</p>
+<h2>Images</h2>
+<p><em>Image placeholders — to be added:</em><br />
+- Cross-section of a croissant showing honeycomb lamination<br />
+- Tray of golden croissants fresh from the oven<br />
+- Step-by-step lamination process (butter block, letter fold, rolled triangles)<br />
+- Historical photograph or engraving of the Boulangerie Viennoise on rue de Richelieu<br />
+- Traditional French breakfast: croissant, café au lait, confiture</p>
+<h2>Related Breads</h2>
+<ul>
+<li>Kipferl — The Austrian crescent ancestor</li>
+<li>Pain au chocolat — Sister viennoiserie with chocolate</li>
+<li>Pain aux raisins — Spiraled cousin with custard and raisins</li>
+<li>Brioche — Predecessor enriched dough used in early kipferl-style pastries</li>
+<li>Vienna loaf — Another product of August Zang's Parisian bakery</li>
+<li>Rugelach — Jewish pastry sometimes considered a form of kipferl</li>
+<li>Puff pastry (pâte feuilletée) — Non-yeasted laminated dough relative</li>
+<li>Danish pastry (wienerbrød) — Scandinavian viennoiserie with shared lamination heritage</li>
+</ul>
+<h2>References</h2>
+<ol>
+<li>Wikipedia contributors. "Croissant." <em>Wikipedia, The Free Encyclopedia.</em> Retrieved from https://en.wikipedia.org/wiki/croissant</li>
+<li>Chevallier, Jim. <em>August Zang and the French Croissant: How Viennoiserie Came to France</em> (cited via Wikipedia).</li>
+<li>Historical references to <em>Boulangerie Viennoise</em>, 92 rue de Richelieu, Paris (1838–1839), as documented in 19th-century French periodicals.</li>
+<li>Earliest recorded laminated croissant recipe, 1905 (cited via Wikipedia).</li>
+<li>Industry data on frozen croissant production in France, c. 2008 (cited via Wikipedia).</li>
+</ol>
+  </main>
+  <script>
+    function filterNav(q) {
+      q = q.toLowerCase();
+      document.querySelectorAll('#nav li').forEach(li => {
+        li.style.display = li.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+      document.querySelectorAll('#nav details').forEach(d => {
+        const visible = [...d.querySelectorAll('li')].some(li => li.style.display !== 'none');
+        d.style.display = visible || !q ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

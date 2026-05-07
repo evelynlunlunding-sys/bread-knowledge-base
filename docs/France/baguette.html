@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baguette — Bread Knowledge Base</title>
+  <style>
+    :root {
+      --bg: #fdf8f0; --surface: #fff; --text: #2c2416;
+      --accent: #c07a2a; --sidebar-bg: #3b2a1a; --sidebar-text: #f5e6d0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Georgia', serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; }
+    #sidebar { width: 260px; min-height: 100vh; background: var(--sidebar-bg); color: var(--sidebar-text); padding: 24px 16px; position: fixed; overflow-y: auto; }
+    #sidebar h1 { font-size: 1.1rem; margin-bottom: 4px; color: var(--accent); }
+    #sidebar .tagline { font-size: 0.75rem; opacity: 0.7; margin-bottom: 20px; }
+    #sidebar input { width: 100%; padding: 6px 8px; border-radius: 4px; border: none; font-size: 0.85rem; margin-bottom: 16px; }
+    #sidebar details summary { cursor: pointer; font-weight: bold; padding: 4px 0; color: var(--accent); font-size: 0.9rem; }
+    #sidebar ul { list-style: none; padding-left: 12px; margin-top: 4px; }
+    #sidebar ul li a { color: var(--sidebar-text); text-decoration: none; font-size: 0.85rem; line-height: 1.9; opacity: 0.85; }
+    #sidebar ul li a:hover { color: var(--accent); opacity: 1; }
+    #main { margin-left: 260px; flex: 1; padding: 40px 60px; max-width: 900px; }
+    #main h1 { font-size: 2rem; color: var(--text); border-bottom: 2px solid var(--accent); padding-bottom: 8px; margin-bottom: 24px; }
+    #main h2 { font-size: 1.4rem; margin-top: 32px; margin-bottom: 12px; color: var(--accent); }
+    #main h3 { font-size: 1.1rem; margin-top: 20px; margin-bottom: 8px; }
+    #main p { line-height: 1.8; margin-bottom: 12px; }
+    #main table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+    #main th { background: var(--accent); color: white; padding: 8px 12px; text-align: left; }
+    #main td { padding: 7px 12px; border-bottom: 1px solid #e8d5b0; }
+    #main tr:nth-child(even) td { background: #faf4e8; }
+    #main ul, #main ol { padding-left: 24px; margin-bottom: 12px; line-height: 1.9; }
+    #main img { max-width: 100%; border-radius: 6px; margin: 12px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+    #main code { background: #f0e8d5; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 0.9em; }
+    #main pre { background: #f0e8d5; padding: 16px; border-radius: 6px; overflow-x: auto; margin: 12px 0; }
+    #main blockquote { border-left: 3px solid var(--accent); padding-left: 16px; color: #5a4030; margin: 12px 0; }
+    .tag { display: inline-block; background: var(--accent); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin: 2px; }
+    .frontmatter { background: #faf0d8; border: 1px solid #e0c890; border-radius: 6px; padding: 12px 16px; margin-bottom: 24px; font-size: 0.85rem; }
+    a { color: var(--accent); }
+    @media (max-width: 768px) { #sidebar { display: none; } #main { margin-left: 0; padding: 24px 20px; } }
+  </style>
+</head>
+<body>
+  <nav id="sidebar">
+    <h1>🍞 Bread KB</h1>
+    <p class="tagline">Global Bread Knowledge Base</p>
+    <input type="text" id="search" placeholder="Search breads…" oninput="filterNav(this.value)">
+    <div id="nav"><details open><summary>🏳 France</summary><ul>
+<li><a href="../France/baguette.html">Baguette</a></li>
+<li><a href="../France/brioche.html">Brioche</a></li>
+<li><a href="../France/croissant.html">Croissant</a></li>
+<li><a href="../France/pain_de_campagne.html">Pain De Campagne</a></li>
+</ul></details>
+<details open><summary>🏳 Germany</summary><ul>
+<li><a href="../Germany/pretzel.html">Pretzel</a></li>
+<li><a href="../Germany/pumpernickel.html">Pumpernickel</a></li>
+<li><a href="../Germany/rye_bread.html">Rye Bread</a></li>
+<li><a href="../Germany/vollkornbrot.html">Vollkornbrot</a></li>
+</ul></details>
+<details open><summary>🏳 India</summary><ul>
+<li><a href="../India/chapati.html">Chapati</a></li>
+<li><a href="../India/naan.html">Naan</a></li>
+<li><a href="../India/parotta.html">Parotta</a></li>
+<li><a href="../India/pav.html">Pav</a></li>
+</ul></details>
+<details open><summary>🏳 Italy</summary><ul>
+<li><a href="../Italy/ciabatta.html">Ciabatta</a></li>
+<li><a href="../Italy/focaccia.html">Focaccia</a></li>
+<li><a href="../Italy/grissini.html">Grissini</a></li>
+<li><a href="../Italy/pane_di_casa.html">Pane Di Casa</a></li>
+</ul></details>
+<details open><summary>🏳 USA</summary><ul>
+<li><a href="../USA/bagel.html">Bagel</a></li>
+<li><a href="../USA/cornbread.html">Cornbread</a></li>
+<li><a href="../USA/pretzel.html">Pretzel</a></li>
+<li><a href="../USA/sourdough.html">Sourdough</a></li>
+</ul></details></div>
+  </nav>
+  <main id="main">
+    <div class="frontmatter"><strong>Country:</strong> France &nbsp;|&nbsp; <strong>Updated:</strong> 2026-05-06 &nbsp;|&nbsp; <span class="tag">french</span> <span class="tag">yeast</span> <span class="tag">wheat</span> <span class="tag">crispy-crust</span> <span class="tag">lean-dough</span> <span class="tag">iconic</span></div><h1>Baguette</h1>
+<h2>Overview</h2>
+<p>The baguette (<em>French: "wand" or "stick"</em>) is a long, thin loaf of French bread distinguished by its crispy golden crust, soft honeycomb interior, and iconic shape. Made from just four ingredients — flour, water, salt, and yeast — it exemplifies the French belief that perfect bread requires quality ingredients and careful technique rather than complexity. A UNESCO Intangible Cultural Heritage since 2022, the baguette is France's national bread and one of the world's most recognized food symbols.</p>
+<h2>Origin &amp; Country</h2>
+<p><strong>Country:</strong> France<br />
+<strong>City:</strong> Paris<br />
+<strong>Legal Definition:</strong> Defined by French law (<em>Décret Pain</em>, 1993) — must be made on-site from flour, water, salt, and yeast only<br />
+<strong>UNESCO Status:</strong> Inscribed on Intangible Cultural Heritage list, <strong>November 2022</strong></p>
+<h2>History &amp; Evolution</h2>
+<table>
+<thead>
+<tr>
+<th>Period</th>
+<th>Event</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1839</td>
+<td>August Zang opens a Viennese bakery in Paris, introducing steam-baked bread</td>
+</tr>
+<tr>
+<td>1920</td>
+<td>French labor law bans bakers from working before 4 AM — thin loaves that bake quickly gain favor</td>
+</tr>
+<tr>
+<td>1920s–1930s</td>
+<td>The elongated baguette shape becomes standardized in Paris</td>
+</tr>
+<tr>
+<td>1993</td>
+<td>French government issues the <em>Décret Pain</em> protecting traditional baguette ingredients</td>
+</tr>
+<tr>
+<td>1994</td>
+<td>Paris city government organizes the first annual Grand Prix de la Baguette</td>
+</tr>
+<tr>
+<td>2022</td>
+<td>UNESCO inscribes French baguette craft on Intangible Cultural Heritage list</td>
+</tr>
+</tbody>
+</table>
+<p>The 1920 labor law is often cited as the practical reason baguettes became so long and thin: bakers could not start work before 4 AM but had to supply morning customers. A thin baguette bakes in 15–20 minutes versus 45+ minutes for a round loaf, solving the timing problem.</p>
+<h2>Recipe</h2>
+<h3>Ingredients</h3>
+<p><em>(Traditional French bakery method — makes 3 baguettes)</em></p>
+<table>
+<thead>
+<tr>
+<th>Ingredient</th>
+<th>Amount</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>French Type 65 flour (or bread flour)</td>
+<td>500 g</td>
+</tr>
+<tr>
+<td>Water (cold, 4–8 °C)</td>
+<td>350 ml</td>
+</tr>
+<tr>
+<td>Instant yeast</td>
+<td>4 g</td>
+</tr>
+<tr>
+<td>Fine sea salt</td>
+<td>10 g</td>
+</tr>
+</tbody>
+</table>
+<h3>Method</h3>
+<ol>
+<li>
+<p><strong>Mix:</strong> Combine flour, yeast, and 320 ml cold water. Mix until shaggy (do not over-mix). Rest 30 minutes (autolyse).</p>
+</li>
+<li>
+<p><strong>Add salt:</strong> Dissolve salt in remaining 30 ml water. Fold into dough over 3–4 minutes.</p>
+</li>
+<li>
+<p><strong>Bulk fermentation:</strong> Ferment at 24 °C for 90 minutes with 3 sets of stretch-and-fold every 30 minutes. Then refrigerate 12–16 hours (cold retard builds flavor).</p>
+</li>
+<li>
+<p><strong>Divide &amp; preshape:</strong> Remove from fridge. Divide into 3 equal pieces (~285 g each). Gently preshape into oblongs. Rest 20 min.</p>
+</li>
+<li>
+<p><strong>Shape baguette:</strong><br />
+   - Pat dough into rough rectangle.<br />
+   - Fold top third down, bottom third up (letter fold).<br />
+   - Roll gently to extend to ~40–50 cm, applying even pressure.<br />
+   - Seal the seam with the heel of your hand.</p>
+</li>
+<li>
+<p><strong>Final proof:</strong> Place seam-side down on a linen couche (or baguette pan). Proof 45–60 minutes at room temperature.</p>
+</li>
+<li>
+<p><strong>Score:</strong> Using a <em>lame</em> (razor blade at 30° angle), make 5–7 overlapping diagonal slashes. Work decisively — do not drag.</p>
+</li>
+<li>
+<p><strong>Bake:</strong><br />
+   - Preheat oven to 250 °C (480 °F) with baking stone.<br />
+   - Inject or pour water to create steam (crucial for crust).<br />
+   - Slide baguettes onto stone. Bake 18–22 minutes until deep golden.<br />
+   - Cool on wire rack 10 minutes before eating.</p>
+</li>
+</ol>
+<p><strong>Hydration:</strong> 70 % | <strong>Crumb:</strong> Open, irregular | <strong>Crust:</strong> Shattering crisp</p>
+<h2>Variations</h2>
+<table>
+<thead>
+<tr>
+<th>Variation</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Baguette de tradition</strong></td>
+<td>Made per the 1993 decree; no additives; superior flavor</td>
+</tr>
+<tr>
+<td><strong>Baguette ordinaire</strong></td>
+<td>Standard commercial version; often made with improvers</td>
+</tr>
+<tr>
+<td><strong>Pain au levain</strong></td>
+<td>Sourdough version; more complex flavor; longer shelf life</td>
+</tr>
+<tr>
+<td><strong>Demi-baguette</strong></td>
+<td>Half-length; sold individually or for smaller households</td>
+</tr>
+<tr>
+<td><strong>Ficelle</strong></td>
+<td>Thinner, crispier; even faster bake</td>
+</tr>
+<tr>
+<td><strong>Flûte</strong></td>
+<td>Between ficelle and baguette in size</td>
+</tr>
+<tr>
+<td><strong>Baguette viennoise</strong></td>
+<td>Enriched with milk and sugar; softer crust</td>
+</tr>
+</tbody>
+</table>
+<h2>Cultural Context</h2>
+<p>In France, buying a daily baguette is not grocery shopping — it is a cultural ritual. The French consume approximately <strong>30 million baguettes per day</strong>, with most purchased fresh from the local <em>boulangerie</em> and eaten the same day. A baguette tucked under the arm is a cultural image recognizable worldwide.</p>
+<p>The <em>Grand Prix de la Baguette de Paris</em> is held annually to crown the best baguette in the city. The winning baker earns the right to supply bread to the Élysée Palace (the French presidential residence) for a year.</p>
+<p>The baguette's simplicity is also its paradox: four ingredients, no fat, no eggs — yet infinite variation in outcome depending on flour quality, fermentation time, shaping skill, and oven temperature. Parisian bakers speak of the baguette the way sommeliers speak of wine.</p>
+<h2>Images</h2>
+<p><img alt="Classic baguette with crispy crust" src="../../data/images/france/baguette/baguette_main.jpg" /><br />
+<img alt="Baguette cross-section showing crumb" src="../../data/images/france/baguette/baguette_crumb.jpg" /></p>
+<h2>Related Breads</h2>
+<ul>
+<li>Pain de campagne — French country bread; rustic cousin of the baguette</li>
+<li>Ciabatta — Italian bread created partly as a response to the baguette's dominance</li>
+<li>Sourdough — contrasts with baguette in leavening method but similar artisanal philosophy</li>
+<li>Brioche — enriched French bread; opposite of the lean baguette</li>
+<li>Ficelle — thinner French stick bread</li>
+</ul>
+<h2>References</h2>
+<ol>
+<li>Kaplan, S. L. (2006). <em>Good Bread Is Back: A Contemporary History of French Bread</em>. Duke University Press.</li>
+<li>Child, J., Bertholle, L., &amp; Beck, S. (1961). <em>Mastering the Art of French Cooking</em>. Knopf.</li>
+<li>French Government. (1993). <em>Décret no 93-1074 du 13 septembre 1993 pris pour l'application de la loi du 1er août 1905 en ce qui concerne certaines catégories de pains</em>.</li>
+<li>UNESCO. (2022). "Artisanal know-how and culture of baguette bread in France." Intangible Cultural Heritage. https://ich.unesco.org/en/RL/artisanal-know-how-and-culture-of-baguette-bread-in-france-01947</li>
+<li>Wikipedia contributors. "Baguette." <em>Wikipedia</em>. https://en.wikipedia.org/wiki/Baguette</li>
+</ol>
+  </main>
+  <script>
+    function filterNav(q) {
+      q = q.toLowerCase();
+      document.querySelectorAll('#nav li').forEach(li => {
+        li.style.display = li.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+      document.querySelectorAll('#nav details').forEach(d => {
+        const visible = [...d.querySelectorAll('li')].some(li => li.style.display !== 'none');
+        d.style.display = visible || !q ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

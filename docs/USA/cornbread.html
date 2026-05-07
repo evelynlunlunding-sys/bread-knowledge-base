@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cornbread — Bread Knowledge Base</title>
+  <style>
+    :root {
+      --bg: #fdf8f0; --surface: #fff; --text: #2c2416;
+      --accent: #c07a2a; --sidebar-bg: #3b2a1a; --sidebar-text: #f5e6d0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Georgia', serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; }
+    #sidebar { width: 260px; min-height: 100vh; background: var(--sidebar-bg); color: var(--sidebar-text); padding: 24px 16px; position: fixed; overflow-y: auto; }
+    #sidebar h1 { font-size: 1.1rem; margin-bottom: 4px; color: var(--accent); }
+    #sidebar .tagline { font-size: 0.75rem; opacity: 0.7; margin-bottom: 20px; }
+    #sidebar input { width: 100%; padding: 6px 8px; border-radius: 4px; border: none; font-size: 0.85rem; margin-bottom: 16px; }
+    #sidebar details summary { cursor: pointer; font-weight: bold; padding: 4px 0; color: var(--accent); font-size: 0.9rem; }
+    #sidebar ul { list-style: none; padding-left: 12px; margin-top: 4px; }
+    #sidebar ul li a { color: var(--sidebar-text); text-decoration: none; font-size: 0.85rem; line-height: 1.9; opacity: 0.85; }
+    #sidebar ul li a:hover { color: var(--accent); opacity: 1; }
+    #main { margin-left: 260px; flex: 1; padding: 40px 60px; max-width: 900px; }
+    #main h1 { font-size: 2rem; color: var(--text); border-bottom: 2px solid var(--accent); padding-bottom: 8px; margin-bottom: 24px; }
+    #main h2 { font-size: 1.4rem; margin-top: 32px; margin-bottom: 12px; color: var(--accent); }
+    #main h3 { font-size: 1.1rem; margin-top: 20px; margin-bottom: 8px; }
+    #main p { line-height: 1.8; margin-bottom: 12px; }
+    #main table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+    #main th { background: var(--accent); color: white; padding: 8px 12px; text-align: left; }
+    #main td { padding: 7px 12px; border-bottom: 1px solid #e8d5b0; }
+    #main tr:nth-child(even) td { background: #faf4e8; }
+    #main ul, #main ol { padding-left: 24px; margin-bottom: 12px; line-height: 1.9; }
+    #main img { max-width: 100%; border-radius: 6px; margin: 12px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+    #main code { background: #f0e8d5; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 0.9em; }
+    #main pre { background: #f0e8d5; padding: 16px; border-radius: 6px; overflow-x: auto; margin: 12px 0; }
+    #main blockquote { border-left: 3px solid var(--accent); padding-left: 16px; color: #5a4030; margin: 12px 0; }
+    .tag { display: inline-block; background: var(--accent); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin: 2px; }
+    .frontmatter { background: #faf0d8; border: 1px solid #e0c890; border-radius: 6px; padding: 12px 16px; margin-bottom: 24px; font-size: 0.85rem; }
+    a { color: var(--accent); }
+    @media (max-width: 768px) { #sidebar { display: none; } #main { margin-left: 0; padding: 24px 20px; } }
+  </style>
+</head>
+<body>
+  <nav id="sidebar">
+    <h1>🍞 Bread KB</h1>
+    <p class="tagline">Global Bread Knowledge Base</p>
+    <input type="text" id="search" placeholder="Search breads…" oninput="filterNav(this.value)">
+    <div id="nav"><details open><summary>🏳 France</summary><ul>
+<li><a href="../France/baguette.html">Baguette</a></li>
+<li><a href="../France/brioche.html">Brioche</a></li>
+<li><a href="../France/croissant.html">Croissant</a></li>
+<li><a href="../France/pain_de_campagne.html">Pain De Campagne</a></li>
+</ul></details>
+<details open><summary>🏳 Germany</summary><ul>
+<li><a href="../Germany/pretzel.html">Pretzel</a></li>
+<li><a href="../Germany/pumpernickel.html">Pumpernickel</a></li>
+<li><a href="../Germany/rye_bread.html">Rye Bread</a></li>
+<li><a href="../Germany/vollkornbrot.html">Vollkornbrot</a></li>
+</ul></details>
+<details open><summary>🏳 India</summary><ul>
+<li><a href="../India/chapati.html">Chapati</a></li>
+<li><a href="../India/naan.html">Naan</a></li>
+<li><a href="../India/parotta.html">Parotta</a></li>
+<li><a href="../India/pav.html">Pav</a></li>
+</ul></details>
+<details open><summary>🏳 Italy</summary><ul>
+<li><a href="../Italy/ciabatta.html">Ciabatta</a></li>
+<li><a href="../Italy/focaccia.html">Focaccia</a></li>
+<li><a href="../Italy/grissini.html">Grissini</a></li>
+<li><a href="../Italy/pane_di_casa.html">Pane Di Casa</a></li>
+</ul></details>
+<details open><summary>🏳 USA</summary><ul>
+<li><a href="../USA/bagel.html">Bagel</a></li>
+<li><a href="../USA/cornbread.html">Cornbread</a></li>
+<li><a href="../USA/pretzel.html">Pretzel</a></li>
+<li><a href="../USA/sourdough.html">Sourdough</a></li>
+</ul></details></div>
+  </nav>
+  <main id="main">
+    <div class="frontmatter"><strong>Country:</strong> USA &nbsp;|&nbsp; <strong>Updated:</strong> 2025-11-14 &nbsp;|&nbsp; <span class="tag">cornbread</span> <span class="tag">southern-cuisine</span> <span class="tag">quick-bread</span> <span class="tag">native-american</span> <span class="tag">cornmeal</span> <span class="tag">batter-bread</span> <span class="tag">soul-food</span></div><h1>Cornbread</h1>
+<h2>Overview</h2>
+<p>Cornbread is a quick bread made primarily from cornmeal and a hallmark of cuisine of the Southern United States. Classified as a batter bread, it is typically leavened with baking powder or baking soda in modern recipes and ranges in texture from dense and crumbly to moist and cake-like. With deep roots in Native American foodways, cornbread has become a cultural cornerstone shared across African American, European American, and Indigenous communities in the American South.</p>
+<h2>Origin &amp; Country</h2>
+<p><strong>Country of Origin:</strong> United States (with origins in Native American cuisine)</p>
+<p><strong>Region:</strong> Southern United States, with significant Indigenous cultural roots stretching from the Hopi lands of Arizona to the Hidatsa territories of the Upper Midwest, and the Cherokee, Seneca, and Choctaw lands of the Southeast.</p>
+<p>Cornbread evolved in the American colonial South out of necessity: the heat and humidity of the region caused European wheat to wither and turn rancid, while corn (maize)—a native crop—thrived and provided a reliable grain for daily bread.</p>
+<h2>History &amp; Evolution</h2>
+<p>Corn was first domesticated in Mexico roughly six thousand years ago, and made its way to what is now the United States between three thousand and one thousand years ago. Indigenous peoples developed a rich array of corn-based foods over millennia before European contact, including:</p>
+<ul>
+<li><strong>Naktsi</strong> — baked cornbread of the Hidatsa people</li>
+<li><strong>Bvnaha</strong> — Choctaw cornbread, often wrapped in corn husks and boiled</li>
+<li><strong>Hopi cornmeal dumplings and pancakes</strong> — staple foods of the Arizona Hopi</li>
+<li><strong>Cherokee and Seneca enriched breads</strong> — incorporating chestnuts, sunflower seeds, apples, berries, beans, or potatoes</li>
+</ul>
+<p>When European settlers arrived, they adopted these Indigenous recipes, as did enslaved Africans brought to the Southern colonies. Corn also crossed the Atlantic in the opposite direction: introduced to West Africa by European traders soon after contact, it quickly became central to West African cooking. Dishes such as <strong>kush</strong> in Senegambia and the Sahel reflect this transatlantic culinary exchange, and these traditions in turn shaped African American cornbread cookery.</p>
+<h3>Key milestones</h3>
+<table>
+<thead>
+<tr>
+<th>Era</th>
+<th>Development</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pre-contact</td>
+<td>Indigenous peoples cultivate corn; develop diverse cornbreads, dumplings, and pancakes</td>
+</tr>
+<tr>
+<td>17th–18th c.</td>
+<td>Colonial cornbread: a simple mix of cornmeal and water baked over an open fire or hearth</td>
+</tr>
+<tr>
+<td>18th c.</td>
+<td>Buttermilk, eggs, baking soda/powder, and pork fat (bacon drippings, ham hock fat) transform texture and flavor</td>
+</tr>
+<tr>
+<td>19th c.</td>
+<td>Refinement of leavened, enriched cornbread closer to the modern Southern style</td>
+</tr>
+<tr>
+<td>20th c.</td>
+<td>Sugar and wheat flour enter many recipes; steel roller mills replace stone mills, reducing the natural sweetness of cornmeal</td>
+</tr>
+</tbody>
+</table>
+<p>The shift from stone-ground to steel-roller-milled cornmeal in the 20th century is widely credited with prompting the addition of sugar to many recipes—particularly outside the traditional South—to compensate for lost kernel sweetness. Purist Southern cooks often still resist sweetened versions.</p>
+<h2>Recipe</h2>
+<p>A classic Southern-style buttermilk cornbread baked in a cast-iron skillet.</p>
+<h3>Ingredients</h3>
+<ul>
+<li>2 cups (240 g) stone-ground yellow cornmeal</li>
+<li>1 teaspoon baking soda</li>
+<li>1 teaspoon baking powder</li>
+<li>1 teaspoon fine salt</li>
+<li>2 cups (475 ml) buttermilk</li>
+<li>2 large eggs, lightly beaten</li>
+<li>3 tablespoons bacon drippings (or melted butter), plus 1 tablespoon for the skillet</li>
+<li><em>Optional:</em> 1–2 tablespoons sugar (non-traditional but common outside the Deep South)</li>
+<li><em>Optional:</em> 2 tablespoons wheat flour for a softer crumb</li>
+</ul>
+<h3>Method</h3>
+<ol>
+<li><strong>Preheat</strong> the oven to 425 °F (220 °C). Place a 9- or 10-inch cast-iron skillet inside while it heats.</li>
+<li><strong>Whisk dry ingredients</strong>: combine cornmeal, baking soda, baking powder, and salt in a large bowl. Whisk in flour and sugar if using.</li>
+<li><strong>Combine wet ingredients</strong>: in a separate bowl, whisk together buttermilk, eggs, and 3 tablespoons of bacon drippings or melted butter.</li>
+<li><strong>Mix</strong>: pour the wet ingredients into the dry and stir just until combined; do not overmix. The batter should be thick but pourable.</li>
+<li><strong>Grease the skillet</strong>: carefully remove the hot skillet from the oven, swirl 1 tablespoon of bacon drippings around the bottom and sides until the fat shimmers and lightly smokes.</li>
+<li><strong>Bake</strong>: pour the batter into the hot skillet—it should sizzle on contact, forming the prized crisp crust. Return to the oven and bake for 20–25 minutes, until the top is golden and a tester inserted in the center comes out clean.</li>
+<li><strong>Rest and serve</strong>: cool 5 minutes in the pan, then turn out onto a board. Serve warm with butter, honey, sorghum syrup, or alongside chili, greens, or beans.</li>
+</ol>
+<h2>Variations</h2>
+<ul>
+<li><strong>Hot water cornbread</strong> — a primitive style closest to colonial origins; cornmeal scalded with boiling water, shaped into cakes, and pan-fried.</li>
+<li><strong>Hoecake / Johnnycake</strong> — thin griddle-cooked cornmeal cakes traditional throughout the early American colonies.</li>
+<li><strong>Corn pone</strong> — small, unsweetened oval loaves baked or fried; a hallmark of older Southern cookery.</li>
+<li><strong>Spoonbread</strong> — a soufflé-like soft cornbread eaten with a spoon, enriched with eggs and milk.</li>
+<li><strong>Cracklin' cornbread</strong> — studded with crispy bits of rendered pork fat (cracklings).</li>
+<li><strong>Northern (Yankee) cornbread</strong> — sweeter and cake-like, made with wheat flour and sugar.</li>
+<li><strong>Mexican cornbread</strong> — incorporating jalapeños, cheddar cheese, and creamed corn.</li>
+<li><strong>Cherokee/Seneca enriched cornbread</strong> — with chestnuts, sunflower seeds, berries, beans, or potatoes.</li>
+<li><strong>Choctaw bvnaha</strong> — cornmeal dough wrapped in corn husks and boiled.</li>
+<li><strong>Hidatsa naktsi</strong> — a traditional baked cornbread of the Upper Midwest.</li>
+<li><strong>Kush (West African / African diaspora)</strong> — fried, crumbled cornbread reflecting transatlantic culinary exchange.</li>
+</ul>
+<h2>Cultural Context</h2>
+<p>Cornbread occupies a singular place in American food culture. In the Indigenous nations of North America, corn is one of the "Three Sisters" (with beans and squash) and carries profound spiritual and ceremonial significance; cornbreads like Choctaw <em>bvnaha</em> and Hidatsa <em>naktsi</em> remain living traditions.</p>
+<p>In the post-colonial South, cornbread became a daily staple across racial and economic lines—on plantations, in tenant farms, and in city kitchens alike. For African Americans, cornbread is central to the soul food canon, served alongside collard greens, black-eyed peas, fried chicken, and pot likker. The transatlantic journey of maize—from the Americas to West Africa via European traders, and back again through the labor and culinary genius of enslaved Africans—is encoded in every skillet of Southern cornbread.</p>
+<p>A long-standing cultural debate divides the bread along regional lines: traditional Southern cornbread is savory, dense, and crusty, made without sugar or wheat flour, while Northern cornbread is sweet, cake-like, and lighter. Many Southerners regard sweetened cornbread as a corruption; many Northerners regard the unsweetened version as bland. Both descend from the same humble Indigenous root.</p>
+<p>Cornbread also figures in symbolic foods: <strong>hoppin' John</strong> with cornbread is eaten on New Year's Day in the South for luck and prosperity, with the bread said to represent gold.</p>
+<h2>Images</h2>
+<p><em>Images not included in source material. Suggested searches:</em><br />
+- A golden round of cornbread baked in a cast-iron skillet<br />
+- Sliced wedges of cornbread with butter<br />
+- Choctaw bvnaha wrapped in corn husks<br />
+- Stone-ground yellow cornmeal</p>
+<h2>Related Breads</h2>
+<ul>
+<li>hoecake</li>
+<li>johnnycake</li>
+<li>corn pone</li>
+<li>spoonbread</li>
+<li>hush puppies</li>
+<li>bvnaha</li>
+<li>kush</li>
+<li>arepa</li>
+<li>broa (Portuguese cornbread)</li>
+<li>anadama bread</li>
+</ul>
+<h2>References</h2>
+<ol>
+<li>"Cornbread." <em>Wikipedia</em>. https://en.wikipedia.org/wiki/cornbread</li>
+<li>Notes on Hopi cornmeal staples (Wikipedia, citation 1).</li>
+<li>Hidatsa <em>naktsi</em> and Choctaw <em>bvnaha</em> (Wikipedia, citation 2).</li>
+<li>Cherokee and Seneca enriched cornbread traditions (Wikipedia, citation 3).</li>
+<li>Modern leavening with baking powder (Wikipedia, citation 4).</li>
+<li>Domestication and spread of maize in the Americas (Wikipedia, citations 5–7).</li>
+<li>Transatlantic introduction of corn to West Africa via the slave trade; <em>kush</em> in Senegambia and the Sahel (Wikipedia, citations 7–8).</li>
+<li>Cornbread as a cornerstone of Southeastern U.S. cuisine across communities (Wikipedia, citation 9).</li>
+<li>Colonial origins as cornmeal-and-water hearth bread (Wikipedia, citation 10).</li>
+<li>Climate constraints on Southern wheat cultivation (Wikipedia, citation 11).</li>
+<li>18th–20th century evolution: buttermilk, eggs, leaveners, pork fat, sugar, and wheat flour (Wikipedia, citation 12).</li>
+<li>Impact of steel roller mills on cornmeal sweetness in the 20th century.</li>
+</ol>
+  </main>
+  <script>
+    function filterNav(q) {
+      q = q.toLowerCase();
+      document.querySelectorAll('#nav li').forEach(li => {
+        li.style.display = li.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+      document.querySelectorAll('#nav details').forEach(d => {
+        const visible = [...d.querySelectorAll('li')].some(li => li.style.display !== 'none');
+        d.style.display = visible || !q ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

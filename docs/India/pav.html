@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pav — Bread Knowledge Base</title>
+  <style>
+    :root {
+      --bg: #fdf8f0; --surface: #fff; --text: #2c2416;
+      --accent: #c07a2a; --sidebar-bg: #3b2a1a; --sidebar-text: #f5e6d0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Georgia', serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; }
+    #sidebar { width: 260px; min-height: 100vh; background: var(--sidebar-bg); color: var(--sidebar-text); padding: 24px 16px; position: fixed; overflow-y: auto; }
+    #sidebar h1 { font-size: 1.1rem; margin-bottom: 4px; color: var(--accent); }
+    #sidebar .tagline { font-size: 0.75rem; opacity: 0.7; margin-bottom: 20px; }
+    #sidebar input { width: 100%; padding: 6px 8px; border-radius: 4px; border: none; font-size: 0.85rem; margin-bottom: 16px; }
+    #sidebar details summary { cursor: pointer; font-weight: bold; padding: 4px 0; color: var(--accent); font-size: 0.9rem; }
+    #sidebar ul { list-style: none; padding-left: 12px; margin-top: 4px; }
+    #sidebar ul li a { color: var(--sidebar-text); text-decoration: none; font-size: 0.85rem; line-height: 1.9; opacity: 0.85; }
+    #sidebar ul li a:hover { color: var(--accent); opacity: 1; }
+    #main { margin-left: 260px; flex: 1; padding: 40px 60px; max-width: 900px; }
+    #main h1 { font-size: 2rem; color: var(--text); border-bottom: 2px solid var(--accent); padding-bottom: 8px; margin-bottom: 24px; }
+    #main h2 { font-size: 1.4rem; margin-top: 32px; margin-bottom: 12px; color: var(--accent); }
+    #main h3 { font-size: 1.1rem; margin-top: 20px; margin-bottom: 8px; }
+    #main p { line-height: 1.8; margin-bottom: 12px; }
+    #main table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+    #main th { background: var(--accent); color: white; padding: 8px 12px; text-align: left; }
+    #main td { padding: 7px 12px; border-bottom: 1px solid #e8d5b0; }
+    #main tr:nth-child(even) td { background: #faf4e8; }
+    #main ul, #main ol { padding-left: 24px; margin-bottom: 12px; line-height: 1.9; }
+    #main img { max-width: 100%; border-radius: 6px; margin: 12px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+    #main code { background: #f0e8d5; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 0.9em; }
+    #main pre { background: #f0e8d5; padding: 16px; border-radius: 6px; overflow-x: auto; margin: 12px 0; }
+    #main blockquote { border-left: 3px solid var(--accent); padding-left: 16px; color: #5a4030; margin: 12px 0; }
+    .tag { display: inline-block; background: var(--accent); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin: 2px; }
+    .frontmatter { background: #faf0d8; border: 1px solid #e0c890; border-radius: 6px; padding: 12px 16px; margin-bottom: 24px; font-size: 0.85rem; }
+    a { color: var(--accent); }
+    @media (max-width: 768px) { #sidebar { display: none; } #main { margin-left: 0; padding: 24px 20px; } }
+  </style>
+</head>
+<body>
+  <nav id="sidebar">
+    <h1>🍞 Bread KB</h1>
+    <p class="tagline">Global Bread Knowledge Base</p>
+    <input type="text" id="search" placeholder="Search breads…" oninput="filterNav(this.value)">
+    <div id="nav"><details open><summary>🏳 France</summary><ul>
+<li><a href="../France/baguette.html">Baguette</a></li>
+<li><a href="../France/brioche.html">Brioche</a></li>
+<li><a href="../France/croissant.html">Croissant</a></li>
+<li><a href="../France/pain_de_campagne.html">Pain De Campagne</a></li>
+</ul></details>
+<details open><summary>🏳 Germany</summary><ul>
+<li><a href="../Germany/pretzel.html">Pretzel</a></li>
+<li><a href="../Germany/pumpernickel.html">Pumpernickel</a></li>
+<li><a href="../Germany/rye_bread.html">Rye Bread</a></li>
+<li><a href="../Germany/vollkornbrot.html">Vollkornbrot</a></li>
+</ul></details>
+<details open><summary>🏳 India</summary><ul>
+<li><a href="../India/chapati.html">Chapati</a></li>
+<li><a href="../India/naan.html">Naan</a></li>
+<li><a href="../India/parotta.html">Parotta</a></li>
+<li><a href="../India/pav.html">Pav</a></li>
+</ul></details>
+<details open><summary>🏳 Italy</summary><ul>
+<li><a href="../Italy/ciabatta.html">Ciabatta</a></li>
+<li><a href="../Italy/focaccia.html">Focaccia</a></li>
+<li><a href="../Italy/grissini.html">Grissini</a></li>
+<li><a href="../Italy/pane_di_casa.html">Pane Di Casa</a></li>
+</ul></details>
+<details open><summary>🏳 USA</summary><ul>
+<li><a href="../USA/bagel.html">Bagel</a></li>
+<li><a href="../USA/cornbread.html">Cornbread</a></li>
+<li><a href="../USA/pretzel.html">Pretzel</a></li>
+<li><a href="../USA/sourdough.html">Sourdough</a></li>
+</ul></details></div>
+  </nav>
+  <main id="main">
+    <div class="frontmatter"><strong>Country:</strong> India &nbsp;|&nbsp; <strong>Updated:</strong> 2025-01-20 &nbsp;|&nbsp; <span class="tag">indian-bread</span> <span class="tag">soft-bread</span> <span class="tag">street-food</span> <span class="tag">leavened</span> <span class="tag">white-bread</span> <span class="tag">mumbai</span></div><h1>Pav</h1>
+<h2>Overview</h2>
+<p>Pav (also spelled <strong>pao</strong> or <strong>paav</strong>) is a soft, square, leavened white bread roll that has become a cornerstone of Indian street food, particularly in Mumbai and the wider Maharashtra region. Baked in a connected slab and then pulled apart into individual pillowy buns, pav is characterized by its tender crumb, lightly browned tops, and slightly sweet, buttery flavor. It serves as the carbohydrate vehicle for some of India's most iconic street snacks, including pav bhaji, vada pav, and misal pav.</p>
+<h2>Origin &amp; Country</h2>
+<p>Pav originated in <strong>India</strong>, with its roots traced to the Portuguese colonial presence in Goa and the Konkan coast during the 16th and 17th centuries. The name itself comes from the Portuguese word <em>pão</em>, meaning "bread." From its Goan and coastal Maharashtrian origins, pav spread across western India and eventually became inseparable from Mumbai's culinary identity.</p>
+<h2>History &amp; Evolution</h2>
+<p>The introduction of yeast-leavened wheat bread to India is largely credited to Portuguese colonizers, who arrived in Goa in 1510 and brought European baking traditions with them. Local Goan Catholic communities adopted and adapted these techniques, developing distinctly Indian variants such as Goan poee, undo, and katre pao.</p>
+<p>As Indians migrated from Goa and the Konkan to Bombay (Mumbai) in the 18th and 19th centuries, the bread traveled with them. Mumbai's bustling textile mills in the late 19th century created a massive working-class population that needed cheap, filling, hand-held food. Local bakers, including the East Indian Catholic and Irani communities, scaled up pav production into the connected loaves we recognize today.</p>
+<p>The bread truly became iconic in the 1960s and 1970s with the popularization of <strong>pav bhaji</strong>—reportedly invented as a quick lunch for Mumbai's mill workers—and <strong>vada pav</strong>, often called the "Indian burger," which was popularized by street vendor Ashok Vaidya near Dadar station in 1966. Today pav is industrially produced as well as artisanally baked, and remains one of the most consumed breads in urban India.</p>
+<h2>Recipe</h2>
+<h3>Ingredients</h3>
+<p><em>Makes 9–12 rolls</em></p>
+<table>
+<thead>
+<tr>
+<th>Ingredient</th>
+<th>Quantity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All-purpose flour (maida)</td>
+<td>3 cups (375 g)</td>
+</tr>
+<tr>
+<td>Instant dry yeast</td>
+<td>2 tsp</td>
+</tr>
+<tr>
+<td>Sugar</td>
+<td>1.5 tbsp</td>
+</tr>
+<tr>
+<td>Salt</td>
+<td>1 tsp</td>
+</tr>
+<tr>
+<td>Warm milk</td>
+<td>½ cup</td>
+</tr>
+<tr>
+<td>Warm water</td>
+<td>½ cup (approx.)</td>
+</tr>
+<tr>
+<td>Softened butter</td>
+<td>3 tbsp</td>
+</tr>
+<tr>
+<td>Melted butter (for brushing)</td>
+<td>1–2 tbsp</td>
+</tr>
+</tbody>
+</table>
+<h3>Method</h3>
+<ol>
+<li><strong>Activate the yeast:</strong> In a small bowl, combine warm milk, sugar, and yeast. Let stand for 5–10 minutes until frothy.</li>
+<li><strong>Form the dough:</strong> In a large bowl, mix flour and salt. Add the yeast mixture and softened butter. Gradually add warm water and knead into a soft, slightly sticky dough.</li>
+<li><strong>Knead:</strong> Knead vigorously for 10–12 minutes (or 6–8 minutes in a stand mixer) until smooth, elastic, and passing the windowpane test.</li>
+<li><strong>First rise:</strong> Place in a greased bowl, cover, and let rise in a warm spot for 1.5–2 hours, or until doubled.</li>
+<li><strong>Shape:</strong> Punch down the dough and divide into 9 or 12 equal balls. Tuck each into a tight ball with a smooth top.</li>
+<li><strong>Arrange:</strong> Place balls in a greased square or rectangular baking pan, just touching one another in a grid pattern.</li>
+<li><strong>Second rise:</strong> Cover and let prove for 45–60 minutes until puffy and the rolls have merged at the sides.</li>
+<li><strong>Bake:</strong> Preheat oven to 200 °C (400 °F). Bake for 18–22 minutes until golden brown on top.</li>
+<li><strong>Finish:</strong> Brush generously with melted butter while still hot. Cool slightly, then pull apart and serve.</li>
+</ol>
+<h2>Variations</h2>
+<ul>
+<li><strong>Ladi pav</strong> – The most common form: a "ladder" or slab of joined square rolls, typically 9 or 12 to a tray.</li>
+<li><strong>Whole wheat pav</strong> – A healthier modern adaptation made with atta or a blend.</li>
+<li><strong>Butter pav</strong> – Toasted on a tava (griddle) with generous butter, often the standard preparation when serving with curries.</li>
+<li><strong>Masala pav</strong> – Pav cooked on a tava with a spiced onion-tomato-capsicum mixture; a Mumbai street favorite.</li>
+<li><strong>Goan poee/pão</strong> – A related but distinct Portuguese-influenced bread with a crustier exterior and hollow interior.</li>
+<li><strong>Brun pav (gutli pav)</strong> – A crusty, hard-topped version popular in Iranian cafés of Mumbai and Pune, often eaten with chai or kheema.</li>
+</ul>
+<h2>Cultural Context</h2>
+<p>Pav is far more than a bread in India—it is a cultural institution, especially in Mumbai, where it functions as the city's edible currency. It bridges class divides: eaten by mill workers, office commuters, schoolchildren, and elite diners alike. Local bakeries (<em>pav-walas</em>) deliver fresh pav daily on bicycles, and the bread's affordability has made it a symbol of urban democratic eating.</p>
+<p>It is the foundation of several beloved street foods:<br />
+- <strong>Vada Pav</strong> – A spicy potato fritter sandwiched in buttered pav with chutneys; the unofficial sandwich of Mumbai.<br />
+- <strong>Pav Bhaji</strong> – A buttery mashed vegetable curry served with toasted pav.<br />
+- <strong>Misal Pav</strong> – Spicy sprouted-bean curry topped with farsan, eaten with pav.<br />
+- <strong>Kheema Pav</strong> – Spiced minced meat with pav, an Irani café staple.<br />
+- <strong>Bun Maska</strong> – Pav split and filled with cold butter, served with cutting chai.</p>
+<p>Pav also features in religious and community contexts, particularly among Goan Catholics, East Indians, and Parsis, for whom it is a daily staple. During Mumbai's monsoon, hot vada pav with chai is considered an essential ritual.</p>
+<h2>Images</h2>
+<p><em>Images not included in source data. Suggested visual references:</em><br />
+- A slab of golden ladi pav fresh from the oven<br />
+- Vada pav being assembled at a Mumbai street stall<br />
+- Pav bhaji served with butter-toasted pav and lime<br />
+- Traditional bicycle pav delivery in Mumbai's older neighborhoods</p>
+<h2>Related Breads</h2>
+<ul>
+<li>Vada Pav – Snack built around pav</li>
+<li>Pav Bhaji – Iconic dish using pav</li>
+<li>Poee – Goan Portuguese-influenced cousin</li>
+<li>Brun Pav – Crusty Irani café variant</li>
+<li>Bun – General leavened roll category</li>
+<li>Pão – The Portuguese ancestor bread</li>
+<li>Naan – Another major Indian leavened bread</li>
+<li>Kulcha – North Indian leavened flatbread</li>
+</ul>
+<h2>References</h2>
+<ol>
+<li>Wikipedia contributors. "Pav (bread)." <em>Wikipedia, The Free Encyclopedia</em>. https://en.wikipedia.org/wiki/Pav</li>
+</ol>
+<p><em>Note: This entry was synthesized from limited source material. Some historical and cultural details reflect generally accepted knowledge about pav and Indian street-food history; readers seeking academic citations should consult specialized works on Indian colonial food history and Mumbai's culinary culture.</em></p>
+  </main>
+  <script>
+    function filterNav(q) {
+      q = q.toLowerCase();
+      document.querySelectorAll('#nav li').forEach(li => {
+        li.style.display = li.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+      document.querySelectorAll('#nav details').forEach(d => {
+        const visible = [...d.querySelectorAll('li')].some(li => li.style.display !== 'none');
+        d.style.display = visible || !q ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

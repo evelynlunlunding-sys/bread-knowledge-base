@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pain de Campagne — Bread Knowledge Base</title>
+  <style>
+    :root {
+      --bg: #fdf8f0; --surface: #fff; --text: #2c2416;
+      --accent: #c07a2a; --sidebar-bg: #3b2a1a; --sidebar-text: #f5e6d0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Georgia', serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; }
+    #sidebar { width: 260px; min-height: 100vh; background: var(--sidebar-bg); color: var(--sidebar-text); padding: 24px 16px; position: fixed; overflow-y: auto; }
+    #sidebar h1 { font-size: 1.1rem; margin-bottom: 4px; color: var(--accent); }
+    #sidebar .tagline { font-size: 0.75rem; opacity: 0.7; margin-bottom: 20px; }
+    #sidebar input { width: 100%; padding: 6px 8px; border-radius: 4px; border: none; font-size: 0.85rem; margin-bottom: 16px; }
+    #sidebar details summary { cursor: pointer; font-weight: bold; padding: 4px 0; color: var(--accent); font-size: 0.9rem; }
+    #sidebar ul { list-style: none; padding-left: 12px; margin-top: 4px; }
+    #sidebar ul li a { color: var(--sidebar-text); text-decoration: none; font-size: 0.85rem; line-height: 1.9; opacity: 0.85; }
+    #sidebar ul li a:hover { color: var(--accent); opacity: 1; }
+    #main { margin-left: 260px; flex: 1; padding: 40px 60px; max-width: 900px; }
+    #main h1 { font-size: 2rem; color: var(--text); border-bottom: 2px solid var(--accent); padding-bottom: 8px; margin-bottom: 24px; }
+    #main h2 { font-size: 1.4rem; margin-top: 32px; margin-bottom: 12px; color: var(--accent); }
+    #main h3 { font-size: 1.1rem; margin-top: 20px; margin-bottom: 8px; }
+    #main p { line-height: 1.8; margin-bottom: 12px; }
+    #main table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+    #main th { background: var(--accent); color: white; padding: 8px 12px; text-align: left; }
+    #main td { padding: 7px 12px; border-bottom: 1px solid #e8d5b0; }
+    #main tr:nth-child(even) td { background: #faf4e8; }
+    #main ul, #main ol { padding-left: 24px; margin-bottom: 12px; line-height: 1.9; }
+    #main img { max-width: 100%; border-radius: 6px; margin: 12px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+    #main code { background: #f0e8d5; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 0.9em; }
+    #main pre { background: #f0e8d5; padding: 16px; border-radius: 6px; overflow-x: auto; margin: 12px 0; }
+    #main blockquote { border-left: 3px solid var(--accent); padding-left: 16px; color: #5a4030; margin: 12px 0; }
+    .tag { display: inline-block; background: var(--accent); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin: 2px; }
+    .frontmatter { background: #faf0d8; border: 1px solid #e0c890; border-radius: 6px; padding: 12px 16px; margin-bottom: 24px; font-size: 0.85rem; }
+    a { color: var(--accent); }
+    @media (max-width: 768px) { #sidebar { display: none; } #main { margin-left: 0; padding: 24px 20px; } }
+  </style>
+</head>
+<body>
+  <nav id="sidebar">
+    <h1>🍞 Bread KB</h1>
+    <p class="tagline">Global Bread Knowledge Base</p>
+    <input type="text" id="search" placeholder="Search breads…" oninput="filterNav(this.value)">
+    <div id="nav"><details open><summary>🏳 France</summary><ul>
+<li><a href="../France/baguette.html">Baguette</a></li>
+<li><a href="../France/brioche.html">Brioche</a></li>
+<li><a href="../France/croissant.html">Croissant</a></li>
+<li><a href="../France/pain_de_campagne.html">Pain De Campagne</a></li>
+</ul></details>
+<details open><summary>🏳 Germany</summary><ul>
+<li><a href="../Germany/pretzel.html">Pretzel</a></li>
+<li><a href="../Germany/pumpernickel.html">Pumpernickel</a></li>
+<li><a href="../Germany/rye_bread.html">Rye Bread</a></li>
+<li><a href="../Germany/vollkornbrot.html">Vollkornbrot</a></li>
+</ul></details>
+<details open><summary>🏳 India</summary><ul>
+<li><a href="../India/chapati.html">Chapati</a></li>
+<li><a href="../India/naan.html">Naan</a></li>
+<li><a href="../India/parotta.html">Parotta</a></li>
+<li><a href="../India/pav.html">Pav</a></li>
+</ul></details>
+<details open><summary>🏳 Italy</summary><ul>
+<li><a href="../Italy/ciabatta.html">Ciabatta</a></li>
+<li><a href="../Italy/focaccia.html">Focaccia</a></li>
+<li><a href="../Italy/grissini.html">Grissini</a></li>
+<li><a href="../Italy/pane_di_casa.html">Pane Di Casa</a></li>
+</ul></details>
+<details open><summary>🏳 USA</summary><ul>
+<li><a href="../USA/bagel.html">Bagel</a></li>
+<li><a href="../USA/cornbread.html">Cornbread</a></li>
+<li><a href="../USA/pretzel.html">Pretzel</a></li>
+<li><a href="../USA/sourdough.html">Sourdough</a></li>
+</ul></details></div>
+  </nav>
+  <main id="main">
+    <div class="frontmatter"><strong>Country:</strong> France &nbsp;|&nbsp; <strong>Updated:</strong> 2025-01-20 &nbsp;|&nbsp; <span class="tag">french-bread</span> <span class="tag">sourdough</span> <span class="tag">country-bread</span> <span class="tag">artisan</span> <span class="tag">miche</span> <span class="tag">rustic</span> <span class="tag">wheat</span> <span class="tag">rye</span></div><h1>Pain de Campagne</h1>
+<h2>Overview</h2>
+<p>Pain de campagne — literally "country bread" — is a quintessential French rustic loaf, often referred to in English as "French sourdough." Traditionally shaped as a large round <em>miche</em>, it is made from a blend of white wheat flour with whole wheat and/or rye flour, water, leavening (natural sourdough or baker's yeast), and salt. Its hearty crumb, thick crust, and tangy, complex flavor make it one of the most beloved artisan breads of France.</p>
+<h2>Origin &amp; Country</h2>
+<p><strong>Country of origin:</strong> France</p>
+<p>Pain de campagne emerged from the rural baking traditions of French villages, where communal ovens served the entire community. Unlike the refined, urban baguette, it represents the agricultural and peasant heritage of the French countryside, where bread was baked infrequently in large quantities to last a household for days or even weeks.</p>
+<h2>History &amp; Evolution</h2>
+<p>For centuries, French villages relied on shared communal ovens. Townsfolk prepared dough at home and brought it to the village oven for baking, producing massive <em>miches</em> weighing between 1.5 and 5.5 kilograms (3–12 lb). These loaves needed to keep well, which informed the dense, sourdough-leavened style.</p>
+<p>Before the advent of roller milling in the late 19th century, nearly all wheat was stone-ground. To achieve a lighter loaf, millers and bakers sifted (or "bolted") the whole wheat flour through mesh or cloth, producing a whiter flour that still retained some of the bran and germ — a key contributor to the bread's character. Rye often found its way into the loaf because rye plants grew among wheat fields; up to 10% of the harvested grain could be rye. Since rye ferments faster than wheat and lends a distinctive earthy tang, this "accidental" inclusion became a defining trait.</p>
+<p>The rise of commercial yeast at the turn of the 20th century pushed pain de campagne out of fashion in French cities, where the lighter, faster baguette took its place. The bread experienced a renaissance during the <strong>artisan bread revival of the 1970s</strong>, championed by bakers seeking a return to traditional methods, long fermentation, and natural leavening. Today, pain de campagne is once again a staple of French <em>boulangeries</em> and has gained enthusiastic followings in the United States and United Kingdom.</p>
+<h2>Recipe</h2>
+<h3>Ingredients</h3>
+<p><em>Makes one large miche (approx. 1 kg / 2.2 lb)</em></p>
+<table>
+<thead>
+<tr>
+<th>Ingredient</th>
+<th>Quantity</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bread flour (white)</td>
+<td>400 g</td>
+<td>High-protein</td>
+</tr>
+<tr>
+<td>Whole wheat flour</td>
+<td>75 g</td>
+<td>Stone-ground if possible</td>
+</tr>
+<tr>
+<td>Rye flour</td>
+<td>25 g</td>
+<td>Adds tang and complexity</td>
+</tr>
+<tr>
+<td>Water (lukewarm)</td>
+<td>375 g</td>
+<td>~75% hydration</td>
+</tr>
+<tr>
+<td>Active sourdough starter</td>
+<td>100 g</td>
+<td>Or 5 g instant yeast</td>
+</tr>
+<tr>
+<td>Fine sea salt</td>
+<td>10 g</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>Method</h3>
+<ol>
+<li><strong>Mix the dough.</strong> Combine the flours and water in a large bowl. Let rest (autolyse) for 30–60 minutes.</li>
+<li><strong>Add leavening and salt.</strong> Incorporate the sourdough starter (or yeast) and the salt. Mix thoroughly until smooth and cohesive.</li>
+<li><strong>Bulk fermentation.</strong> Cover and let ferment at room temperature for 4–6 hours (or longer if cool), performing a series of stretch-and-folds in the first 2 hours. The dough should grow noticeably and become airy.</li>
+<li><strong>Shape.</strong> Turn the dough out and shape into a tight round (boule).</li>
+<li><strong>Proof.</strong> Place seam-side up in a flour-dusted, linen-lined basket called a <strong>banneton</strong>. Cover and proof for 2–4 hours at room temperature, or overnight in the refrigerator for deeper flavor.</li>
+<li><strong>Preheat oven.</strong> Heat to 230 °C (450 °F) with a Dutch oven or baking stone inside.</li>
+<li><strong>Bake.</strong> Invert the loaf onto a peel or into the Dutch oven, score decoratively across the top, and bake for about <strong>50 minutes</strong>, until the crust is deep mahogany and the internal temperature reaches 96 °C (205 °F). Use steam in the first 20 minutes for a crisp crust.</li>
+<li><strong>Cool.</strong> Let the bread rest on a wire rack for at least 1 hour before slicing — the crumb continues to set as it cools.</li>
+</ol>
+<h2>Variations</h2>
+<ul>
+<li><strong>Pain de campagne au levain</strong> — Made strictly with natural sourdough starter for maximum tang and shelf life.</li>
+<li><strong>Pain au seigle</strong> — A higher-rye variation, sometimes 30–50% rye flour, with a denser crumb (see pain de seigle).</li>
+<li><strong>Pain complet</strong> — A wholemeal version using primarily whole wheat flour.</li>
+<li><strong>Miche Poilâne</strong> — The famed Parisian variant from the Poilâne bakery: a massive 2 kg stone-ground sourdough miche, scored with a distinctive "P".</li>
+<li><strong>Tourte de meule</strong> — A regional cousin made with stone-ground (<em>meule</em>) flour, often even more rustic.</li>
+<li><strong>Pain de campagne aux noix</strong> — Studded with walnuts; a popular cheese-board pairing.</li>
+</ul>
+<h2>Cultural Context</h2>
+<p>Pain de campagne occupies a special place in French culinary identity as a symbol of rural authenticity and the slow-food ethos. While the baguette represents urban Parisian life, the miche speaks of farmhouse tables, family meals, and continuity with pre-industrial baking traditions.</p>
+<p>The bread is a staple at French bistros and brasseries, where it is sliced thick and served alongside <em>charcuterie</em>, <em>pâté</em>, <em>rillettes</em>, soups, and aged cheeses. Its robust flavor and sturdy crumb make it ideal for <em>tartines</em> (open-faced sandwiches) and for sopping up rich sauces. A stale loaf finds new life in <em>pain perdu</em> (French toast) or country-style bread soups.</p>
+<p>The artisan bread movement that began in 1970s France — and the parallel movement in the United States led by bakers inspired by figures like Lionel Poilâne — restored pain de campagne to its rightful place as a cornerstone of serious bread baking.</p>
+<h2>Images</h2>
+<p><em>Image placeholders:</em><br />
+- A traditional round miche with a flour-dusted, slashed crust<br />
+- Dough proofing in a linen-lined banneton<br />
+- A communal village oven (<em>four banal</em>) of rural France<br />
+- Sliced pain de campagne showing its open, irregular crumb</p>
+<h2>Related Breads</h2>
+<ul>
+<li>Baguette — The urban French counterpart</li>
+<li>Pain de seigle — Rye-forward French bread</li>
+<li>Miche — The general term for a large round French country loaf</li>
+<li>Pain au levain — Naturally leavened French bread</li>
+<li>Tourte de meule — Stone-milled rustic loaf</li>
+<li>Sourdough — The broader category of naturally leavened bread</li>
+<li>Boule — The round shape pain de campagne typically takes</li>
+</ul>
+<h2>References</h2>
+<ol>
+<li>Wikipedia contributors. "Pain de campagne." <em>Wikipedia, The Free Encyclopedia.</em> https://en.wikipedia.org/wiki/Pain_de_campagne</li>
+<li>Notes on the rise of commercial yeast and the displacement of country bread by the baguette in early 20th-century French cities.</li>
+<li>Historical accounts of the 1970s artisan bread revival in France.</li>
+<li>Traditional baking guidelines: fermentation in bannetons, oven temperature ~230 °C (450 °F), bake time ~50 minutes.</li>
+</ol>
+  </main>
+  <script>
+    function filterNav(q) {
+      q = q.toLowerCase();
+      document.querySelectorAll('#nav li').forEach(li => {
+        li.style.display = li.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+      document.querySelectorAll('#nav details').forEach(d => {
+        const visible = [...d.querySelectorAll('li')].some(li => li.style.display !== 'none');
+        d.style.display = visible || !q ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

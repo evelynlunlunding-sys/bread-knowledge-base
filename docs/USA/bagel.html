@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bagel — Bread Knowledge Base</title>
+  <style>
+    :root {
+      --bg: #fdf8f0; --surface: #fff; --text: #2c2416;
+      --accent: #c07a2a; --sidebar-bg: #3b2a1a; --sidebar-text: #f5e6d0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Georgia', serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; }
+    #sidebar { width: 260px; min-height: 100vh; background: var(--sidebar-bg); color: var(--sidebar-text); padding: 24px 16px; position: fixed; overflow-y: auto; }
+    #sidebar h1 { font-size: 1.1rem; margin-bottom: 4px; color: var(--accent); }
+    #sidebar .tagline { font-size: 0.75rem; opacity: 0.7; margin-bottom: 20px; }
+    #sidebar input { width: 100%; padding: 6px 8px; border-radius: 4px; border: none; font-size: 0.85rem; margin-bottom: 16px; }
+    #sidebar details summary { cursor: pointer; font-weight: bold; padding: 4px 0; color: var(--accent); font-size: 0.9rem; }
+    #sidebar ul { list-style: none; padding-left: 12px; margin-top: 4px; }
+    #sidebar ul li a { color: var(--sidebar-text); text-decoration: none; font-size: 0.85rem; line-height: 1.9; opacity: 0.85; }
+    #sidebar ul li a:hover { color: var(--accent); opacity: 1; }
+    #main { margin-left: 260px; flex: 1; padding: 40px 60px; max-width: 900px; }
+    #main h1 { font-size: 2rem; color: var(--text); border-bottom: 2px solid var(--accent); padding-bottom: 8px; margin-bottom: 24px; }
+    #main h2 { font-size: 1.4rem; margin-top: 32px; margin-bottom: 12px; color: var(--accent); }
+    #main h3 { font-size: 1.1rem; margin-top: 20px; margin-bottom: 8px; }
+    #main p { line-height: 1.8; margin-bottom: 12px; }
+    #main table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+    #main th { background: var(--accent); color: white; padding: 8px 12px; text-align: left; }
+    #main td { padding: 7px 12px; border-bottom: 1px solid #e8d5b0; }
+    #main tr:nth-child(even) td { background: #faf4e8; }
+    #main ul, #main ol { padding-left: 24px; margin-bottom: 12px; line-height: 1.9; }
+    #main img { max-width: 100%; border-radius: 6px; margin: 12px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+    #main code { background: #f0e8d5; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 0.9em; }
+    #main pre { background: #f0e8d5; padding: 16px; border-radius: 6px; overflow-x: auto; margin: 12px 0; }
+    #main blockquote { border-left: 3px solid var(--accent); padding-left: 16px; color: #5a4030; margin: 12px 0; }
+    .tag { display: inline-block; background: var(--accent); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin: 2px; }
+    .frontmatter { background: #faf0d8; border: 1px solid #e0c890; border-radius: 6px; padding: 12px 16px; margin-bottom: 24px; font-size: 0.85rem; }
+    a { color: var(--accent); }
+    @media (max-width: 768px) { #sidebar { display: none; } #main { margin-left: 0; padding: 24px 20px; } }
+  </style>
+</head>
+<body>
+  <nav id="sidebar">
+    <h1>🍞 Bread KB</h1>
+    <p class="tagline">Global Bread Knowledge Base</p>
+    <input type="text" id="search" placeholder="Search breads…" oninput="filterNav(this.value)">
+    <div id="nav"><details open><summary>🏳 France</summary><ul>
+<li><a href="../France/baguette.html">Baguette</a></li>
+<li><a href="../France/brioche.html">Brioche</a></li>
+<li><a href="../France/croissant.html">Croissant</a></li>
+<li><a href="../France/pain_de_campagne.html">Pain De Campagne</a></li>
+</ul></details>
+<details open><summary>🏳 Germany</summary><ul>
+<li><a href="../Germany/pretzel.html">Pretzel</a></li>
+<li><a href="../Germany/pumpernickel.html">Pumpernickel</a></li>
+<li><a href="../Germany/rye_bread.html">Rye Bread</a></li>
+<li><a href="../Germany/vollkornbrot.html">Vollkornbrot</a></li>
+</ul></details>
+<details open><summary>🏳 India</summary><ul>
+<li><a href="../India/chapati.html">Chapati</a></li>
+<li><a href="../India/naan.html">Naan</a></li>
+<li><a href="../India/parotta.html">Parotta</a></li>
+<li><a href="../India/pav.html">Pav</a></li>
+</ul></details>
+<details open><summary>🏳 Italy</summary><ul>
+<li><a href="../Italy/ciabatta.html">Ciabatta</a></li>
+<li><a href="../Italy/focaccia.html">Focaccia</a></li>
+<li><a href="../Italy/grissini.html">Grissini</a></li>
+<li><a href="../Italy/pane_di_casa.html">Pane Di Casa</a></li>
+</ul></details>
+<details open><summary>🏳 USA</summary><ul>
+<li><a href="../USA/bagel.html">Bagel</a></li>
+<li><a href="../USA/cornbread.html">Cornbread</a></li>
+<li><a href="../USA/pretzel.html">Pretzel</a></li>
+<li><a href="../USA/sourdough.html">Sourdough</a></li>
+</ul></details></div>
+  </nav>
+  <main id="main">
+    <div class="frontmatter"><strong>Country:</strong> USA &nbsp;|&nbsp; <strong>Updated:</strong> 2025-01-20 &nbsp;|&nbsp; <span class="tag">bread</span> <span class="tag">jewish</span> <span class="tag">ashkenazi</span> <span class="tag">boiled-bread</span> <span class="tag">new-york</span> <span class="tag">polish-origin</span> <span class="tag">breakfast</span></div><h1>Bagel</h1>
+<h2>Overview</h2>
+<p>The bagel is a dense, chewy, ring-shaped bread roll distinguished by its unique two-stage cooking process: a brief boil in water followed by baking. This method produces a glossy, often crisp crust enclosing a tight, satisfyingly dense crumb. While the bagel originated in the Jewish communities of Poland, it has become an iconic American food—particularly synonymous with New York City, where Polish Jewish immigrants transformed it into a defining feature of the city's culinary identity.</p>
+<p>Traditionally topped with poppy or sesame seeds, or coarse salt, the modern bagel comes in countless variations and is enjoyed across North America as a breakfast staple, often split, toasted, and spread with cream cheese or layered with smoked salmon (lox).</p>
+<h2>Origin &amp; Country</h2>
+<p>Although now firmly established as an American culinary icon, the bagel's roots lie in <strong>Poland</strong>, with its modern identity forged in the <strong>United States</strong>—particularly New York City. The earliest documented mention of the word <em>bajgiel</em> appears in the 1610 Community Regulations of Kraków, Poland, where bagels were noted as a gift given to women after childbirth.</p>
+<p>The bread is closely tied to Ashkenazi Jewish culture and shares ancestry with a broad family of boiled-and-baked ring breads found across Europe and Asia, including obwarzanek, ka'ak, simit, tarallo, and girde [[naan]].</p>
+<h2>History &amp; Evolution</h2>
+<h3>Ancient and European Roots</h3>
+<p>Ring-shaped boiled-then-baked breads have a long history. A 13th-century Syrian cookbook contains one of the earliest known references to such a bread. In Poland, the bagel-like <em>obwarzanek</em> appears in royal family accounts as early as 1394.</p>
+<p>Two competing theories explain the bagel's arrival in Poland:</p>
+<ol>
+<li><strong>The Italian Theory:</strong> Queen Bona Sforza of Bari, Italy, who became Queen of Poland in 1518, may have introduced ring-shaped breads to Kraków.</li>
+<li><strong>The German Theory:</strong> The bagel may have evolved from German pretzels brought to Poland by immigrants.</li>
+</ol>
+<p>The name itself derives from the Yiddish <em>beygal</em>, in turn from the German dialect word <em>beugel</em>, meaning "ring" or "bracelet."</p>
+<h3>A Polish Staple</h3>
+<p>By the 16th and early 17th centuries, the <em>bajgiel</em> had become a staple of Polish cuisine, deeply integrated into Ashkenazi Jewish foodways. The hole at its center was both functional and symbolic—it allowed even cooking and made it possible to thread bagels onto strings or wooden dowels for transport and retail display, a practice still visible in 19th-century London's Brick Lane and early 20th-century New York.</p>
+<h3>Coming to America</h3>
+<p>The bagel arrived in the United States with Polish Jewish immigrants in the late 19th and early 20th centuries. In New York City, the trade became remarkably organized: <strong>Bagel Bakers Local 338</strong>, a tightly-knit union founded in 1907, controlled nearly all bagel production in and around the city for decades. Membership was largely hereditary, and the union famously kept production methods traditional and labor-intensive.</p>
+<h3>Industrialization</h3>
+<p>The bagel's transformation from regional ethnic food to mainstream American product accelerated in the 1960s, when Daniel Thompson invented an automated bagel-making machine. This, combined with frozen-bagel distribution pioneered by Lender's Bagels, allowed bagels to reach supermarkets nationwide—and eventually worldwide.</p>
+<h2>Recipe</h2>
+<h3>Ingredients</h3>
+<p><strong>For the dough (makes 8 bagels):</strong><br />
+- 500 g (4 cups) bread flour, high in gluten<br />
+- 7 g (2¼ tsp) instant dry yeast<br />
+- 10 g (2 tsp) fine salt<br />
+- 20 g (1 tbsp) malt syrup or honey<br />
+- 280 ml (1¼ cups) warm water</p>
+<p><strong>For the boiling bath:</strong><br />
+- 2 liters water<br />
+- 2 tbsp malt syrup or 1 tbsp baking soda<br />
+- 1 tbsp sugar (optional)</p>
+<p><strong>Toppings (choose):</strong><br />
+- Poppy seeds<br />
+- Sesame seeds<br />
+- Coarse salt<br />
+- Dried garlic or onion flakes<br />
+- "Everything" mix (combination of the above)</p>
+<h3>Method</h3>
+<ol>
+<li><strong>Mix the dough:</strong> Combine flour, yeast, and salt in a large bowl. Dissolve malt syrup in warm water, then add to dry ingredients. Mix until a stiff, shaggy dough forms.</li>
+<li><strong>Knead:</strong> Knead vigorously for 10–12 minutes until smooth and very elastic. The dough should be firmer and drier than typical bread dough.</li>
+<li><strong>First rise:</strong> Cover and let rise at room temperature for about 1 hour, until slightly puffed.</li>
+<li><strong>Shape:</strong> Divide into 8 equal pieces. Roll each into a ball, then poke a hole through the center with your thumb. Stretch the hole until it is about 4 cm (1½ inches) wide.</li>
+<li><strong>Cold ferment:</strong> Place shaped bagels on a parchment-lined tray, cover, and refrigerate overnight (8–24 hours). This develops flavor and the signature chewy texture.</li>
+<li><strong>Boil:</strong> Bring the boiling-bath ingredients to a rolling boil. Drop in 2–3 bagels at a time and boil for 60 seconds per side for a thinner crust, or up to 2 minutes per side for a chewier, traditional New York–style crust.</li>
+<li><strong>Top:</strong> Remove with a slotted spoon, drain briefly, then dip the wet top into your chosen seeds or toppings.</li>
+<li><strong>Bake:</strong> Bake at 230 °C (450 °F) on a tray (or pizza stone) for 18–22 minutes, until deeply golden brown.</li>
+<li><strong>Cool:</strong> Cool on a rack for at least 15 minutes before slicing.</li>
+</ol>
+<h2>Variations</h2>
+<table>
+<thead>
+<tr>
+<th>Variation</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>New York–style</strong></td>
+<td>Hand-rolled, malt-sweetened, dense and chewy with a glossy crust. The benchmark style.</td>
+</tr>
+<tr>
+<td><strong>Montreal-style</strong></td>
+<td>Sweeter (uses honey in the dough and boil), thinner, denser, with a larger hole; baked in wood-fired ovens.</td>
+</tr>
+<tr>
+<td><strong>Everything bagel</strong></td>
+<td>Topped with poppy seeds, sesame seeds, dried garlic, dried onion, and coarse salt.</td>
+</tr>
+<tr>
+<td><strong>Pumpernickel / rye</strong></td>
+<td>Dark, malty bagels using rye flour, often with caraway seeds.</td>
+</tr>
+<tr>
+<td><strong>Whole-grain / multigrain</strong></td>
+<td>Made with whole wheat flour or seed blends.</td>
+</tr>
+<tr>
+<td><strong>Cinnamon-raisin</strong></td>
+<td>Sweet bagel studded with raisins and laced with cinnamon.</td>
+</tr>
+<tr>
+<td><strong>Bialy</strong></td>
+<td>A close cousin from Białystok, Poland; not boiled, with a depressed center filled with onions instead of a hole. See bialy.</td>
+</tr>
+<tr>
+<td><strong>Flagels</strong></td>
+<td>Flat bagels, popular in parts of New York.</td>
+</tr>
+<tr>
+<td><strong>Beigel (London)</strong></td>
+<td>Brick Lane–style; smaller, lighter, with a distinct East End tradition.</td>
+</tr>
+</tbody>
+</table>
+<h2>Cultural Context</h2>
+<p>The bagel occupies a unique place in cultural memory and culinary identity:</p>
+<ul>
+<li><strong>Jewish heritage:</strong> Bagels are deeply tied to Ashkenazi Jewish tradition. The classic Sunday brunch combination of bagel, cream cheese, and lox emerged in early 20th-century New York as Jewish immigrants combined the imported bagel with locally available smoked salmon and dairy.</li>
+<li><strong>New York identity:</strong> The bagel is one of New York City's most recognized foods. Local lore holds that the city's water gives its bagels a uniquely superior chew—a claim debated but lovingly defended.</li>
+<li><strong>Symbolism:</strong> In Polish Jewish tradition, bagels were given as gifts to women in childbirth, and the ring shape has been variously interpreted as a symbol of the eternal cycle of life.</li>
+<li><strong>Globalization:</strong> From a niche ethnic food to a global breakfast staple, the bagel today is sold frozen, fresh, and pre-sliced in supermarkets worldwide—a remarkable journey for a 17th-century Polish Jewish bread.</li>
+<li><strong>Labor history:</strong> The story of Bagel Bakers Local 338 represents one of the most successful examples of an immigrant trade union dominating an entire urban food industry.</li>
+</ul>
+<h2>Images</h2>
+<p><em>Suggested imagery for this entry:</em><br />
+- A tray of freshly boiled bagels going into the oven, glossy and pre-seeded.<br />
+- A classic New York "bagel with a schmear" — sliced bagel with cream cheese and lox.<br />
+- Vintage photograph of bagels strung on dowels in a bakery window (Brick Lane or Lower East Side).<br />
+- A cross-section showing the dense, chewy crumb characteristic of authentic bagels.</p>
+<h2>Related Breads</h2>
+<ul>
+<li>obwarzanek — Polish ancestor of the bagel, still sold on Kraków streets today.</li>
+<li>bialy — Close Polish-Jewish cousin, with an onion-filled depression instead of a hole.</li>
+<li>simit — Turkish sesame-encrusted ring bread.</li>
+<li>ka'ak — Family of Middle Eastern ring breads.</li>
+<li>tarallo — Italian boiled-and-baked ring biscuit/bread.</li>
+<li>girde naan — Uyghur ring bread.</li>
+<li>pretzel — Possibly a German ancestor; shares the boiling-then-baking technique (in lye).</li>
+<li>montreal-bagel — Sweeter, denser Canadian variation.</li>
+</ul>
+<h2>References</h2>
+<ol>
+<li>Wikipedia: <em>Bagel.</em> https://en.wikipedia.org/wiki/bagel</li>
+<li>Rosten, Leo. <em>The Joys of Yiddish.</em></li>
+<li>Community Regulations of Kraków, 1610 (earliest known written mention of <em>bajgiel</em>).</li>
+<li>Polish royal family accounts, 1394 (mention of <em>obwarzanek</em>).</li>
+<li>13th-century Syrian cookbook (early reference to a boiled-then-baked ring bread).</li>
+</ol>
+  </main>
+  <script>
+    function filterNav(q) {
+      q = q.toLowerCase();
+      document.querySelectorAll('#nav li').forEach(li => {
+        li.style.display = li.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+      document.querySelectorAll('#nav details').forEach(d => {
+        const visible = [...d.querySelectorAll('li')].some(li => li.style.display !== 'none');
+        d.style.display = visible || !q ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

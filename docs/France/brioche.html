@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brioche — Bread Knowledge Base</title>
+  <style>
+    :root {
+      --bg: #fdf8f0; --surface: #fff; --text: #2c2416;
+      --accent: #c07a2a; --sidebar-bg: #3b2a1a; --sidebar-text: #f5e6d0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Georgia', serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; }
+    #sidebar { width: 260px; min-height: 100vh; background: var(--sidebar-bg); color: var(--sidebar-text); padding: 24px 16px; position: fixed; overflow-y: auto; }
+    #sidebar h1 { font-size: 1.1rem; margin-bottom: 4px; color: var(--accent); }
+    #sidebar .tagline { font-size: 0.75rem; opacity: 0.7; margin-bottom: 20px; }
+    #sidebar input { width: 100%; padding: 6px 8px; border-radius: 4px; border: none; font-size: 0.85rem; margin-bottom: 16px; }
+    #sidebar details summary { cursor: pointer; font-weight: bold; padding: 4px 0; color: var(--accent); font-size: 0.9rem; }
+    #sidebar ul { list-style: none; padding-left: 12px; margin-top: 4px; }
+    #sidebar ul li a { color: var(--sidebar-text); text-decoration: none; font-size: 0.85rem; line-height: 1.9; opacity: 0.85; }
+    #sidebar ul li a:hover { color: var(--accent); opacity: 1; }
+    #main { margin-left: 260px; flex: 1; padding: 40px 60px; max-width: 900px; }
+    #main h1 { font-size: 2rem; color: var(--text); border-bottom: 2px solid var(--accent); padding-bottom: 8px; margin-bottom: 24px; }
+    #main h2 { font-size: 1.4rem; margin-top: 32px; margin-bottom: 12px; color: var(--accent); }
+    #main h3 { font-size: 1.1rem; margin-top: 20px; margin-bottom: 8px; }
+    #main p { line-height: 1.8; margin-bottom: 12px; }
+    #main table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+    #main th { background: var(--accent); color: white; padding: 8px 12px; text-align: left; }
+    #main td { padding: 7px 12px; border-bottom: 1px solid #e8d5b0; }
+    #main tr:nth-child(even) td { background: #faf4e8; }
+    #main ul, #main ol { padding-left: 24px; margin-bottom: 12px; line-height: 1.9; }
+    #main img { max-width: 100%; border-radius: 6px; margin: 12px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+    #main code { background: #f0e8d5; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 0.9em; }
+    #main pre { background: #f0e8d5; padding: 16px; border-radius: 6px; overflow-x: auto; margin: 12px 0; }
+    #main blockquote { border-left: 3px solid var(--accent); padding-left: 16px; color: #5a4030; margin: 12px 0; }
+    .tag { display: inline-block; background: var(--accent); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin: 2px; }
+    .frontmatter { background: #faf0d8; border: 1px solid #e0c890; border-radius: 6px; padding: 12px 16px; margin-bottom: 24px; font-size: 0.85rem; }
+    a { color: var(--accent); }
+    @media (max-width: 768px) { #sidebar { display: none; } #main { margin-left: 0; padding: 24px 20px; } }
+  </style>
+</head>
+<body>
+  <nav id="sidebar">
+    <h1>🍞 Bread KB</h1>
+    <p class="tagline">Global Bread Knowledge Base</p>
+    <input type="text" id="search" placeholder="Search breads…" oninput="filterNav(this.value)">
+    <div id="nav"><details open><summary>🏳 France</summary><ul>
+<li><a href="../France/baguette.html">Baguette</a></li>
+<li><a href="../France/brioche.html">Brioche</a></li>
+<li><a href="../France/croissant.html">Croissant</a></li>
+<li><a href="../France/pain_de_campagne.html">Pain De Campagne</a></li>
+</ul></details>
+<details open><summary>🏳 Germany</summary><ul>
+<li><a href="../Germany/pretzel.html">Pretzel</a></li>
+<li><a href="../Germany/pumpernickel.html">Pumpernickel</a></li>
+<li><a href="../Germany/rye_bread.html">Rye Bread</a></li>
+<li><a href="../Germany/vollkornbrot.html">Vollkornbrot</a></li>
+</ul></details>
+<details open><summary>🏳 India</summary><ul>
+<li><a href="../India/chapati.html">Chapati</a></li>
+<li><a href="../India/naan.html">Naan</a></li>
+<li><a href="../India/parotta.html">Parotta</a></li>
+<li><a href="../India/pav.html">Pav</a></li>
+</ul></details>
+<details open><summary>🏳 Italy</summary><ul>
+<li><a href="../Italy/ciabatta.html">Ciabatta</a></li>
+<li><a href="../Italy/focaccia.html">Focaccia</a></li>
+<li><a href="../Italy/grissini.html">Grissini</a></li>
+<li><a href="../Italy/pane_di_casa.html">Pane Di Casa</a></li>
+</ul></details>
+<details open><summary>🏳 USA</summary><ul>
+<li><a href="../USA/bagel.html">Bagel</a></li>
+<li><a href="../USA/cornbread.html">Cornbread</a></li>
+<li><a href="../USA/pretzel.html">Pretzel</a></li>
+<li><a href="../USA/sourdough.html">Sourdough</a></li>
+</ul></details></div>
+  </nav>
+  <main id="main">
+    <div class="frontmatter"><strong>Country:</strong> France &nbsp;|&nbsp; <strong>Updated:</strong> 2025-01-15 &nbsp;|&nbsp; <span class="tag">viennoiserie</span> <span class="tag">enriched-bread</span> <span class="tag">french-bread</span> <span class="tag">breakfast</span> <span class="tag">pastry</span> <span class="tag">butter-bread</span> <span class="tag">egg-bread</span></div><h1>Brioche</h1>
+<h2>Overview</h2>
+<p>Brioche is a classic French enriched bread, classified as a <em>Viennoiserie</em> — a category of baked goods made with bread-like methods but enriched with the lavish ingredients of pastry. Distinguished by its high content of eggs and butter, brioche boasts a rich, tender crumb and a dark, golden, flaky crust often heightened by a glossy egg wash applied after proofing. Chef Joël Robuchon famously described it as "light and slightly puffy, more or less fine, according to the proportion of butter and eggs."</p>
+<p>Equally at home in sweet and savory contexts, brioche may be eaten plain at breakfast, transformed into elegant desserts, or wrapped around foie gras, sausage, or beef fillet for refined main courses.</p>
+<h2>Origin &amp; Country</h2>
+<p><strong>Country of origin:</strong> France</p>
+<p>Brioche is firmly French in identity, though it sits within the broader European family of enriched, leavened <em>Viennoiserie</em> — a tradition that historically drew inspiration from Viennese baking before being refined in French kitchens. It belongs to the same leavened Viennoiserie subgroup as pain au lait and pain aux raisins.</p>
+<h2>History &amp; Evolution</h2>
+<p>Brioche emerged in France as part of the Viennoiserie tradition, taking the basic structure of bread and elevating it with the richness of pastry. Over the centuries, distinct regional and class-based styles developed, reflecting the cost of butter and eggs:</p>
+<ul>
+<li><strong>"Rich man's brioche"</strong> — a luxurious version with a flour-to-butter ratio as generous as 3:2.</li>
+<li><strong>Pain brioché</strong> — a more economical version, often around 4:1 flour-to-butter.</li>
+<li><strong>Modern standard</strong> — typically a 2:1 flour-to-butter ratio.</li>
+<li><strong>Roux Brothers' professional formula</strong> — 700 g butter per 1 kg flour, exemplifying the haute cuisine standard.</li>
+</ul>
+<p>The classic <em>brioche à tête</em> (or <em>parisienne</em>) and the loaf-style <em>brioche de Nanterre</em> became the two most iconic shapes, each tied to a particular pan and technique. Today, brioche has spread globally, serving as the basis for everything from luxury hamburger buns to French toast and bread pudding.</p>
+<h2>Recipe</h2>
+<h3>Ingredients</h3>
+<p>A typical brioche dough at a 2:1 flour-to-butter ratio:</p>
+<table>
+<thead>
+<tr>
+<th>Ingredient</th>
+<th>Quantity</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bread or all-purpose flour</td>
+<td>500 g</td>
+<td>High-protein flour preferred</td>
+</tr>
+<tr>
+<td>Unsalted butter</td>
+<td>250 g</td>
+<td>Softened, cubed</td>
+</tr>
+<tr>
+<td>Eggs</td>
+<td>5–6 large</td>
+<td>Cold, lightly beaten</td>
+</tr>
+<tr>
+<td>Whole milk</td>
+<td>60 ml</td>
+<td>Or water/cream; brandy optional</td>
+</tr>
+<tr>
+<td>Fresh yeast</td>
+<td>15 g</td>
+<td>Or 7 g instant dry yeast</td>
+</tr>
+<tr>
+<td>Sugar</td>
+<td>40 g</td>
+<td>Optional; adjust for sweetness</td>
+</tr>
+<tr>
+<td>Salt</td>
+<td>10 g</td>
+<td></td>
+</tr>
+<tr>
+<td>Egg wash</td>
+<td>1 egg + splash of milk</td>
+<td>For glazing before baking</td>
+</tr>
+</tbody>
+</table>
+<h3>Method</h3>
+<ol>
+<li><strong>Mix the dough.</strong> Combine flour, sugar, salt, and yeast in a stand mixer fitted with the dough hook. Add eggs and milk; mix on low until a shaggy dough forms, then knead on medium for 8–10 minutes until smooth and elastic.</li>
+<li><strong>Incorporate the butter.</strong> With the mixer running, add softened butter a few cubes at a time, allowing each addition to fully absorb before adding more. Continue kneading 10–15 minutes until the dough is glossy, smooth, and pulls cleanly from the bowl.</li>
+<li><strong>First rise.</strong> Cover and let rise at room temperature until doubled, about 1.5–2 hours.</li>
+<li><strong>Punch down and chill.</strong> Deflate the dough, wrap tightly, and refrigerate at least 4 hours or (ideally) overnight. This retarded ferment develops flavor and stiffens the butter-rich dough so it can be shaped.</li>
+<li><strong>Shape.</strong><br />
+   - For <strong>brioche à tête</strong>: divide into balls, place a large ball in a fluted mold, and crown with a smaller ball pressed in to form the <em>tête</em> (head).<br />
+   - For <strong>brioche de Nanterre</strong>: divide into 8 equal balls and arrange in two rows of four in a buttered loaf pan.<br />
+   - For a plain loaf: shape into a single mass and place in a loaf pan.</li>
+<li><strong>Final proof.</strong> Let rise at warm room temperature until puffy and nearly doubled, about 1.5–2 hours.</li>
+<li><strong>Egg wash and bake.</strong> Brush gently with egg wash. Bake at 180 °C (350 °F) for 25–35 minutes (depending on size) until deep golden brown and an internal temperature of about 88–90 °C (190 °F).</li>
+<li><strong>Cool</strong> on a wire rack before slicing.</li>
+</ol>
+<h2>Variations</h2>
+<ul>
+<li><strong>Brioche à tête (parisienne)</strong> — The iconic small fluted brioche topped with a knob of dough.</li>
+<li><strong>Brioche de Nanterre</strong> — Loaf-pan brioche with a characteristic two-row pattern of fused dough balls.</li>
+<li><strong>Brioche Nanterre plain loaf</strong> — Single mass baked in a loaf pan, used widely for French toast and sandwiches.</li>
+<li><strong>Pain brioché</strong> — Leaner, more bread-like version with less butter.</li>
+<li><strong>Fruit and chocolate brioches</strong> — Studded with raisins, candied fruit, or chocolate chips.</li>
+<li><strong>Coulibiac</strong> — A grand Russian-French dish wrapping salmon, rice, and mushrooms in brioche dough.</li>
+<li><strong>Brioche en croûte</strong> — Used to encase fillet of beef, foie gras, sausage, or cervelat lyonnais.</li>
+<li><strong>Sweet-filled brioche</strong> — Filled with vanilla cream, jam, or fresh fruit.</li>
+<li><strong>Bostock</strong> — A clever use of stale brioche: slices soaked in syrup, topped with frangipane, and baked.</li>
+</ul>
+<h2>Cultural Context</h2>
+<p>Brioche occupies a uniquely versatile place in French food culture. It is a humble breakfast staple — sliced, toasted, and spread with butter or jam — yet also a luxury item served at celebrations, weddings, and holiday tables. Regional bakeries across France produce their own versions, with shapes, fillings, and richness varying from town to town.</p>
+<p>In haute cuisine, brioche dough is a vehicle for elegance: wrapping foie gras or beef Wellington, framing the layers of coulibiac, or accompanying terrines and pâtés. In the home kitchen, day-old brioche is prized for transformations like <em>bostock</em>, French toast (<em>pain perdu</em>), and bread puddings.</p>
+<p>The word "brioche" also carries a famous (and almost certainly apocryphal) historical association with Marie Antoinette, in the misattributed phrase <em>"Qu'ils mangent de la brioche"</em> ("Let them eat brioche") — itself a window into how brioche was historically perceived as a richer, more aristocratic bread than ordinary pain.</p>
+<h2>Images</h2>
+<p><em>Suggested imagery for this entry:</em><br />
+- A classic <strong>brioche à tête</strong> in its fluted mold, freshly baked and glossy<br />
+- A sliced <strong>brioche de Nanterre</strong> showing the pull-apart structure<br />
+- Cross-section revealing the tender, golden, feathery crumb<br />
+- A serving of <strong>bostock</strong> topped with frangipane and almonds<br />
+- Brioche dough being kneaded with butter incorporation</p>
+<h2>Related Breads</h2>
+<ul>
+<li>pain au lait — Sister Viennoiserie, milk-enriched</li>
+<li>pain aux raisins — Leavened Viennoiserie with raisins and pastry cream</li>
+<li>croissant — Laminated cousin in the Viennoiserie family</li>
+<li>challah — Jewish enriched egg bread with similar tender crumb</li>
+<li>pannetone — Italian enriched holiday bread</li>
+<li>kugelhopf — Alsatian/Austrian yeast-leavened enriched bread</li>
+<li>pain brioché — Leaner everyday cousin of brioche</li>
+</ul>
+<h2>References</h2>
+<ol>
+<li>Wikipedia contributors. "Brioche." <em>Wikipedia, The Free Encyclopedia.</em> https://en.wikipedia.org/wiki/brioche</li>
+<li>Robuchon, Joël — quoted descriptions of brioche texture (via Wikipedia).</li>
+<li>The Roux Brothers — professional brioche formula (700 g butter : 1 kg flour), as cited in Wikipedia.</li>
+</ol>
+  </main>
+  <script>
+    function filterNav(q) {
+      q = q.toLowerCase();
+      document.querySelectorAll('#nav li').forEach(li => {
+        li.style.display = li.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+      document.querySelectorAll('#nav details').forEach(d => {
+        const visible = [...d.querySelectorAll('li')].some(li => li.style.display !== 'none');
+        d.style.display = visible || !q ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

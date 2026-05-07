@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grissini — Bread Knowledge Base</title>
+  <style>
+    :root {
+      --bg: #fdf8f0; --surface: #fff; --text: #2c2416;
+      --accent: #c07a2a; --sidebar-bg: #3b2a1a; --sidebar-text: #f5e6d0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Georgia', serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; }
+    #sidebar { width: 260px; min-height: 100vh; background: var(--sidebar-bg); color: var(--sidebar-text); padding: 24px 16px; position: fixed; overflow-y: auto; }
+    #sidebar h1 { font-size: 1.1rem; margin-bottom: 4px; color: var(--accent); }
+    #sidebar .tagline { font-size: 0.75rem; opacity: 0.7; margin-bottom: 20px; }
+    #sidebar input { width: 100%; padding: 6px 8px; border-radius: 4px; border: none; font-size: 0.85rem; margin-bottom: 16px; }
+    #sidebar details summary { cursor: pointer; font-weight: bold; padding: 4px 0; color: var(--accent); font-size: 0.9rem; }
+    #sidebar ul { list-style: none; padding-left: 12px; margin-top: 4px; }
+    #sidebar ul li a { color: var(--sidebar-text); text-decoration: none; font-size: 0.85rem; line-height: 1.9; opacity: 0.85; }
+    #sidebar ul li a:hover { color: var(--accent); opacity: 1; }
+    #main { margin-left: 260px; flex: 1; padding: 40px 60px; max-width: 900px; }
+    #main h1 { font-size: 2rem; color: var(--text); border-bottom: 2px solid var(--accent); padding-bottom: 8px; margin-bottom: 24px; }
+    #main h2 { font-size: 1.4rem; margin-top: 32px; margin-bottom: 12px; color: var(--accent); }
+    #main h3 { font-size: 1.1rem; margin-top: 20px; margin-bottom: 8px; }
+    #main p { line-height: 1.8; margin-bottom: 12px; }
+    #main table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+    #main th { background: var(--accent); color: white; padding: 8px 12px; text-align: left; }
+    #main td { padding: 7px 12px; border-bottom: 1px solid #e8d5b0; }
+    #main tr:nth-child(even) td { background: #faf4e8; }
+    #main ul, #main ol { padding-left: 24px; margin-bottom: 12px; line-height: 1.9; }
+    #main img { max-width: 100%; border-radius: 6px; margin: 12px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+    #main code { background: #f0e8d5; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 0.9em; }
+    #main pre { background: #f0e8d5; padding: 16px; border-radius: 6px; overflow-x: auto; margin: 12px 0; }
+    #main blockquote { border-left: 3px solid var(--accent); padding-left: 16px; color: #5a4030; margin: 12px 0; }
+    .tag { display: inline-block; background: var(--accent); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin: 2px; }
+    .frontmatter { background: #faf0d8; border: 1px solid #e0c890; border-radius: 6px; padding: 12px 16px; margin-bottom: 24px; font-size: 0.85rem; }
+    a { color: var(--accent); }
+    @media (max-width: 768px) { #sidebar { display: none; } #main { margin-left: 0; padding: 24px 20px; } }
+  </style>
+</head>
+<body>
+  <nav id="sidebar">
+    <h1>🍞 Bread KB</h1>
+    <p class="tagline">Global Bread Knowledge Base</p>
+    <input type="text" id="search" placeholder="Search breads…" oninput="filterNav(this.value)">
+    <div id="nav"><details open><summary>🏳 France</summary><ul>
+<li><a href="../France/baguette.html">Baguette</a></li>
+<li><a href="../France/brioche.html">Brioche</a></li>
+<li><a href="../France/croissant.html">Croissant</a></li>
+<li><a href="../France/pain_de_campagne.html">Pain De Campagne</a></li>
+</ul></details>
+<details open><summary>🏳 Germany</summary><ul>
+<li><a href="../Germany/pretzel.html">Pretzel</a></li>
+<li><a href="../Germany/pumpernickel.html">Pumpernickel</a></li>
+<li><a href="../Germany/rye_bread.html">Rye Bread</a></li>
+<li><a href="../Germany/vollkornbrot.html">Vollkornbrot</a></li>
+</ul></details>
+<details open><summary>🏳 India</summary><ul>
+<li><a href="../India/chapati.html">Chapati</a></li>
+<li><a href="../India/naan.html">Naan</a></li>
+<li><a href="../India/parotta.html">Parotta</a></li>
+<li><a href="../India/pav.html">Pav</a></li>
+</ul></details>
+<details open><summary>🏳 Italy</summary><ul>
+<li><a href="../Italy/ciabatta.html">Ciabatta</a></li>
+<li><a href="../Italy/focaccia.html">Focaccia</a></li>
+<li><a href="../Italy/grissini.html">Grissini</a></li>
+<li><a href="../Italy/pane_di_casa.html">Pane Di Casa</a></li>
+</ul></details>
+<details open><summary>🏳 USA</summary><ul>
+<li><a href="../USA/bagel.html">Bagel</a></li>
+<li><a href="../USA/cornbread.html">Cornbread</a></li>
+<li><a href="../USA/pretzel.html">Pretzel</a></li>
+<li><a href="../USA/sourdough.html">Sourdough</a></li>
+</ul></details></div>
+  </nav>
+  <main id="main">
+    <div class="frontmatter"><strong>Country:</strong> Italy &nbsp;|&nbsp; <strong>Updated:</strong> 2025-01-15 &nbsp;|&nbsp; <span class="tag">italian-bread</span> <span class="tag">breadstick</span> <span class="tag">piedmont</span> <span class="tag">turin</span> <span class="tag">crisp-bread</span> <span class="tag">antipasto</span></div><h1>Grissini</h1>
+<h2>Overview</h2>
+<p>Grissini (singular: <em>grissino</em>), also known as breadsticks or <em>grissini torinesi</em>, are slender, pencil-thin sticks of crisp, dry baked bread that have become an icon of Italian dining. Originating in the city of Turin in the Piedmont region of northwestern Italy, grissini are typically served as an <em>antipasto</em> in restaurants, often alongside or in place of conventional bread. Their distinctive crunch, light texture, and elegant elongated form make them equally suited to fine dining and casual snacking, and they pair famously with cured meats such as prosciutto.</p>
+<h2>Origin &amp; Country</h2>
+<ul>
+<li><strong>Country of origin:</strong> Italy</li>
+<li><strong>Region:</strong> Piedmont (<em>Piemonte</em>)</li>
+<li><strong>City:</strong> Turin (<em>Torino</em>)</li>
+<li><strong>Local name (Piedmontese):</strong> <em>ghërsin</em></li>
+</ul>
+<p>Grissini are deeply tied to Piedmontese culinary identity and are often labeled <em>grissini torinesi</em> ("breadsticks of Turin") to denote authenticity.</p>
+<h2>History &amp; Evolution</h2>
+<p>The origins of grissini date to the 17th century. The earliest documented reference appears before 1643, when a Florentine abbot described a long, "bone-thin" bread being baked in Lanzo Torinese, a town just outside Turin.</p>
+<p>According to tradition, the breadstick was invented in Piedmont by a Turinese baker named <strong>Antonio Brunero</strong>. The story holds that Brunero developed the thin, fully-baked bread for the young <strong>Duke Victor Amadeus II of Savoy</strong>, who suffered from digestive ailments in childhood. Because grissini are baked dry all the way through, with very little moist crumb, they were considered easier to digest than ordinary loaves — making them a medicinal as well as culinary innovation.</p>
+<p>From these noble beginnings, grissini spread throughout Italy and eventually around the world. Notably, Napoleon Bonaparte is said to have been so fond of them that he had a regular supply sent from Turin to Paris, calling them <em>les petits bâtons de Turin</em> ("the little sticks of Turin").</p>
+<p>In modern times, grissini have evolved into many forms:<br />
+- <strong>Italy:</strong> retained their classic thin, crisp character, often hand-rolled (<em>stirati</em>) and served with antipasti.<br />
+- <strong>North America:</strong> transformed into a softer, larger product, frequently brushed with butter, garlic, and cheese, or sweetened with cinnamon and sugar for dessert.<br />
+- <strong>Supermarkets worldwide:</strong> dried, pre-packaged grissini are sold as cracker-like snacks.</p>
+<h2>Recipe</h2>
+<h3>Ingredients</h3>
+<p>For approximately 30–40 traditional grissini:</p>
+<table>
+<thead>
+<tr>
+<th>Ingredient</th>
+<th>Quantity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type "00" or all-purpose flour</td>
+<td>500 g</td>
+</tr>
+<tr>
+<td>Warm water</td>
+<td>280 ml</td>
+</tr>
+<tr>
+<td>Extra-virgin olive oil</td>
+<td>40 ml</td>
+</tr>
+<tr>
+<td>Fresh yeast (or 7 g dry yeast)</td>
+<td>15 g</td>
+</tr>
+<tr>
+<td>Fine sea salt</td>
+<td>10 g</td>
+</tr>
+<tr>
+<td>Malt syrup or sugar</td>
+<td>1 tsp</td>
+</tr>
+<tr>
+<td>Semolina or extra flour (for dusting)</td>
+<td>as needed</td>
+</tr>
+</tbody>
+</table>
+<p>Optional toppings: sesame seeds, poppy seeds, rosemary, coarse salt, cracked pepper.</p>
+<h3>Method</h3>
+<ol>
+<li><strong>Activate the yeast.</strong> Dissolve the yeast and malt (or sugar) in the warm water; let stand 5–10 minutes until foamy.</li>
+<li><strong>Mix the dough.</strong> Combine flour and salt in a large bowl. Add the yeast mixture and olive oil. Mix until a shaggy dough forms.</li>
+<li><strong>Knead.</strong> Turn out onto a lightly floured surface and knead for 8–10 minutes until smooth and elastic.</li>
+<li><strong>First rise.</strong> Place dough in an oiled bowl, cover, and let rise at room temperature for about 1 hour, or until roughly doubled.</li>
+<li><strong>Shape into a slab.</strong> Gently flatten the dough into a rectangle about 1.5 cm thick on a lightly oiled surface, brush the top with olive oil, and let rest for 20 minutes.</li>
+<li><strong>Cut and stretch.</strong> Using a sharp knife or dough cutter, slice strips about 1–1.5 cm wide. Pick up each strip by the ends and gently stretch to the length of your baking sheet (this is the traditional <em>stirati</em> method).</li>
+<li><strong>Top (optional).</strong> Roll the stretched sticks in seeds, herbs, or coarse salt if desired.</li>
+<li><strong>Bake.</strong> Place on parchment-lined trays, leaving small gaps between sticks. Bake at 200 °C (390 °F) for 15–20 minutes, until deeply golden and fully crisp through.</li>
+<li><strong>Cool.</strong> Let cool completely on a rack — this final drying step is what gives grissini their signature snap. Store in an airtight container.</li>
+</ol>
+<h2>Variations</h2>
+<ul>
+<li><strong>Grissini Stirati:</strong> the traditional hand-pulled, irregularly shaped variety from Turin, prized for its rustic, knobbly texture.</li>
+<li><strong>Grissini Rubatà:</strong> a thicker, knotted-looking variant from the Chieri area near Turin, hand-rolled rather than stretched, with a denser bite.</li>
+<li><strong>Grissini al Sesamo / Papavero:</strong> topped with sesame or poppy seeds.</li>
+<li><strong>Grissini al Rosmarino:</strong> flavored with fresh rosemary and olive oil.</li>
+<li><strong>Grissini Integrali:</strong> made with whole-wheat flour for a nuttier flavor.</li>
+<li><strong>American-style soft breadsticks:</strong> thicker and pliable, often brushed with garlic butter and Parmesan, served with marinara or cheese dips.</li>
+<li><strong>Sweet dessert breadsticks:</strong> dusted with cinnamon-sugar or drizzled with icing — a North American innovation.</li>
+</ul>
+<h2>Cultural Context</h2>
+<p>In Italy, grissini occupy a place of quiet honor at the dining table. They are typically presented in a tall glass or paper sleeve at the start of a meal, often before the menu even arrives, signaling Italian hospitality. In Piedmont especially, they are a point of regional pride and a protected element of local food heritage.</p>
+<p>A classic pairing is <strong>grissini wrapped in prosciutto</strong>, an antipasto fixture in trattorias from Turin to New York. They also accompany cheese boards, salumi platters, and aperitivo spreads with wines like Barbera, Nebbiolo, or Prosecco.</p>
+<p>In North America, grissini have largely been reimagined as a casual, soft, buttery side item — popularized by chain Italian-American restaurants — and are frequently served with dipping sauces, in contrast to the dry, crunchy original meant to be eaten on its own.</p>
+<h2>Images</h2>
+<p><em>Images not included in source material. Suggested visuals:</em><br />
+- Traditional hand-stretched <em>grissini stirati</em> in a glass container on an Italian restaurant table.<br />
+- Grissini wrapped in prosciutto on an antipasto platter.<br />
+- Comparison shot of <em>stirati</em> (rustic, irregular) vs. <em>rubatà</em> (knotted, thicker).<br />
+- Soft American-style breadsticks topped with garlic butter.</p>
+<h2>Related Breads</h2>
+<ul>
+<li>Focaccia — Italian flatbread sharing olive-oil-rich dough characteristics.</li>
+<li>Ciabatta — another Italian bread often served with antipasti.</li>
+<li>Taralli — small, crunchy ring-shaped Italian snacks, similar in texture and snacking role.</li>
+<li>Friselle — twice-baked, dry Italian bread.</li>
+<li>Lavash — thin, crisp flatbread with a comparable cracker-like quality.</li>
+<li>Pane Carasau — Sardinian crisp flatbread, another extremely dry Italian bread.</li>
+</ul>
+<h2>References</h2>
+<ol>
+<li>Wikipedia contributors. <a href="https://en.wikipedia.org/wiki/grissini">"Breadstick."</a> <em>Wikipedia, The Free Encyclopedia.</em></li>
+<li>Historical references to grissini in Lanzo Torinese, Piedmont (pre-1643), as cited in Wikipedia source.</li>
+<li>Tradition of Antonio Brunero and Duke Victor Amadeus II of Savoy, as documented in Italian culinary history sources cited via Wikipedia.</li>
+</ol>
+  </main>
+  <script>
+    function filterNav(q) {
+      q = q.toLowerCase();
+      document.querySelectorAll('#nav li').forEach(li => {
+        li.style.display = li.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+      document.querySelectorAll('#nav details').forEach(d => {
+        const visible = [...d.querySelectorAll('li')].some(li => li.style.display !== 'none');
+        d.style.display = visible || !q ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

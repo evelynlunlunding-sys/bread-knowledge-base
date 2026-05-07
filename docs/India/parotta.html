@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parotta — Bread Knowledge Base</title>
+  <style>
+    :root {
+      --bg: #fdf8f0; --surface: #fff; --text: #2c2416;
+      --accent: #c07a2a; --sidebar-bg: #3b2a1a; --sidebar-text: #f5e6d0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Georgia', serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; }
+    #sidebar { width: 260px; min-height: 100vh; background: var(--sidebar-bg); color: var(--sidebar-text); padding: 24px 16px; position: fixed; overflow-y: auto; }
+    #sidebar h1 { font-size: 1.1rem; margin-bottom: 4px; color: var(--accent); }
+    #sidebar .tagline { font-size: 0.75rem; opacity: 0.7; margin-bottom: 20px; }
+    #sidebar input { width: 100%; padding: 6px 8px; border-radius: 4px; border: none; font-size: 0.85rem; margin-bottom: 16px; }
+    #sidebar details summary { cursor: pointer; font-weight: bold; padding: 4px 0; color: var(--accent); font-size: 0.9rem; }
+    #sidebar ul { list-style: none; padding-left: 12px; margin-top: 4px; }
+    #sidebar ul li a { color: var(--sidebar-text); text-decoration: none; font-size: 0.85rem; line-height: 1.9; opacity: 0.85; }
+    #sidebar ul li a:hover { color: var(--accent); opacity: 1; }
+    #main { margin-left: 260px; flex: 1; padding: 40px 60px; max-width: 900px; }
+    #main h1 { font-size: 2rem; color: var(--text); border-bottom: 2px solid var(--accent); padding-bottom: 8px; margin-bottom: 24px; }
+    #main h2 { font-size: 1.4rem; margin-top: 32px; margin-bottom: 12px; color: var(--accent); }
+    #main h3 { font-size: 1.1rem; margin-top: 20px; margin-bottom: 8px; }
+    #main p { line-height: 1.8; margin-bottom: 12px; }
+    #main table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+    #main th { background: var(--accent); color: white; padding: 8px 12px; text-align: left; }
+    #main td { padding: 7px 12px; border-bottom: 1px solid #e8d5b0; }
+    #main tr:nth-child(even) td { background: #faf4e8; }
+    #main ul, #main ol { padding-left: 24px; margin-bottom: 12px; line-height: 1.9; }
+    #main img { max-width: 100%; border-radius: 6px; margin: 12px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+    #main code { background: #f0e8d5; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 0.9em; }
+    #main pre { background: #f0e8d5; padding: 16px; border-radius: 6px; overflow-x: auto; margin: 12px 0; }
+    #main blockquote { border-left: 3px solid var(--accent); padding-left: 16px; color: #5a4030; margin: 12px 0; }
+    .tag { display: inline-block; background: var(--accent); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin: 2px; }
+    .frontmatter { background: #faf0d8; border: 1px solid #e0c890; border-radius: 6px; padding: 12px 16px; margin-bottom: 24px; font-size: 0.85rem; }
+    a { color: var(--accent); }
+    @media (max-width: 768px) { #sidebar { display: none; } #main { margin-left: 0; padding: 24px 20px; } }
+  </style>
+</head>
+<body>
+  <nav id="sidebar">
+    <h1>🍞 Bread KB</h1>
+    <p class="tagline">Global Bread Knowledge Base</p>
+    <input type="text" id="search" placeholder="Search breads…" oninput="filterNav(this.value)">
+    <div id="nav"><details open><summary>🏳 France</summary><ul>
+<li><a href="../France/baguette.html">Baguette</a></li>
+<li><a href="../France/brioche.html">Brioche</a></li>
+<li><a href="../France/croissant.html">Croissant</a></li>
+<li><a href="../France/pain_de_campagne.html">Pain De Campagne</a></li>
+</ul></details>
+<details open><summary>🏳 Germany</summary><ul>
+<li><a href="../Germany/pretzel.html">Pretzel</a></li>
+<li><a href="../Germany/pumpernickel.html">Pumpernickel</a></li>
+<li><a href="../Germany/rye_bread.html">Rye Bread</a></li>
+<li><a href="../Germany/vollkornbrot.html">Vollkornbrot</a></li>
+</ul></details>
+<details open><summary>🏳 India</summary><ul>
+<li><a href="../India/chapati.html">Chapati</a></li>
+<li><a href="../India/naan.html">Naan</a></li>
+<li><a href="../India/parotta.html">Parotta</a></li>
+<li><a href="../India/pav.html">Pav</a></li>
+</ul></details>
+<details open><summary>🏳 Italy</summary><ul>
+<li><a href="../Italy/ciabatta.html">Ciabatta</a></li>
+<li><a href="../Italy/focaccia.html">Focaccia</a></li>
+<li><a href="../Italy/grissini.html">Grissini</a></li>
+<li><a href="../Italy/pane_di_casa.html">Pane Di Casa</a></li>
+</ul></details>
+<details open><summary>🏳 USA</summary><ul>
+<li><a href="../USA/bagel.html">Bagel</a></li>
+<li><a href="../USA/cornbread.html">Cornbread</a></li>
+<li><a href="../USA/pretzel.html">Pretzel</a></li>
+<li><a href="../USA/sourdough.html">Sourdough</a></li>
+</ul></details></div>
+  </nav>
+  <main id="main">
+    <div class="frontmatter"><strong>Country:</strong> India &nbsp;|&nbsp; <strong>Updated:</strong> 2025-01-20 &nbsp;|&nbsp; <span class="tag">flatbread</span> <span class="tag">south-indian</span> <span class="tag">layered-bread</span> <span class="tag">kerala</span> <span class="tag">tamil-nadu</span> <span class="tag">maida</span> <span class="tag">griddle-bread</span></div><h1>Parotta</h1>
+<h2>Overview</h2>
+<p>Parotta (also spelled <em>porotta</em> or <em>barota</em>) is a soft, flaky, layered flatbread that holds an iconic place in South Indian and Sri Lankan cuisine. Made from maida (refined wheat flour), oil, salt, and water, it is distinguished by its delicate, peelable layers and chewy mouthfeel. Unlike its North Indian cousin the paratha, parotta is built around a process of stretching, oiling, and spiraling the dough to create dozens of fine sheets that puff and separate during griddle cooking.</p>
+<p>It is most commonly served with rich, saucy accompaniments — Kerala beef fry, korma, or tangy tomato-based <em>salna</em> — and has become a defining street-food staple from Kochi to Colombo.</p>
+<h2>Origin &amp; Country</h2>
+<ul>
+<li><strong>Country of Origin:</strong> India (with strong parallel traditions in Sri Lanka)</li>
+<li><strong>Primary Regions:</strong> Kerala (Malabar Coast) and Tamil Nadu</li>
+<li><strong>Spread:</strong> Sri Lanka, the Gulf states (via diaspora), Malaysia and Singapore (through its descendant roti canai)</li>
+</ul>
+<p>The name <em>parotta</em> reflects the Malayalam pronunciation, while <em>barota</em> corresponds to Tamil phonetics. Both terms are South Indian regional equivalents of the Hindi word <em>paratha</em>, though the breads themselves are distinct.</p>
+<h2>History &amp; Evolution</h2>
+<p>The origins of parotta are debated, with two leading theories:</p>
+<ol>
+<li><strong>West Asian Influence Theory:</strong> Layered flatbreads from West Asia may have arrived on the Malabar Coast through centuries of Arab maritime trade, evolving locally into the Malabar parotta.</li>
+<li><strong>North Indian Descent Theory:</strong> Parotta may have evolved from the North Indian paratha tradition as it migrated south.</li>
+</ol>
+<p>Either way, parotta's rise to prominence is firmly tied to the <strong>20th century</strong>, when wheat cultivation and milling spread across South India, making maida widely available. Once a relatively elite or restaurant food, parotta became a daily staple by the late 1900s, sold by home cooks, roadside vendors, and bustling "thattukadas" (street stalls) alike.</p>
+<p>In Kerala, the pairing of parotta with beef has become a deep cultural marker — an everyday comfort food and an emblem of the state's distinctive, pluralistic food identity. Parotta also seeded the development of related Southeast Asian breads, most notably roti canai in Malaysia and Singapore.</p>
+<h2>Recipe</h2>
+<h3>Ingredients</h3>
+<p>For approximately 6–8 parottas:</p>
+<table>
+<thead>
+<tr>
+<th>Ingredient</th>
+<th>Quantity</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Maida (refined wheat flour)</td>
+<td>500 g</td>
+<td>Essential for chewiness and elasticity</td>
+</tr>
+<tr>
+<td>Oil (neutral)</td>
+<td>25–50 g (5–10% of flour)</td>
+<td>Plus extra for layering</td>
+</tr>
+<tr>
+<td>Salt</td>
+<td>7–12 g (1.5–2.5% of flour)</td>
+<td></td>
+</tr>
+<tr>
+<td>Water</td>
+<td>~250–275 ml</td>
+<td>Adjust for a soft, supple dough</td>
+</tr>
+<tr>
+<td>Sugar</td>
+<td>1 tsp (optional)</td>
+<td>Aids browning</td>
+</tr>
+<tr>
+<td>Egg</td>
+<td>1 (optional)</td>
+<td>For richness, common in some recipes</td>
+</tr>
+<tr>
+<td>Ghee or oil</td>
+<td>For cooking</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>Method</h3>
+<ol>
+<li><strong>Knead:</strong> Combine maida, salt, and (optional) sugar. Add oil and rub through the flour. Add water gradually, kneading 8–10 minutes until smooth and elastic. The dough should be soft and slightly tacky.</li>
+<li><strong>Rest:</strong> Cover and rest for at least 1 hour (longer is better — 3–4 hours yields more elastic dough).</li>
+<li><strong>Portion:</strong> Divide into balls of about 80–100 g each. Coat lightly with oil and rest 5 more minutes.</li>
+<li><strong>Stretch:</strong> On an oiled surface, beat and stretch each ball into a paper-thin sheet, almost translucent. This step is critical — the thinness determines layering and texture.</li>
+<li><strong>Layer:</strong> Drizzle a little oil across the sheet. Pleat or fold it accordion-style into a long, narrow ribbon.</li>
+<li><strong>Spiral:</strong> Coil the ribbon into a tight spiral (like a snail shell). Press lightly and rest a few minutes.</li>
+<li><strong>Roll Out:</strong> Flatten the spiral into a disc 15–20 cm across and 5–7.5 mm thick (or as thin as 2–3 mm for crispier versions).</li>
+<li><strong>Cook:</strong> On a hot griddle (tawa) at around 230 °C / 450 °F, cook about 2 minutes total, flipping with a long spatula and brushing with oil or ghee. Cream-colored with light brown spots is the goal.</li>
+<li><strong>Fluff:</strong> While still hot, clap the parotta between your palms — or scrunch it inward from the edges — to separate the layers. This signature gesture is what gives parotta its airy, ruffled body.</li>
+</ol>
+<h2>Variations</h2>
+<ul>
+<li><strong>Malabar (Kerala) Parotta:</strong> The classic spiraled and rolled version; fluffy, layered, golden-edged.</li>
+<li><strong>Veechu Parotta:</strong> From Tamil Nadu and Sri Lanka. The dough is thrown and stretched dramatically (<em>veechu</em> = "throw"), then folded into a square rather than spiraled. Thinner and crisper.</li>
+<li><strong>Ceylon Parotta:</strong> A Sri Lankan veechu-style parotta enclosing a filling — often egg, vegetables, or minced meat.</li>
+<li><strong>Kothu Parotta:</strong> Day-old parotta chopped on a griddle with eggs, meat, vegetables, and spicy gravy, mixed with rhythmic metallic clanging by street vendors. A beloved late-night dish.</li>
+<li><strong>Egg Parotta:</strong> Egg whisked and poured over the parotta on the griddle.</li>
+<li><strong>Wheat Parotta:</strong> A modern, "healthier" version made with whole-wheat atta — closer in spirit to the paratha.</li>
+<li><strong>Coin Parotta:</strong> Miniature, bite-sized parottas often served as a snack with curry.</li>
+</ul>
+<h2>Cultural Context</h2>
+<p>Parotta is more than a bread — it is a fixture of South Indian social life. In Kerala, it is the default pairing for <strong>beef fry (<em>erachi varattiyathu</em>)</strong>, a combination so iconic it functions as a regional identity marker, especially among Malayali Christians and Muslims. In Tamil Nadu, the <strong>parotta–salna–chalna</strong> trio (parotta, peppery meat gravy, and a thinner side gravy) defines highway dhabas and city street stalls.</p>
+<p>In Sri Lanka, <em>kottu roti</em> (the local cousin of kothu parotta) is the quintessential late-night street food, its rhythmic chopping a familiar urban soundtrack. Across Gulf cities with large South Indian populations, parotta has become a breakfast and dinner mainstay, served in "Kerala restaurants" and tea shops.</p>
+<p>The bread also bridges class and religion: it appears at humble roadside stalls, Muslim wedding feasts, Hindu home kitchens, and Christian Sunday lunches alike. Its dramatic preparation — the slap of dough, the whirl of the spiral, the clap to fluff — gives it theatrical appeal that has made it a staple of food television and viral street-food videos.</p>
+<h2>Images</h2>
+<p><em>(Images to be added)</em><br />
+- Stack of golden Malabar parottas with visible layers<br />
+- Cook stretching paper-thin dough on an oiled steel surface<br />
+- Spiral coil of layered dough before rolling<br />
+- Parotta served with Kerala beef fry<br />
+- Street vendor preparing kothu parotta on a flat griddle</p>
+<h2>Related Breads</h2>
+<ul>
+<li>paratha — the North Indian whole-wheat counterpart</li>
+<li>roti canai — Malaysian/Singaporean descendant of parotta</li>
+<li>roti prata — Singaporean variant closely related to roti canai</li>
+<li>chapati — simpler unleavened Indian flatbread</li>
+<li>laccha paratha — North Indian multilayered paratha with a similar layering technique</li>
+<li>malabar paratha — alternate name for Kerala parotta</li>
+<li>kottu roti — Sri Lankan dish made from chopped parotta</li>
+</ul>
+<h2>References</h2>
+<ol>
+<li>Wikipedia, "Parotta." https://en.wikipedia.org/wiki/Parotta</li>
+<li>Indrani, D., &amp; Rao, G. V. — research on optimal parotta baking parameters (cited in Wikipedia source).</li>
+<li>Regional culinary documentation on Malabar, Tamil, and Sri Lankan flatbread traditions (as referenced in source material).</li>
+</ol>
+<blockquote>
+<p><strong>Note:</strong> This entry synthesizes a single primary source (Wikipedia). Some details — particularly precise historical dates and origin theories — remain debated among food historians and should be treated as reasonable consensus rather than settled fact.</p>
+</blockquote>
+  </main>
+  <script>
+    function filterNav(q) {
+      q = q.toLowerCase();
+      document.querySelectorAll('#nav li').forEach(li => {
+        li.style.display = li.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+      document.querySelectorAll('#nav details').forEach(d => {
+        const visible = [...d.querySelectorAll('li')].some(li => li.style.display !== 'none');
+        d.style.display = visible || !q ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

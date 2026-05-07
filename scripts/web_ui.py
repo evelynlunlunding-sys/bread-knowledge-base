@@ -28,7 +28,7 @@ except ImportError:
 
 ROOT = Path(__file__).parent.parent
 KB_DIR = ROOT / "knowledge_base"
-SITE_DIR = ROOT / "site"
+SITE_DIR = ROOT / "docs"
 
 HTML_TEMPLATE = """\
 <!DOCTYPE html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pretzel — Bread Knowledge Base</title>
+  <style>
+    :root {
+      --bg: #fdf8f0; --surface: #fff; --text: #2c2416;
+      --accent: #c07a2a; --sidebar-bg: #3b2a1a; --sidebar-text: #f5e6d0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Georgia', serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; }
+    #sidebar { width: 260px; min-height: 100vh; background: var(--sidebar-bg); color: var(--sidebar-text); padding: 24px 16px; position: fixed; overflow-y: auto; }
+    #sidebar h1 { font-size: 1.1rem; margin-bottom: 4px; color: var(--accent); }
+    #sidebar .tagline { font-size: 0.75rem; opacity: 0.7; margin-bottom: 20px; }
+    #sidebar input { width: 100%; padding: 6px 8px; border-radius: 4px; border: none; font-size: 0.85rem; margin-bottom: 16px; }
+    #sidebar details summary { cursor: pointer; font-weight: bold; padding: 4px 0; color: var(--accent); font-size: 0.9rem; }
+    #sidebar ul { list-style: none; padding-left: 12px; margin-top: 4px; }
+    #sidebar ul li a { color: var(--sidebar-text); text-decoration: none; font-size: 0.85rem; line-height: 1.9; opacity: 0.85; }
+    #sidebar ul li a:hover { color: var(--accent); opacity: 1; }
+    #main { margin-left: 260px; flex: 1; padding: 40px 60px; max-width: 900px; }
+    #main h1 { font-size: 2rem; color: var(--text); border-bottom: 2px solid var(--accent); padding-bottom: 8px; margin-bottom: 24px; }
+    #main h2 { font-size: 1.4rem; margin-top: 32px; margin-bottom: 12px; color: var(--accent); }
+    #main h3 { font-size: 1.1rem; margin-top: 20px; margin-bottom: 8px; }
+    #main p { line-height: 1.8; margin-bottom: 12px; }
+    #main table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+    #main th { background: var(--accent); color: white; padding: 8px 12px; text-align: left; }
+    #main td { padding: 7px 12px; border-bottom: 1px solid #e8d5b0; }
+    #main tr:nth-child(even) td { background: #faf4e8; }
+    #main ul, #main ol { padding-left: 24px; margin-bottom: 12px; line-height: 1.9; }
+    #main img { max-width: 100%; border-radius: 6px; margin: 12px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+    #main code { background: #f0e8d5; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 0.9em; }
+    #main pre { background: #f0e8d5; padding: 16px; border-radius: 6px; overflow-x: auto; margin: 12px 0; }
+    #main blockquote { border-left: 3px solid var(--accent); padding-left: 16px; color: #5a4030; margin: 12px 0; }
+    .tag { display: inline-block; background: var(--accent); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin: 2px; }
+    .frontmatter { background: #faf0d8; border: 1px solid #e0c890; border-radius: 6px; padding: 12px 16px; margin-bottom: 24px; font-size: 0.85rem; }
+    a { color: var(--accent); }
+    @media (max-width: 768px) { #sidebar { display: none; } #main { margin-left: 0; padding: 24px 20px; } }
+  </style>
+</head>
+<body>
+  <nav id="sidebar">
+    <h1>🍞 Bread KB</h1>
+    <p class="tagline">Global Bread Knowledge Base</p>
+    <input type="text" id="search" placeholder="Search breads…" oninput="filterNav(this.value)">
+    <div id="nav"><details open><summary>🏳 France</summary><ul>
+<li><a href="../France/baguette.html">Baguette</a></li>
+<li><a href="../France/brioche.html">Brioche</a></li>
+<li><a href="../France/croissant.html">Croissant</a></li>
+<li><a href="../France/pain_de_campagne.html">Pain De Campagne</a></li>
+</ul></details>
+<details open><summary>🏳 Germany</summary><ul>
+<li><a href="../Germany/pretzel.html">Pretzel</a></li>
+<li><a href="../Germany/pumpernickel.html">Pumpernickel</a></li>
+<li><a href="../Germany/rye_bread.html">Rye Bread</a></li>
+<li><a href="../Germany/vollkornbrot.html">Vollkornbrot</a></li>
+</ul></details>
+<details open><summary>🏳 India</summary><ul>
+<li><a href="../India/chapati.html">Chapati</a></li>
+<li><a href="../India/naan.html">Naan</a></li>
+<li><a href="../India/parotta.html">Parotta</a></li>
+<li><a href="../India/pav.html">Pav</a></li>
+</ul></details>
+<details open><summary>🏳 Italy</summary><ul>
+<li><a href="../Italy/ciabatta.html">Ciabatta</a></li>
+<li><a href="../Italy/focaccia.html">Focaccia</a></li>
+<li><a href="../Italy/grissini.html">Grissini</a></li>
+<li><a href="../Italy/pane_di_casa.html">Pane Di Casa</a></li>
+</ul></details>
+<details open><summary>🏳 USA</summary><ul>
+<li><a href="../USA/bagel.html">Bagel</a></li>
+<li><a href="../USA/cornbread.html">Cornbread</a></li>
+<li><a href="../USA/pretzel.html">Pretzel</a></li>
+<li><a href="../USA/sourdough.html">Sourdough</a></li>
+</ul></details></div>
+  </nav>
+  <main id="main">
+    <div class="frontmatter"><strong>Country:</strong> USA &nbsp;|&nbsp; <strong>Updated:</strong> 2025-01-20 &nbsp;|&nbsp; <span class="tag">pretzel</span> <span class="tag">soft pretzel</span> <span class="tag">lye bread</span> <span class="tag">german-american</span> <span class="tag">snack bread</span> <span class="tag">baked goods</span></div><h1>Pretzel</h1>
+<h2>Overview</h2>
+<p>The pretzel is a distinctive baked dough product, instantly recognizable by its symmetrical knotted shape, deep mahogany crust, and characteristic salty bite. Made from a simple lean dough that is briefly bathed in an alkaline solution before baking, the pretzel develops a glossy, leathery skin and the unmistakable flavor produced by an intensified Maillard reaction. Though European in origin, the pretzel has become a deeply American food—particularly in Pennsylvania, where German immigrants established a tradition of both soft and hard-baked pretzels that today defines an entire snack category in the United States.</p>
+<p>Pretzels exist in two principal forms: <strong>soft pretzels</strong>, eaten warm and fresh, and <strong>hard pretzels</strong>, baked dry for a long shelf life. Salt is the canonical topping, but modern American pretzels also appear with mustard, cheese, cinnamon-sugar, chocolate glaze, seeds, and nuts.</p>
+<h2>Origin &amp; Country</h2>
+<p>While this entry focuses on the pretzel as it exists in the <strong>United States</strong>, its origins lie in continental Europe. The pretzel arrived in America with German-speaking immigrants—particularly the Pennsylvania Dutch—beginning in the 17th and 18th centuries. The town of Lititz, Pennsylvania is home to the Sturgis Pretzel House (founded 1861), generally credited as America's first commercial pretzel bakery. Pennsylvania remains the heart of American pretzel production, manufacturing the majority of the country's hard pretzels, while Philadelphia developed its own iconic soft pretzel tradition.</p>
+<h2>History &amp; Evolution</h2>
+<p>The pretzel's pre-American history is steeped in monastic legend. The most widely repeated story attributes its invention to an Italian monk around <strong>610 AD</strong>, who is said to have rolled scraps of Lenten dough into the shape of arms crossed in prayer and given them to his students as <em>pretiola</em> ("little rewards"). Other accounts locate the origin in a southern French monastery, and German folklore tells of bakers inventing the shape under duress from local dignitaries. The German name <strong>Brezel</strong> likely derives from the Latin <em>bracellus</em> ("bracelet") or <em>bracchiola</em> ("little arms").</p>
+<p>By the 12th century, the pretzel had become the emblem of bakers' guilds across southern German-speaking lands. One of the earliest known depictions appears in the <em>Hortus Deliciarum</em> from Alsace, illustrating the banquet of Queen Esther and King Ahasuerus. Because pretzels could be made from only flour, water, and salt, they were ideal for <strong>Lent</strong>, when eggs, dairy, and lard were forbidden. Pretzels became associated with Easter as well, and were once hidden for children to find on Easter morning, much as eggs are today.</p>
+<p>In America, the pretzel evolved along two paths:</p>
+<ul>
+<li><strong>Hard pretzels</strong> were reportedly invented by accident in the late 18th or 19th century in Pennsylvania, when a baker's apprentice over-baked a batch. The dry, crunchy result kept indefinitely and became a staple snack.</li>
+<li><strong>Soft pretzels</strong> flourished as urban street food, especially in Philadelphia, where vendors sold them from carts threaded onto wooden dowels, typically smeared with yellow mustard.</li>
+</ul>
+<p>The 20th century saw industrial mechanization (the first automatic pretzel-twisting machine was introduced in 1935) and, in the late 20th century, the rise of mall-based chains such as Auntie Anne's (founded 1988) and Wetzel's Pretzels, which globalized the American soft pretzel.</p>
+<h2>Recipe</h2>
+<p>The following recipe yields approximately 8 large American-style soft pretzels.</p>
+<h3>Ingredients</h3>
+<p><strong>Dough:</strong><br />
+- 4 cups (500 g) bread flour<br />
+- 1½ cups (355 ml) warm water (110 °F / 43 °C)<br />
+- 1 packet (2¼ tsp) active dry yeast<br />
+- 2 tablespoons brown sugar<br />
+- 4 tablespoons unsalted butter, melted<br />
+- 2 teaspoons fine salt</p>
+<p><strong>Alkaline bath (choose one):</strong><br />
+- <em>Traditional:</em> ⅓ cup food-grade lye (sodium hydroxide) dissolved in 4 cups cold water — <strong>wear gloves and eye protection</strong><br />
+- <em>Home-friendly:</em> ⅔ cup baking soda baked at 250 °F for 1 hour (to convert it to sodium carbonate), then dissolved in 8 cups water</p>
+<p><strong>Topping:</strong><br />
+- Coarse pretzel salt or flaky sea salt<br />
+- 1 egg, beaten with 1 tbsp water (optional, for extra shine if not using lye)</p>
+<h3>Method</h3>
+<ol>
+<li><strong>Activate the yeast.</strong> Stir warm water, brown sugar, and yeast in a bowl. Rest 5–10 minutes until foamy.</li>
+<li><strong>Mix the dough.</strong> Add melted butter, salt, and flour. Knead 8–10 minutes by hand or 5 minutes in a stand mixer with a dough hook until smooth and slightly tacky.</li>
+<li><strong>First rise.</strong> Cover and let rise in a warm spot for about 1 hour, or until doubled.</li>
+<li><strong>Shape.</strong> Divide the dough into 8 equal pieces. Roll each into a rope 22–24 inches long, slightly thicker in the middle. Form a U, cross the ends twice, and press them onto the bottom of the loop to form the classic pretzel knot.</li>
+<li><strong>Cold rest.</strong> Transfer pretzels to a parchment-lined tray and refrigerate, uncovered, for 30 minutes. This firms the surface for a better crust.</li>
+<li><strong>Prepare the bath.</strong> Bring the alkaline solution to a gentle simmer (or, for lye, keep it cool—lye is used at room temperature).</li>
+<li><strong>Dip.</strong> Submerge each pretzel for about 20–30 seconds in the baking-soda bath (or 10–15 seconds in lye). Lift out with a slotted spatula.</li>
+<li><strong>Top and slash.</strong> Place on a parchment-lined sheet, sprinkle generously with pretzel salt, and slash the thickest part of the loop with a sharp knife.</li>
+<li><strong>Bake.</strong> At 450 °F (232 °C) for 12–14 minutes, until deeply mahogany.</li>
+<li><strong>Serve.</strong> Eat warm, ideally within an hour, with mustard or melted cheese.</li>
+</ol>
+<h2>Variations</h2>
+<table>
+<thead>
+<tr>
+<th>Variation</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Philadelphia soft pretzel</strong></td>
+<td>Flatter, oblong, often sold in attached pairs; chewy and served with yellow mustard.</td>
+</tr>
+<tr>
+<td><strong>Bavarian-style pretzel</strong></td>
+<td>True lye pretzel with a thin "belly" that splits during baking; closely related to Laugenbrezel.</td>
+</tr>
+<tr>
+<td><strong>Hard pretzel</strong></td>
+<td>Twice-baked or low-temperature dried for a brittle, shelf-stable snack; a Pennsylvania Dutch specialty.</td>
+</tr>
+<tr>
+<td><strong>Pretzel rods / sticks</strong></td>
+<td>Straight extruded forms popularized industrially in the 20th century.</td>
+</tr>
+<tr>
+<td><strong>Cinnamon-sugar pretzel</strong></td>
+<td>Buttered after baking and tossed in cinnamon sugar; an Auntie Anne's signature.</td>
+</tr>
+<tr>
+<td><strong>Pretzel bun / roll</strong></td>
+<td>Lye-bathed dinner roll or burger bun; a fusion of the Laugenbrötchen tradition with American sandwich culture.</td>
+</tr>
+<tr>
+<td><strong>Stuffed pretzels</strong></td>
+<td>Filled with cheese, pepperoni, or jalapeño—an American mall-food innovation.</td>
+</tr>
+<tr>
+<td><strong>Chocolate-dipped pretzels</strong></td>
+<td>Hard pretzels enrobed in chocolate, popular as gifts and holiday treats.</td>
+</tr>
+</tbody>
+</table>
+<h2>Cultural Context</h2>
+<p>In the United States, the pretzel occupies a unique cultural niche that bridges ethnic heritage, regional pride, and mass-market snacking.</p>
+<ul>
+<li><strong>Pennsylvania identity.</strong> Pennsylvania produces roughly 80% of the nation's pretzels. The Pennsylvania Dutch heritage, hard-pretzel bakeries in towns like Lititz and Hanover, and the Philadelphia soft pretzel tradition together make the pretzel a near-state symbol.</li>
+<li><strong>Stadium and street food.</strong> The soft pretzel is a fixture of baseball games, ballparks, and urban food carts, particularly in Philadelphia and New York City.</li>
+<li><strong>National Pretzel Day.</strong> Celebrated annually on April 26, formally proclaimed by Pennsylvania Governor Mark Schweiker in 2003.</li>
+<li><strong>Religious echo.</strong> Though largely secularized in America, the pretzel's link to Lent persists in some Christian communities, where pretzels are eaten as a Lenten food and used in catechetical teaching about prayer.</li>
+<li><strong>Pop culture.</strong> From the phrase "twisted like a pretzel" to George W. Bush's famous 2002 pretzel-choking incident, the snack is woven into American vernacular.</li>
+</ul>
+<h2>Images</h2>
+<p><em>Suggested imagery for this entry:</em><br />
+- A freshly baked Bavarian-style soft pretzel with split belly and coarse salt<br />
+- A Philadelphia-style soft pretzel served with yellow mustard<br />
+- Hard pretzel rods and twists in a bowl<br />
+- The shaping sequence: rope → U-shape → twisted knot<br />
+- The Sturgis Pretzel House in Lititz, Pennsylvania<br />
+- Medieval bakers' guild emblem featuring a pretzel</p>
+<h2>Related Breads</h2>
+<ul>
+<li>Laugenbrezel — the German Bavarian lye pretzel, direct ancestor of the American pretzel</li>
+<li>Laugenbrötchen — German lye roll, related by alkaline-bath technique</li>
+<li>Bagel — another boiled-then-baked ringed bread of European immigrant origin</li>
+<li>Bialy — flat, chewy roll brought to America by Eastern European Jewish immigrants</li>
+<li>Pretzel bun — American lye-treated sandwich roll</li>
+<li>Bread sticks — comparable in form to pretzel sticks</li>
+<li>Simit — Turkish sesame-encrusted ring bread, sometimes compared in shape and street-food role</li>
+</ul>
+<h2>References</h2>
+<ol>
+<li>Wikipedia contributors. "Pretzel." <em>Wikipedia, The Free Encyclopedia.</em> https://en.wikipedia.org/wiki/Pretzel</li>
+<li><em>Hortus Deliciarum</em> (12th century), Alsace — early pictorial reference to a pretzel-shaped bread.</li>
+<li>Sturgis Pretzel House historical records, Lititz, Pennsylvania (founded 1861).</li>
+<li>Pennsylvania Dutch Convention &amp; Visitors Bureau, materials on Pennsylvania pretzel heritage.</li>
+<li>Pennsylvania Governor's Proclamation, National Pretzel Day (April 26, 2003).</li>
+</ol>
+<p><em>Note: Several origin stories—particularly the 610 AD Italian monk legend—are widely repeated but not definitively documented; readers should treat them as tradition rather than verified history.</em></p>
+  </main>
+  <script>
+    function filterNav(q) {
+      q = q.toLowerCase();
+      document.querySelectorAll('#nav li').forEach(li => {
+        li.style.display = li.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+      document.querySelectorAll('#nav details').forEach(d => {
+        const visible = [...d.querySelectorAll('li')].some(li => li.style.display !== 'none');
+        d.style.display = visible || !q ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

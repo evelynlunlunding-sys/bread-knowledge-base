@@ -1,7 +1,7 @@
 # API keys - never commit these
 .env
 
-# Generated site (too large, rebuilt locally)
+# Old site folder
 site/
 
 # Raw scraped data (large, reproducible)

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vollkornbrot — Bread Knowledge Base</title>
+  <style>
+    :root {
+      --bg: #fdf8f0; --surface: #fff; --text: #2c2416;
+      --accent: #c07a2a; --sidebar-bg: #3b2a1a; --sidebar-text: #f5e6d0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Georgia', serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; }
+    #sidebar { width: 260px; min-height: 100vh; background: var(--sidebar-bg); color: var(--sidebar-text); padding: 24px 16px; position: fixed; overflow-y: auto; }
+    #sidebar h1 { font-size: 1.1rem; margin-bottom: 4px; color: var(--accent); }
+    #sidebar .tagline { font-size: 0.75rem; opacity: 0.7; margin-bottom: 20px; }
+    #sidebar input { width: 100%; padding: 6px 8px; border-radius: 4px; border: none; font-size: 0.85rem; margin-bottom: 16px; }
+    #sidebar details summary { cursor: pointer; font-weight: bold; padding: 4px 0; color: var(--accent); font-size: 0.9rem; }
+    #sidebar ul { list-style: none; padding-left: 12px; margin-top: 4px; }
+    #sidebar ul li a { color: var(--sidebar-text); text-decoration: none; font-size: 0.85rem; line-height: 1.9; opacity: 0.85; }
+    #sidebar ul li a:hover { color: var(--accent); opacity: 1; }
+    #main { margin-left: 260px; flex: 1; padding: 40px 60px; max-width: 900px; }
+    #main h1 { font-size: 2rem; color: var(--text); border-bottom: 2px solid var(--accent); padding-bottom: 8px; margin-bottom: 24px; }
+    #main h2 { font-size: 1.4rem; margin-top: 32px; margin-bottom: 12px; color: var(--accent); }
+    #main h3 { font-size: 1.1rem; margin-top: 20px; margin-bottom: 8px; }
+    #main p { line-height: 1.8; margin-bottom: 12px; }
+    #main table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+    #main th { background: var(--accent); color: white; padding: 8px 12px; text-align: left; }
+    #main td { padding: 7px 12px; border-bottom: 1px solid #e8d5b0; }
+    #main tr:nth-child(even) td { background: #faf4e8; }
+    #main ul, #main ol { padding-left: 24px; margin-bottom: 12px; line-height: 1.9; }
+    #main img { max-width: 100%; border-radius: 6px; margin: 12px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+    #main code { background: #f0e8d5; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 0.9em; }
+    #main pre { background: #f0e8d5; padding: 16px; border-radius: 6px; overflow-x: auto; margin: 12px 0; }
+    #main blockquote { border-left: 3px solid var(--accent); padding-left: 16px; color: #5a4030; margin: 12px 0; }
+    .tag { display: inline-block; background: var(--accent); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin: 2px; }
+    .frontmatter { background: #faf0d8; border: 1px solid #e0c890; border-radius: 6px; padding: 12px 16px; margin-bottom: 24px; font-size: 0.85rem; }
+    a { color: var(--accent); }
+    @media (max-width: 768px) { #sidebar { display: none; } #main { margin-left: 0; padding: 24px 20px; } }
+  </style>
+</head>
+<body>
+  <nav id="sidebar">
+    <h1>🍞 Bread KB</h1>
+    <p class="tagline">Global Bread Knowledge Base</p>
+    <input type="text" id="search" placeholder="Search breads…" oninput="filterNav(this.value)">
+    <div id="nav"><details open><summary>🏳 France</summary><ul>
+<li><a href="../France/baguette.html">Baguette</a></li>
+<li><a href="../France/brioche.html">Brioche</a></li>
+<li><a href="../France/croissant.html">Croissant</a></li>
+<li><a href="../France/pain_de_campagne.html">Pain De Campagne</a></li>
+</ul></details>
+<details open><summary>🏳 Germany</summary><ul>
+<li><a href="../Germany/pretzel.html">Pretzel</a></li>
+<li><a href="../Germany/pumpernickel.html">Pumpernickel</a></li>
+<li><a href="../Germany/rye_bread.html">Rye Bread</a></li>
+<li><a href="../Germany/vollkornbrot.html">Vollkornbrot</a></li>
+</ul></details>
+<details open><summary>🏳 India</summary><ul>
+<li><a href="../India/chapati.html">Chapati</a></li>
+<li><a href="../India/naan.html">Naan</a></li>
+<li><a href="../India/parotta.html">Parotta</a></li>
+<li><a href="../India/pav.html">Pav</a></li>
+</ul></details>
+<details open><summary>🏳 Italy</summary><ul>
+<li><a href="../Italy/ciabatta.html">Ciabatta</a></li>
+<li><a href="../Italy/focaccia.html">Focaccia</a></li>
+<li><a href="../Italy/grissini.html">Grissini</a></li>
+<li><a href="../Italy/pane_di_casa.html">Pane Di Casa</a></li>
+</ul></details>
+<details open><summary>🏳 USA</summary><ul>
+<li><a href="../USA/bagel.html">Bagel</a></li>
+<li><a href="../USA/cornbread.html">Cornbread</a></li>
+<li><a href="../USA/pretzel.html">Pretzel</a></li>
+<li><a href="../USA/sourdough.html">Sourdough</a></li>
+</ul></details></div>
+  </nav>
+  <main id="main">
+    <div class="frontmatter"><strong>Country:</strong> Germany &nbsp;|&nbsp; <strong>Updated:</strong> 2025-01-20 &nbsp;|&nbsp; <span class="tag">bread</span> <span class="tag">german</span> <span class="tag">rye</span> <span class="tag">whole-grain</span> <span class="tag">sourdough</span> <span class="tag">wholemeal</span> <span class="tag">european</span></div><h1>Vollkornbrot</h1>
+<h2>Overview</h2>
+<p>Vollkornbrot (literally "whole-grain bread") is a dense, dark, nutritionally rich German bread made from whole rye and/or wheat kernels, often including coarsely ground meal and intact whole grains. Renowned for its deep earthy flavor, chewy crumb, and exceptional keeping qualities, it is a staple of the German <em>Brotkultur</em> and one of the most distinctive whole-grain breads in the world. By German food regulation, a bread may only be labeled <em>Vollkornbrot</em> if at least 90% of its grain content is whole-grain rye or wheat.</p>
+<h2>Origin &amp; Country</h2>
+<p>Vollkornbrot originates in <strong>Germany</strong>, where rye-based whole-grain baking has been a cornerstone of regional cuisine for centuries. It is closely associated with northern and eastern Germany, where rye thrives in cooler climates and poorer soils, but it is baked and consumed throughout the German-speaking world, including Austria and Switzerland.</p>
+<h2>History &amp; Evolution</h2>
+<p>Rye cultivation spread across northern and central Europe in the early Middle Ages, becoming the dominant grain in regions where wheat struggled to flourish. German bakers developed sophisticated sourdough techniques to handle rye's low gluten and high enzymatic activity, producing the dense, long-keeping loaves that became the ancestor of modern Vollkornbrot.</p>
+<p>The specific tradition of using whole, unmilled or coarsely cracked rye berries crystallized in the 19th and 20th centuries, intersecting with the German <em>Lebensreform</em> (life reform) and natural-foods movements that championed unrefined, whole foods. The early 20th-century invention and popularization of Pumpernickel-style steam-baked dark breads, along with figures like Dr. Werner Kollath who promoted whole-grain nutrition, cemented Vollkornbrot's reputation as a wholesome staple.</p>
+<p>Today, Germany's bread register lists hundreds of Vollkornbrot variants, and the bread enjoys protected definitions under the German Food Code (<em>Leitsätze für Brot und Kleingebäck</em>), which mandate the ≥90% whole-grain rule.</p>
+<h2>Recipe</h2>
+<h3>Ingredients</h3>
+<p><strong>Sourdough starter (refresh the day before):</strong><br />
+- 50 g active rye sourdough<br />
+- 150 g whole-rye flour<br />
+- 150 g water (lukewarm)</p>
+<p><strong>Soaker (overnight):</strong><br />
+- 250 g whole rye berries (kernels)<br />
+- 350 g boiling water<br />
+- 8 g salt</p>
+<p><strong>Final dough:</strong><br />
+- All of the sourdough (≈ 350 g)<br />
+- All of the soaker (≈ 600 g)<br />
+- 250 g whole-rye flour (or coarse rye meal)<br />
+- 100 g whole-wheat or whole-spelt flour<br />
+- 8 g salt<br />
+- 10 g molasses or barley malt syrup (optional, for color and flavor)<br />
+- 50–80 g sunflower seeds, flaxseeds, or pumpkin seeds (optional)<br />
+- Water as needed to achieve a thick, sticky paste</p>
+<h3>Method</h3>
+<ol>
+<li><strong>Refresh the sourdough</strong> 12–16 hours before mixing: combine starter, rye flour, and water; cover and ferment at room temperature until bubbly and tangy.</li>
+<li><strong>Prepare the soaker</strong> the night before: pour boiling salted water over the rye berries, cover, and let stand 8–12 hours until softened. (Alternatively, simmer the berries 20 minutes, then cool.)</li>
+<li><strong>Mix the final dough</strong>: combine sourdough, soaker (with its liquid), flours, salt, malt, and seeds. Stir vigorously with a sturdy spoon or dough hook for 5–8 minutes. The dough will be heavy, sticky, and paste-like — this is correct.</li>
+<li><strong>Pan up</strong>: scrape the dough into a well-greased Pullman or loaf pan (about 1.2–1.5 kg capacity). Smooth the top with a wet spatula and dust lightly with rye flour or seeds.</li>
+<li><strong>Proof</strong> at warm room temperature (24–28 °C) for 2–4 hours, until the dough has risen by about 20–30% and small cracks appear on the surface.</li>
+<li><strong>Bake</strong>: preheat oven to 250 °C (480 °F). Place the loaf in the oven, add steam (a splash of water on a hot tray), and bake 15 minutes. Reduce to 180 °C (355 °F) and bake a further 60–75 minutes. Internal temperature should reach 96–98 °C (205–208 °F).</li>
+<li><strong>Cool and rest</strong>: turn out and cool completely on a rack. <strong>Wrap in a clean cloth and rest at least 24 hours</strong> (ideally 48) before slicing — this allows the crumb to set, the flavors to develop, and the moisture to equalize.</li>
+<li><strong>Serve</strong> in thin slices. Properly stored in a cloth or bread box, Vollkornbrot keeps fresh for 7–10 days.</li>
+</ol>
+<h2>Variations</h2>
+<ul>
+<li><strong>Roggenvollkornbrot</strong> — 100% whole rye, the most traditional form.</li>
+<li><strong>Weizenvollkornbrot</strong> — made with whole wheat instead of rye, lighter in color and flavor.</li>
+<li><strong>Dinkelvollkornbrot</strong> — a spelt-based version, popular in southern Germany and Switzerland.</li>
+<li><strong>Vollkornbrot mit Saaten</strong> — enriched with sunflower, pumpkin, sesame, or flax seeds.</li>
+<li><strong>Leinsamenbrot</strong> — heavily loaded with linseed for extra moisture and omega-3s.</li>
+<li><strong>Pumpernickel</strong> — a closely related cousin baked extremely slowly (16–24 hours) at low temperatures, producing an even darker, sweeter loaf via Maillard reactions.</li>
+<li><strong>Schwarzbrot</strong> — a broader category of dark German rye breads that overlaps significantly with Vollkornbrot.</li>
+</ul>
+<h2>Cultural Context</h2>
+<p>Bread holds an exceptional place in German culture: UNESCO inscribed <em>German Bread Culture</em> (<em>Deutsche Brotkultur</em>) on its national list of intangible cultural heritage in 2014. Vollkornbrot sits at the heart of this tradition.</p>
+<p>It is the foundation of the daily <em>Abendbrot</em> ("evening bread"), the cold supper of bread, sliced cheeses, cured meats, pickles, and butter that remains a defining German meal. Thin slices of Vollkornbrot pair traditionally with smoked fish, Mettwurst, aged cheese, quark, or simply good butter and salt. It is also a centerpiece of the German bakery offering — a country with more than 3,000 registered bread varieties, the largest such repertoire in the world.</p>
+<p>Beyond the table, Vollkornbrot symbolizes wholesomeness, frugality, and connection to the land. It anchored the early-20th-century German whole-foods and reform movements and remains a touchstone for contemporary natural-foods and sourdough revival communities worldwide.</p>
+<h2>Images</h2>
+<p><em>No images included in source material. Suggested visuals: a sliced loaf revealing the dense, kernel-flecked crumb; a Pullman pan loaf with a cracked, seed-dusted top; a traditional German </em>Abendbrot<em> spread.</em></p>
+<h2>Related Breads</h2>
+<ul>
+<li>Pumpernickel</li>
+<li>Schwarzbrot</li>
+<li>Roggenbrot</li>
+<li>Mischbrot</li>
+<li>Bauernbrot</li>
+<li>Dinkelbrot</li>
+<li>Knäckebrot</li>
+</ul>
+<h2>References</h2>
+<ol>
+<li>Wikipedia contributors. "Rye bread." <em>Wikipedia, The Free Encyclopedia.</em> https://en.wikipedia.org/wiki/Rye_bread</li>
+<li>Leitsätze für Brot und Kleingebäck — German Food Code guidelines on bread classification (referenced for the 90% whole-grain definition).</li>
+<li>UNESCO Intangible Cultural Heritage — German Bread Culture inscription, 2014 (referenced for cultural context).</li>
+</ol>
+<p><em>Note: Only one source (the Wikipedia article on rye bread) was supplied directly; additional contextual information about German bread regulations, UNESCO recognition, and traditional methods is drawn from widely accepted general knowledge of German bread culture and should be independently verified for scholarly use.</em></p>
+  </main>
+  <script>
+    function filterNav(q) {
+      q = q.toLowerCase();
+      document.querySelectorAll('#nav li').forEach(li => {
+        li.style.display = li.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+      document.querySelectorAll('#nav details').forEach(d => {
+        const visible = [...d.querySelectorAll('li')].some(li => li.style.display !== 'none');
+        d.style.display = visible || !q ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

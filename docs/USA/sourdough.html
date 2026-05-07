@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sourdough — Bread Knowledge Base</title>
+  <style>
+    :root {
+      --bg: #fdf8f0; --surface: #fff; --text: #2c2416;
+      --accent: #c07a2a; --sidebar-bg: #3b2a1a; --sidebar-text: #f5e6d0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Georgia', serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; }
+    #sidebar { width: 260px; min-height: 100vh; background: var(--sidebar-bg); color: var(--sidebar-text); padding: 24px 16px; position: fixed; overflow-y: auto; }
+    #sidebar h1 { font-size: 1.1rem; margin-bottom: 4px; color: var(--accent); }
+    #sidebar .tagline { font-size: 0.75rem; opacity: 0.7; margin-bottom: 20px; }
+    #sidebar input { width: 100%; padding: 6px 8px; border-radius: 4px; border: none; font-size: 0.85rem; margin-bottom: 16px; }
+    #sidebar details summary { cursor: pointer; font-weight: bold; padding: 4px 0; color: var(--accent); font-size: 0.9rem; }
+    #sidebar ul { list-style: none; padding-left: 12px; margin-top: 4px; }
+    #sidebar ul li a { color: var(--sidebar-text); text-decoration: none; font-size: 0.85rem; line-height: 1.9; opacity: 0.85; }
+    #sidebar ul li a:hover { color: var(--accent); opacity: 1; }
+    #main { margin-left: 260px; flex: 1; padding: 40px 60px; max-width: 900px; }
+    #main h1 { font-size: 2rem; color: var(--text); border-bottom: 2px solid var(--accent); padding-bottom: 8px; margin-bottom: 24px; }
+    #main h2 { font-size: 1.4rem; margin-top: 32px; margin-bottom: 12px; color: var(--accent); }
+    #main h3 { font-size: 1.1rem; margin-top: 20px; margin-bottom: 8px; }
+    #main p { line-height: 1.8; margin-bottom: 12px; }
+    #main table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+    #main th { background: var(--accent); color: white; padding: 8px 12px; text-align: left; }
+    #main td { padding: 7px 12px; border-bottom: 1px solid #e8d5b0; }
+    #main tr:nth-child(even) td { background: #faf4e8; }
+    #main ul, #main ol { padding-left: 24px; margin-bottom: 12px; line-height: 1.9; }
+    #main img { max-width: 100%; border-radius: 6px; margin: 12px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+    #main code { background: #f0e8d5; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 0.9em; }
+    #main pre { background: #f0e8d5; padding: 16px; border-radius: 6px; overflow-x: auto; margin: 12px 0; }
+    #main blockquote { border-left: 3px solid var(--accent); padding-left: 16px; color: #5a4030; margin: 12px 0; }
+    .tag { display: inline-block; background: var(--accent); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin: 2px; }
+    .frontmatter { background: #faf0d8; border: 1px solid #e0c890; border-radius: 6px; padding: 12px 16px; margin-bottom: 24px; font-size: 0.85rem; }
+    a { color: var(--accent); }
+    @media (max-width: 768px) { #sidebar { display: none; } #main { margin-left: 0; padding: 24px 20px; } }
+  </style>
+</head>
+<body>
+  <nav id="sidebar">
+    <h1>🍞 Bread KB</h1>
+    <p class="tagline">Global Bread Knowledge Base</p>
+    <input type="text" id="search" placeholder="Search breads…" oninput="filterNav(this.value)">
+    <div id="nav"><details open><summary>🏳 France</summary><ul>
+<li><a href="../France/baguette.html">Baguette</a></li>
+<li><a href="../France/brioche.html">Brioche</a></li>
+<li><a href="../France/croissant.html">Croissant</a></li>
+<li><a href="../France/pain_de_campagne.html">Pain De Campagne</a></li>
+</ul></details>
+<details open><summary>🏳 Germany</summary><ul>
+<li><a href="../Germany/pretzel.html">Pretzel</a></li>
+<li><a href="../Germany/pumpernickel.html">Pumpernickel</a></li>
+<li><a href="../Germany/rye_bread.html">Rye Bread</a></li>
+<li><a href="../Germany/vollkornbrot.html">Vollkornbrot</a></li>
+</ul></details>
+<details open><summary>🏳 India</summary><ul>
+<li><a href="../India/chapati.html">Chapati</a></li>
+<li><a href="../India/naan.html">Naan</a></li>
+<li><a href="../India/parotta.html">Parotta</a></li>
+<li><a href="../India/pav.html">Pav</a></li>
+</ul></details>
+<details open><summary>🏳 Italy</summary><ul>
+<li><a href="../Italy/ciabatta.html">Ciabatta</a></li>
+<li><a href="../Italy/focaccia.html">Focaccia</a></li>
+<li><a href="../Italy/grissini.html">Grissini</a></li>
+<li><a href="../Italy/pane_di_casa.html">Pane Di Casa</a></li>
+</ul></details>
+<details open><summary>🏳 USA</summary><ul>
+<li><a href="../USA/bagel.html">Bagel</a></li>
+<li><a href="../USA/cornbread.html">Cornbread</a></li>
+<li><a href="../USA/pretzel.html">Pretzel</a></li>
+<li><a href="../USA/sourdough.html">Sourdough</a></li>
+</ul></details></div>
+  </nav>
+  <main id="main">
+    <div class="frontmatter"><strong>Country:</strong> USA (San Francisco) &nbsp;|&nbsp; <strong>Updated:</strong> 2026-05-06 &nbsp;|&nbsp; <span class="tag">sourdough</span> <span class="tag">fermented</span> <span class="tag">artisan</span> <span class="tag">wild-yeast</span> <span class="tag">wheat</span> <span class="tag">tangy</span></div><h1>Sourdough</h1>
+<h2>Overview</h2>
+<p>Sourdough is a naturally leavened bread made by fermenting dough with wild yeast and lactic acid bacteria (LAB). Unlike commercial breads that use packaged yeast, sourdough relies on a living <em>starter</em> culture — a fermented mixture of flour and water teeming with microorganisms. The result is bread with a complex, tangy flavor, chewy crumb, blistered crust, and superior shelf life. While sourdough is humanity's oldest bread-leavening technique, its modern artisan revival is most closely associated with <strong>San Francisco, California</strong>.</p>
+<h2>Origin &amp; Country</h2>
+<p><strong>Primary Association:</strong> San Francisco, USA<br />
+<strong>Leavening Method:</strong> Wild-yeast starter (<em>Lactobacillus sanfranciscensis</em> / <em>Fructilactobacillus sanfranciscensis</em>)<br />
+<strong>Historical Origin:</strong> Ancient Egypt (~3700 BCE) — first known leavened bread<br />
+<strong>American Revival:</strong> Boudin Bakery, San Francisco, est. <strong>1849</strong> (Gold Rush era)</p>
+<p>The <em>Lactobacillus sanfranciscensis</em> bacterium — now taxonomically renamed — thrives in San Francisco's cool, foggy microclimate and gives the city's sourdough its distinctive sharp tang. Bakers claim this flavor cannot be perfectly replicated elsewhere, even with the same starter culture.</p>
+<h2>History &amp; Evolution</h2>
+<table>
+<thead>
+<tr>
+<th>Period</th>
+<th>Event</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>~3700 BCE</td>
+<td>Ancient Egyptians discover wild-yeast leavening</td>
+</tr>
+<tr>
+<td>~500 BCE</td>
+<td>Greeks and Romans refine sourdough techniques</td>
+</tr>
+<tr>
+<td>1849</td>
+<td>Isidore Boudin opens San Francisco's first sourdough bakery during Gold Rush</td>
+</tr>
+<tr>
+<td>1850–1900</td>
+<td>SF sourdough becomes an iconic Gold Rush food; "sourdoughs" = nickname for prospectors</td>
+</tr>
+<tr>
+<td>1900–1970</td>
+<td>Commercial yeast displaces sourdough in mainstream baking</td>
+</tr>
+<tr>
+<td>1980s</td>
+<td>Chad Robertson and others spark artisan bread revival</td>
+</tr>
+<tr>
+<td>2010s</td>
+<td>Home baking sourdough renaissance; Tartine Bakery methodology popularized</td>
+</tr>
+<tr>
+<td>2020</td>
+<td>COVID-19 lockdowns trigger global sourdough baking explosion</td>
+</tr>
+</tbody>
+</table>
+<p>The "Tartine effect" — named for Chad Robertson's landmark San Francisco bakery and his 2010 <em>Tartine Bread</em> book — transformed sourdough from a niche pursuit into a worldwide obsession. Robertson's method emphasizes high hydration, long cold fermentation, and baking in a covered cast iron Dutch oven to trap steam.</p>
+<h2>Recipe</h2>
+<h3>Ingredients</h3>
+<p><strong>Starter (maintain and feed 5–7 days before baking)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Ingredient</th>
+<th>Amount</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Active sourdough starter</td>
+<td>50 g</td>
+</tr>
+<tr>
+<td>Bread flour</td>
+<td>50 g</td>
+</tr>
+<tr>
+<td>Whole wheat flour</td>
+<td>50 g</td>
+</tr>
+<tr>
+<td>Water (room temp)</td>
+<td>100 ml</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Main Dough (1 large loaf)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Ingredient</th>
+<th>Amount</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bread flour</td>
+<td>400 g</td>
+</tr>
+<tr>
+<td>Whole wheat flour</td>
+<td>50 g</td>
+</tr>
+<tr>
+<td>Water (warm, ~32 °C)</td>
+<td>335 ml</td>
+</tr>
+<tr>
+<td>Active starter (at peak)</td>
+<td>90 g</td>
+</tr>
+<tr>
+<td>Fine sea salt</td>
+<td>10 g</td>
+</tr>
+</tbody>
+</table>
+<h3>Method</h3>
+<ol>
+<li>
+<p><strong>Feed starter:</strong> 8–12 hours before mixing, feed your starter (50g starter : 100g flour : 100g water). It should be domed, bubbly, and smell pleasantly sour at peak.</p>
+</li>
+<li>
+<p><strong>Autolyse:</strong> Mix flour and 300 ml water until no dry flour remains. Rest, covered, 45 minutes.</p>
+</li>
+<li>
+<p><strong>Add starter &amp; salt:</strong> Dimple in starter and salt. Add remaining 35 ml water. Squeeze and fold until fully incorporated (~5 min). Rest 30 minutes.</p>
+</li>
+<li>
+<p><strong>Bulk fermentation (4–5 hours at 24–26 °C):</strong><br />
+   - <strong>First 2 hours:</strong> Perform 4 sets of stretch-and-fold every 30 minutes.<br />
+   - <strong>Remaining time:</strong> Leave undisturbed. Dough should grow 50–75 % and feel airy and jiggly.</p>
+</li>
+<li>
+<p><strong>Pre-shape:</strong> Turn onto lightly floured surface. Shape into rough round. Rest 20–30 min uncovered.</p>
+</li>
+<li>
+<p><strong>Final shape:</strong> Shape into a tight boule or batard. Place seam-side UP into a floured banneton (proofing basket).</p>
+</li>
+<li>
+<p><strong>Cold retard:</strong> Cover and refrigerate 8–16 hours (overnight).</p>
+</li>
+<li>
+<p><strong>Bake:</strong><br />
+   - Preheat oven to 500 °F (260 °C) with Dutch oven inside for 1 hour.<br />
+   - Score loaf with a razor blade (lame).<br />
+   - Bake covered: 20 minutes.<br />
+   - Uncover, reduce to 450 °F: 20–25 minutes until deep mahogany crust.<br />
+   - Cool on wire rack at least 1 hour before cutting.</p>
+</li>
+</ol>
+<p><strong>Hydration:</strong> ~75 % | <strong>Fermentation:</strong> 12–20 hours total</p>
+<h2>Variations</h2>
+<table>
+<thead>
+<tr>
+<th>Variation</th>
+<th>Key Difference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>San Francisco sourdough</strong></td>
+<td>Extra sour; long cold retard; <em>L. sanfranciscensis</em> dominant</td>
+</tr>
+<tr>
+<td><strong>Tartine country bread</strong></td>
+<td>75–80 % hydration; whole wheat + AP mix; open crumb</td>
+</tr>
+<tr>
+<td><strong>Rye sourdough</strong></td>
+<td>Partial or full rye flour; darker, earthier flavor</td>
+</tr>
+<tr>
+<td><strong>Einkorn sourdough</strong></td>
+<td>Ancient grain; nutty, sweet; denser crumb</td>
+</tr>
+<tr>
+<td><strong>Discard sourdough</strong></td>
+<td>Uses unfed starter in pancakes, crackers, waffles</td>
+</tr>
+<tr>
+<td><strong>Whole wheat sourdough</strong></td>
+<td>Denser, more nutritious; shorter ferment</td>
+</tr>
+</tbody>
+</table>
+<h2>Cultural Context</h2>
+<p>In 19th-century San Francisco, sourdough was survival food. Gold Rush miners (dubbed "sourdoughs") carried their starters everywhere, sleeping with them in cold weather to keep them alive. The bread sustained entire communities in an era before refrigeration.</p>
+<p>Today sourdough carries strong cultural weight in the artisan food movement. A living starter — some dating back decades or even centuries — is a prized possession passed between bakers like an heirloom. During the COVID-19 pandemic, home sourdough baking became a global phenomenon, symbolizing both self-sufficiency and community during isolation.</p>
+<p>San Francisco's iconic sourdough is protected by a community of bakers who argue its flavor is <em>terroir</em>-dependent — as tied to place as a French wine's character.</p>
+<h2>Images</h2>
+<p><img alt="Sourdough boule with open crumb" src="../../data/images/usa/sourdough/sourdough_main.jpg" /><br />
+<img alt="Sourdough starter in jar" src="../../data/images/usa/sourdough/starter.jpg" /></p>
+<p><em>(Images: Classic San Francisco-style boule and active starter at peak)</em></p>
+<h2>Related Breads</h2>
+<ul>
+<li>Pain de campagne — French country bread; similar wild-yeast leavening</li>
+<li>Pumpernickel — German sourdough rye bread</li>
+<li>Ciabatta — Italian; different technique but shares artisan open-crumb aesthetic</li>
+<li>Baguette — uses commercial yeast; often contrasted with sourdough</li>
+<li>Vollkornbrot — German whole-grain sourdough</li>
+</ul>
+<h2>References</h2>
+<ol>
+<li>Robertson, C. (2010). <em>Tartine Bread</em>. Chronicle Books.</li>
+<li>Wood, E. (1996). <em>World Sourdoughs from Antiquity</em>. Ten Speed Press.</li>
+<li>Boudin Bakery. "Our History." https://www.boudinfbakery.com/history</li>
+<li>Modernist Cuisine. (2017). <em>Modernist Bread</em>, Vol. 2. The Cooking Lab.</li>
+<li>Wikipedia contributors. "Sourdough." <em>Wikipedia</em>. https://en.wikipedia.org/wiki/Sourdough</li>
+<li>King Arthur Baking. "The Definitive Sourdough Guide." https://www.kingarthurbaking.com/learn/guides/sourdough</li>
+</ol>
+  </main>
+  <script>
+    function filterNav(q) {
+      q = q.toLowerCase();
+      document.querySelectorAll('#nav li').forEach(li => {
+        li.style.display = li.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+      document.querySelectorAll('#nav details').forEach(d => {
+        const visible = [...d.querySelectorAll('li')].some(li => li.style.display !== 'none');
+        d.style.display = visible || !q ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

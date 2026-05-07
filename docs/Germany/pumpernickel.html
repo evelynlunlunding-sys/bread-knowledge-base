@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pumpernickel — Bread Knowledge Base</title>
+  <style>
+    :root {
+      --bg: #fdf8f0; --surface: #fff; --text: #2c2416;
+      --accent: #c07a2a; --sidebar-bg: #3b2a1a; --sidebar-text: #f5e6d0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Georgia', serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; }
+    #sidebar { width: 260px; min-height: 100vh; background: var(--sidebar-bg); color: var(--sidebar-text); padding: 24px 16px; position: fixed; overflow-y: auto; }
+    #sidebar h1 { font-size: 1.1rem; margin-bottom: 4px; color: var(--accent); }
+    #sidebar .tagline { font-size: 0.75rem; opacity: 0.7; margin-bottom: 20px; }
+    #sidebar input { width: 100%; padding: 6px 8px; border-radius: 4px; border: none; font-size: 0.85rem; margin-bottom: 16px; }
+    #sidebar details summary { cursor: pointer; font-weight: bold; padding: 4px 0; color: var(--accent); font-size: 0.9rem; }
+    #sidebar ul { list-style: none; padding-left: 12px; margin-top: 4px; }
+    #sidebar ul li a { color: var(--sidebar-text); text-decoration: none; font-size: 0.85rem; line-height: 1.9; opacity: 0.85; }
+    #sidebar ul li a:hover { color: var(--accent); opacity: 1; }
+    #main { margin-left: 260px; flex: 1; padding: 40px 60px; max-width: 900px; }
+    #main h1 { font-size: 2rem; color: var(--text); border-bottom: 2px solid var(--accent); padding-bottom: 8px; margin-bottom: 24px; }
+    #main h2 { font-size: 1.4rem; margin-top: 32px; margin-bottom: 12px; color: var(--accent); }
+    #main h3 { font-size: 1.1rem; margin-top: 20px; margin-bottom: 8px; }
+    #main p { line-height: 1.8; margin-bottom: 12px; }
+    #main table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+    #main th { background: var(--accent); color: white; padding: 8px 12px; text-align: left; }
+    #main td { padding: 7px 12px; border-bottom: 1px solid #e8d5b0; }
+    #main tr:nth-child(even) td { background: #faf4e8; }
+    #main ul, #main ol { padding-left: 24px; margin-bottom: 12px; line-height: 1.9; }
+    #main img { max-width: 100%; border-radius: 6px; margin: 12px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+    #main code { background: #f0e8d5; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 0.9em; }
+    #main pre { background: #f0e8d5; padding: 16px; border-radius: 6px; overflow-x: auto; margin: 12px 0; }
+    #main blockquote { border-left: 3px solid var(--accent); padding-left: 16px; color: #5a4030; margin: 12px 0; }
+    .tag { display: inline-block; background: var(--accent); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin: 2px; }
+    .frontmatter { background: #faf0d8; border: 1px solid #e0c890; border-radius: 6px; padding: 12px 16px; margin-bottom: 24px; font-size: 0.85rem; }
+    a { color: var(--accent); }
+    @media (max-width: 768px) { #sidebar { display: none; } #main { margin-left: 0; padding: 24px 20px; } }
+  </style>
+</head>
+<body>
+  <nav id="sidebar">
+    <h1>🍞 Bread KB</h1>
+    <p class="tagline">Global Bread Knowledge Base</p>
+    <input type="text" id="search" placeholder="Search breads…" oninput="filterNav(this.value)">
+    <div id="nav"><details open><summary>🏳 France</summary><ul>
+<li><a href="../France/baguette.html">Baguette</a></li>
+<li><a href="../France/brioche.html">Brioche</a></li>
+<li><a href="../France/croissant.html">Croissant</a></li>
+<li><a href="../France/pain_de_campagne.html">Pain De Campagne</a></li>
+</ul></details>
+<details open><summary>🏳 Germany</summary><ul>
+<li><a href="../Germany/pretzel.html">Pretzel</a></li>
+<li><a href="../Germany/pumpernickel.html">Pumpernickel</a></li>
+<li><a href="../Germany/rye_bread.html">Rye Bread</a></li>
+<li><a href="../Germany/vollkornbrot.html">Vollkornbrot</a></li>
+</ul></details>
+<details open><summary>🏳 India</summary><ul>
+<li><a href="../India/chapati.html">Chapati</a></li>
+<li><a href="../India/naan.html">Naan</a></li>
+<li><a href="../India/parotta.html">Parotta</a></li>
+<li><a href="../India/pav.html">Pav</a></li>
+</ul></details>
+<details open><summary>🏳 Italy</summary><ul>
+<li><a href="../Italy/ciabatta.html">Ciabatta</a></li>
+<li><a href="../Italy/focaccia.html">Focaccia</a></li>
+<li><a href="../Italy/grissini.html">Grissini</a></li>
+<li><a href="../Italy/pane_di_casa.html">Pane Di Casa</a></li>
+</ul></details>
+<details open><summary>🏳 USA</summary><ul>
+<li><a href="../USA/bagel.html">Bagel</a></li>
+<li><a href="../USA/cornbread.html">Cornbread</a></li>
+<li><a href="../USA/pretzel.html">Pretzel</a></li>
+<li><a href="../USA/sourdough.html">Sourdough</a></li>
+</ul></details></div>
+  </nav>
+  <main id="main">
+    <div class="frontmatter"><strong>Country:</strong> Germany &nbsp;|&nbsp; <strong>Updated:</strong> 2025-01-15 &nbsp;|&nbsp; <span class="tag">rye-bread</span> <span class="tag">sourdough</span> <span class="tag">westphalian</span> <span class="tag">dark-bread</span> <span class="tag">traditional</span> <span class="tag">german-bread</span></div><h1>Pumpernickel</h1>
+<h2>Overview</h2>
+<p>Pumpernickel is a dense, dark, slightly sweet rye bread originating from the Westphalia region of Germany. Traditionally made from coarsely ground rye flour and whole rye berries, it is renowned for its deep brown to nearly black color, distinctive earthy-sweet flavor, and remarkably long shelf life. Authentic Westphalian pumpernickel is steam-baked at low temperatures for up to 24 hours, a slow process that caramelizes the natural sugars in the rye grain through the Maillard reaction, producing the bread's signature color and flavor without the need for added coloring.</p>
+<h2>Origin &amp; Country</h2>
+<p><strong>Country of Origin:</strong> Germany<br />
+<strong>Region:</strong> Westphalia (Westfalen), in present-day North Rhine-Westphalia</p>
+<p>Pumpernickel has been associated with Westphalia since at least the mid-15th century, where the abundance of rye and the tradition of communal village ovens made the slow-baked, long-keeping loaf a staple of rural life.</p>
+<h2>History &amp; Evolution</h2>
+<p>The first printed reference to pumpernickel-style bread from Westphalia dates to <strong>1450</strong>, though it is unclear whether these early loaves were precisely what we now call pumpernickel. An earlier English term for similar bread was <em>cranck broat</em>, meaning "sick bread."</p>
+<p>The word <em>Pumpernickel</em> itself entered English literature by <strong>1738</strong> as a loanword from German. Its etymology is colorful and somewhat unflattering:<br />
+- <strong>Pumper</strong> — early modern German for "fart" (recorded in this sense in 1558), derived from Middle High German <em>pumpern</em>, meaning "to knock or fall noisily."<br />
+- <strong>Nickel</strong> — a pet form of the name <em>Nikolaus</em>.</p>
+<p>Before being applied to bread, <em>Pumpernickel</em> was a German term meaning "lout" (and later, in southern German-speaking regions, "vivacious child" or "small, plump person"). The Oxford English Dictionary notes the term is "clearly depreciative," likely coined by outsiders to mock Westphalian bread as either hard to digest, flatulence-inducing, or generally coarse and rustic.</p>
+<p>A widespread but false folk etymology, recorded as early as the 1600s, claims the name comes from French <em>bon pour Nicole</em> ("good only for Nicole," supposedly a horse) — a story so popular it produced the variant German form <em>bonpournikel</em>.</p>
+<p><strong>Class transition:</strong> For centuries, pumpernickel was peasant fare. During the 20th century, it gained popularity across all social classes through delicatessens and supermarkets, eventually becoming an internationally recognized bread.</p>
+<p><strong>European vs. North American forms:</strong> Modern American pumpernickel often departs significantly from tradition — it tends to be lighter, uses added leaveners, may omit whole rye berries, includes wheat flour, employs caramel coloring or molasses for color, is baked at higher temperatures for far shorter times, and often features a glazed crust. Authentic Westphalian pumpernickel, by contrast, traditionally contains <strong>no leavening agent at all</strong> — neither yeast nor sourdough starter — relying entirely on the slow, steamy bake to transform the dense rye dough.</p>
+<h2>Recipe</h2>
+<h3>Ingredients</h3>
+<p><em>Yields one dense loaf (approx. 1 kg)</em></p>
+<table>
+<thead>
+<tr>
+<th>Ingredient</th>
+<th>Quantity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Coarsely ground whole rye meal (pumpernickel flour)</td>
+<td>500 g</td>
+</tr>
+<tr>
+<td>Whole rye berries (soaked overnight)</td>
+<td>250 g</td>
+</tr>
+<tr>
+<td>Water (warm)</td>
+<td>400 ml</td>
+</tr>
+<tr>
+<td>Salt</td>
+<td>10 g</td>
+</tr>
+<tr>
+<td>Optional: dark malt syrup or molasses (for color depth)</td>
+<td>1 tbsp</td>
+</tr>
+<tr>
+<td>Optional: rye sourdough starter (for modern variations)</td>
+<td>100 g</td>
+</tr>
+</tbody>
+</table>
+<h3>Method</h3>
+<ol>
+<li><strong>Soak the rye berries</strong> in cold water overnight (12–24 hours) until softened, then drain.</li>
+<li><strong>Mix the dough:</strong> Combine the coarse rye meal, soaked rye berries, salt, and warm water. (If using sourdough starter or malt syrup, add now.) Mix thoroughly into a stiff, sticky paste. The dough will be heavy and porridge-like.</li>
+<li><strong>Rest</strong> for 1–2 hours at room temperature to allow the rye to fully hydrate.</li>
+<li><strong>Pack</strong> the dough firmly into a well-greased loaf pan or Pullman tin with a tight-fitting lid (essential for trapping steam). Press out air pockets.</li>
+<li><strong>Steam-bake low and slow:</strong> Place the covered pan in a larger roasting tray filled with hot water (a water bath). Bake at <strong>120 °C (250 °F) for 16–24 hours</strong>. Traditional Westphalian bakers may bake even longer at lower temperatures.</li>
+<li><strong>Cool completely</strong> in the pan — overnight is best. The bread should be deeply dark brown to black, dense, and moist.</li>
+<li><strong>Wrap and rest</strong> for at least 24 hours before slicing thinly. Flavor improves over several days.</li>
+</ol>
+<blockquote>
+<p><strong>Tip:</strong> Pumpernickel keeps for weeks when wrapped well. Slice paper-thin to serve.</p>
+</blockquote>
+<h2>Variations</h2>
+<ul>
+<li><strong>Westphalian Pumpernickel (traditional):</strong> Unleavened, steam-baked 16–24 hours, contains whole rye berries, no added color.</li>
+<li><strong>Modern German Pumpernickel:</strong> Often uses sourdough starter for tang and accelerated fermentation; still long-baked.</li>
+<li><strong>North American Pumpernickel:</strong> Lighter, faster-baked, often contains wheat flour, caramel coloring, molasses, cocoa, or coffee for color and flavor; closer in style to a rye bread or Jewish rye.</li>
+<li><strong>Marbled / Swirled Pumpernickel:</strong> A loaf combining pumpernickel and lighter rye doughs, common in delis.</li>
+<li><strong>Cocktail Pumpernickel:</strong> Tiny square slices used as canapé bases.</li>
+</ul>
+<h2>Cultural Context</h2>
+<p>Pumpernickel is one of the most iconic regional breads of Germany and a proud emblem of Westphalian identity. Its long bake was historically efficient: villagers shared communal ovens, and a loaf that could bake overnight on residual heat made economic sense. Its dense, long-keeping nature also suited rural households where bread baking was a weekly or monthly event.</p>
+<p>In modern Germany, pumpernickel is typically served thinly sliced as part of an <em>Abendbrot</em> (evening cold supper) or <em>Brotzeit</em>, paired with strong cheeses (especially Limburger or aged Gouda), cured meats, smoked fish, butter, or sweet accompaniments like quark and honey. It is also a popular base for canapés.</p>
+<p>The bread carries an enduring cultural reputation for being <em>deftig</em> — hearty, honest, and unpretentious — qualities long associated with Westphalian character itself. Despite the name's likely origins as an insult about its coarseness or digestibility, pumpernickel has become a celebrated culinary heritage product, with several Westphalian bakeries (notably in Soest and the Münsterland) producing it by traditional methods to this day.</p>
+<h2>Images</h2>
+<p><em>Images to be added — suggested:</em><br />
+- A whole loaf of dark Westphalian pumpernickel in cross-section<br />
+- Thinly sliced pumpernickel served with butter and smoked fish<br />
+- A traditional steam-bake oven in a Westphalian bakery<br />
+- Whole rye berries and coarse rye meal side by side</p>
+<h2>Related Breads</h2>
+<ul>
+<li>Vollkornbrot — German whole-grain rye loaf, a close cousin</li>
+<li>Roggenbrot — generic German rye bread</li>
+<li>Schwarzbrot — "black bread," a broader German category that includes pumpernickel</li>
+<li>Jewish rye — North American deli rye, sometimes marbled with pumpernickel</li>
+<li>Borodinsky bread — Russian dark rye with similar deep flavor</li>
+<li>Limpa — Swedish rye bread, sweeter and lighter</li>
+<li>Sourdough rye — fermentation cousin of modern pumpernickel</li>
+</ul>
+<h2>References</h2>
+<ol>
+<li>Wikipedia: <em>Pumpernickel</em>. https://en.wikipedia.org/wiki/Pumpernickel</li>
+<li>Oxford English Dictionary, entry on <em>Pumpernickel</em> (etymology and historical usage).</li>
+<li>Historical reference to Westphalian bread, first printed mention 1450.</li>
+<li>Early English-language attestation, 1738.</li>
+</ol>
+  </main>
+  <script>
+    function filterNav(q) {
+      q = q.toLowerCase();
+      document.querySelectorAll('#nav li').forEach(li => {
+        li.style.display = li.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+      document.querySelectorAll('#nav details').forEach(d => {
+        const visible = [...d.querySelectorAll('li')].some(li => li.style.display !== 'none');
+        d.style.display = visible || !q ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

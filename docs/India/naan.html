@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naan — Bread Knowledge Base</title>
+  <style>
+    :root {
+      --bg: #fdf8f0; --surface: #fff; --text: #2c2416;
+      --accent: #c07a2a; --sidebar-bg: #3b2a1a; --sidebar-text: #f5e6d0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Georgia', serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; }
+    #sidebar { width: 260px; min-height: 100vh; background: var(--sidebar-bg); color: var(--sidebar-text); padding: 24px 16px; position: fixed; overflow-y: auto; }
+    #sidebar h1 { font-size: 1.1rem; margin-bottom: 4px; color: var(--accent); }
+    #sidebar .tagline { font-size: 0.75rem; opacity: 0.7; margin-bottom: 20px; }
+    #sidebar input { width: 100%; padding: 6px 8px; border-radius: 4px; border: none; font-size: 0.85rem; margin-bottom: 16px; }
+    #sidebar details summary { cursor: pointer; font-weight: bold; padding: 4px 0; color: var(--accent); font-size: 0.9rem; }
+    #sidebar ul { list-style: none; padding-left: 12px; margin-top: 4px; }
+    #sidebar ul li a { color: var(--sidebar-text); text-decoration: none; font-size: 0.85rem; line-height: 1.9; opacity: 0.85; }
+    #sidebar ul li a:hover { color: var(--accent); opacity: 1; }
+    #main { margin-left: 260px; flex: 1; padding: 40px 60px; max-width: 900px; }
+    #main h1 { font-size: 2rem; color: var(--text); border-bottom: 2px solid var(--accent); padding-bottom: 8px; margin-bottom: 24px; }
+    #main h2 { font-size: 1.4rem; margin-top: 32px; margin-bottom: 12px; color: var(--accent); }
+    #main h3 { font-size: 1.1rem; margin-top: 20px; margin-bottom: 8px; }
+    #main p { line-height: 1.8; margin-bottom: 12px; }
+    #main table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+    #main th { background: var(--accent); color: white; padding: 8px 12px; text-align: left; }
+    #main td { padding: 7px 12px; border-bottom: 1px solid #e8d5b0; }
+    #main tr:nth-child(even) td { background: #faf4e8; }
+    #main ul, #main ol { padding-left: 24px; margin-bottom: 12px; line-height: 1.9; }
+    #main img { max-width: 100%; border-radius: 6px; margin: 12px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+    #main code { background: #f0e8d5; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 0.9em; }
+    #main pre { background: #f0e8d5; padding: 16px; border-radius: 6px; overflow-x: auto; margin: 12px 0; }
+    #main blockquote { border-left: 3px solid var(--accent); padding-left: 16px; color: #5a4030; margin: 12px 0; }
+    .tag { display: inline-block; background: var(--accent); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin: 2px; }
+    .frontmatter { background: #faf0d8; border: 1px solid #e0c890; border-radius: 6px; padding: 12px 16px; margin-bottom: 24px; font-size: 0.85rem; }
+    a { color: var(--accent); }
+    @media (max-width: 768px) { #sidebar { display: none; } #main { margin-left: 0; padding: 24px 20px; } }
+  </style>
+</head>
+<body>
+  <nav id="sidebar">
+    <h1>🍞 Bread KB</h1>
+    <p class="tagline">Global Bread Knowledge Base</p>
+    <input type="text" id="search" placeholder="Search breads…" oninput="filterNav(this.value)">
+    <div id="nav"><details open><summary>🏳 France</summary><ul>
+<li><a href="../France/baguette.html">Baguette</a></li>
+<li><a href="../France/brioche.html">Brioche</a></li>
+<li><a href="../France/croissant.html">Croissant</a></li>
+<li><a href="../France/pain_de_campagne.html">Pain De Campagne</a></li>
+</ul></details>
+<details open><summary>🏳 Germany</summary><ul>
+<li><a href="../Germany/pretzel.html">Pretzel</a></li>
+<li><a href="../Germany/pumpernickel.html">Pumpernickel</a></li>
+<li><a href="../Germany/rye_bread.html">Rye Bread</a></li>
+<li><a href="../Germany/vollkornbrot.html">Vollkornbrot</a></li>
+</ul></details>
+<details open><summary>🏳 India</summary><ul>
+<li><a href="../India/chapati.html">Chapati</a></li>
+<li><a href="../India/naan.html">Naan</a></li>
+<li><a href="../India/parotta.html">Parotta</a></li>
+<li><a href="../India/pav.html">Pav</a></li>
+</ul></details>
+<details open><summary>🏳 Italy</summary><ul>
+<li><a href="../Italy/ciabatta.html">Ciabatta</a></li>
+<li><a href="../Italy/focaccia.html">Focaccia</a></li>
+<li><a href="../Italy/grissini.html">Grissini</a></li>
+<li><a href="../Italy/pane_di_casa.html">Pane Di Casa</a></li>
+</ul></details>
+<details open><summary>🏳 USA</summary><ul>
+<li><a href="../USA/bagel.html">Bagel</a></li>
+<li><a href="../USA/cornbread.html">Cornbread</a></li>
+<li><a href="../USA/pretzel.html">Pretzel</a></li>
+<li><a href="../USA/sourdough.html">Sourdough</a></li>
+</ul></details></div>
+  </nav>
+  <main id="main">
+    <div class="frontmatter"><strong>Country:</strong> India &nbsp;|&nbsp; <strong>Updated:</strong> 2025-01-15 &nbsp;|&nbsp; <span class="tag">flatbread</span> <span class="tag">leavened</span> <span class="tag">tandoor</span> <span class="tag">indian-cuisine</span> <span class="tag">south-asian</span> <span class="tag">mughal-cuisine</span></div><h1>Naan</h1>
+<h2>Overview</h2>
+<p>Naan is a leavened, oven-baked flatbread celebrated for its light, fluffy texture and characteristic golden-brown blistering. Traditionally baked in a clay tandoor at scorching temperatures, naan can also be prepared on a tawa (griddle) at home. Once baked, it is brushed with ghee or butter and served warm — soft, pliable, and ideally suited to scooping up curries, stews, and sauces, or pairing with drier dishes like tandoori chicken and kebabs.</p>
+<p>Although naan is enjoyed across many cuisines worldwide today, it holds a particularly iconic place in the breadbasket of the Indian subcontinent.</p>
+<h2>Origin &amp; Country</h2>
+<p>Naan is most closely associated with <strong>India</strong>, where it became a hallmark of Mughal-era cuisine and remains a staple of North Indian dining. However, the bread's roots are Persian: the word <em>naan</em> derives from the Persian <em>nân</em> (نان), a generic term meaning simply "bread."</p>
+<p>From Persia and Central Asia, naan spread through the Islamic world and entered the Indian subcontinent during the medieval period, where it was refined into the form recognized globally today.</p>
+<h2>History &amp; Evolution</h2>
+<p>Naan arrived in the Indian subcontinent during the <strong>Delhi Sultanate</strong> (13th–16th centuries), carried by Persian and Central Asian culinary traditions. The earliest known mention of naan in the region appears in the writings of the Indo-Persian Sufi poet <strong>Amir Khusrau</strong> in the 1300s. Khusrau described two varieties enjoyed by Muslim nobles:</p>
+<ul>
+<li><strong>Naan-e-Tunuk</strong> — a light, thin bread</li>
+<li><strong>Naan-e-Tanuri</strong> — a heavier bread baked in a tandoor</li>
+</ul>
+<p>During the <strong>Mughal era</strong> beginning in the 1520s, naan was an aristocratic delicacy. The lengthy fermentation process and the specialized skill required to bake in a tandoor meant it was reserved for royalty and nobility. The <em>Ain-i-Akbari</em>, the great chronicle of Emperor Akbar's reign, mentions naan being eaten with kebabs and kheema (minced meat).</p>
+<p>By the <strong>1700s</strong>, naan had spread from royal kitchens to the broader population in Mughal cultural centers across South Asia. The earliest English-language reference appears in an 1803 travelogue by William Tooke, who spelled it "nan" — the now-dominant spelling "naan" only became standard from the 1970s onward.</p>
+<p>Today, naan has traveled far beyond its South Asian heartland, appearing on menus from London to Jakarta.</p>
+<h2>Recipe</h2>
+<h3>Ingredients</h3>
+<table>
+<thead>
+<tr>
+<th>Ingredient</th>
+<th>Quantity</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>White (or wheat) flour</td>
+<td>500 g</td>
+<td>All-purpose flour works best</td>
+</tr>
+<tr>
+<td>Active dry yeast</td>
+<td>7 g (1 packet)</td>
+<td>Or substitute baking powder for a quicker version</td>
+</tr>
+<tr>
+<td>Warm water</td>
+<td>120 ml</td>
+<td>~40°C / 105°F</td>
+</tr>
+<tr>
+<td>Plain yogurt</td>
+<td>120 ml</td>
+<td>Adds tang and tenderness</td>
+</tr>
+<tr>
+<td>Salt</td>
+<td>1 tsp</td>
+<td></td>
+</tr>
+<tr>
+<td>Sugar</td>
+<td>1 tsp</td>
+<td>Helps activate yeast</td>
+</tr>
+<tr>
+<td>Ghee or melted butter</td>
+<td>2 tbsp</td>
+<td>Plus extra for brushing</td>
+</tr>
+<tr>
+<td>Milk (optional)</td>
+<td>60 ml</td>
+<td>For a softer crumb</td>
+</tr>
+<tr>
+<td>Egg (optional)</td>
+<td>1</td>
+<td>Adds richness</td>
+</tr>
+<tr>
+<td>Honey (optional)</td>
+<td>1 tsp</td>
+<td></td>
+</tr>
+<tr>
+<td>Nigella seeds, garlic, or coriander</td>
+<td>To taste</td>
+<td>For topping</td>
+</tr>
+</tbody>
+</table>
+<h3>Method</h3>
+<ol>
+<li><strong>Bloom the yeast.</strong> Combine warm water, sugar, and yeast in a bowl. Let it rest for 10 minutes until foamy.</li>
+<li><strong>Form the dough.</strong> In a large bowl, mix flour and salt. Add the yeast mixture, yogurt, ghee, and milk/egg if using. Knead for 8–10 minutes until smooth and elastic.</li>
+<li><strong>First rise.</strong> Cover and let the dough rise in a warm place for 1–2 hours, until doubled in size.</li>
+<li><strong>Divide and shape.</strong> Punch down the dough and divide into 6–8 balls. Roll each into a teardrop or oval shape, about 5 mm thick.</li>
+<li><strong>Bake.</strong> Three options:<br />
+   - <strong>Tandoor (traditional):</strong> Slap the dough onto the inner wall of a tandoor heated to ~480°C (900°F). Bake for 1–2 minutes until blistered.<br />
+   - <strong>Tawa/skillet:</strong> Heat a heavy cast-iron pan until smoking. Cook the naan for 1 minute, then flip the pan upside-down over the flame to char the top side directly.<br />
+   - <strong>Oven:</strong> Preheat to maximum (260°C / 500°F) with a pizza stone. Bake 3–4 minutes.</li>
+<li><strong>Finish.</strong> Brush generously with ghee or butter while still hot. Sprinkle with chopped garlic, coriander, or nigella seeds if desired. Serve immediately.</li>
+</ol>
+<h2>Variations</h2>
+<ul>
+<li><strong>Garlic Naan</strong> — Topped with minced garlic and fresh coriander.</li>
+<li><strong>Butter Naan</strong> — Liberally brushed with butter or ghee after baking.</li>
+<li><strong>Keema Naan</strong> — Stuffed with spiced minced meat, recalling the Mughal-era preparation noted in the <em>Ain-i-Akbari</em>.</li>
+<li><strong>Peshawari Naan</strong> — Sweet, stuffed with nuts, raisins, and coconut.</li>
+<li><strong>Kashmiri Naan</strong> — Filled with dried fruits and nuts.</li>
+<li><strong>Naan-e-Tunuk</strong> — The historical thin variant mentioned by Amir Khusrau.</li>
+<li><strong>Naan-e-Tanuri</strong> — The historical heavy, tandoor-baked variant.</li>
+<li><strong>Roti Naan (Indonesia)</strong> — A localized version popular among Indonesian Indians, Arabs, Malays, Acehnese, and Minangkabaus, often cooked with Indonesian spices like garlic.</li>
+<li><strong>Naan Bya (Myanmar)</strong> — Burmese teahouse staple (နံပြား); round, soft, blistered, and buttered, served as breakfast with tea or coffee.</li>
+</ul>
+<h2>Cultural Context</h2>
+<p>Naan is far more than a side dish — it is an edible utensil, a vehicle for sauces, and a symbol of communal dining. In North Indian, Pakistani, and Afghan households, tearing naan with the hands and using it to scoop curries is the natural rhythm of a meal.</p>
+<p>Historically, naan carried strong associations with <strong>courtly luxury and Islamic nobility</strong> during the Mughal period, when leavened, tandoor-baked bread signified status. Its democratization in the 18th century parallels the broader spread of Mughal foodways into popular culture.</p>
+<p>In contemporary times, naan has become a global ambassador for Indian cuisine. It anchors Indian restaurant menus from New York to Tokyo, and supermarket shelves now carry pre-made versions worldwide. In Indonesia, it appears as <em>roti naan</em>, distinct from but related to roti canai. In Myanmar, <em>naan bya</em> is a beloved breakfast tradition in teahouses.</p>
+<h2>Images</h2>
+<p><em>Images not included in source material. Suggested visuals:</em><br />
+- Naan being slapped against the wall of a glowing tandoor<br />
+- A platter of garlic naan brushed with ghee and sprinkled with coriander<br />
+- A traditional Mughal-era manuscript illustration depicting royal feasting<br />
+- Naan bya served with tea at a Burmese teahouse</p>
+<h2>Related Breads</h2>
+<ul>
+<li>Roti — Unleavened Indian flatbread cooked on a tawa</li>
+<li>Chapati — Everyday Indian unleavened wheat flatbread</li>
+<li>Tandoori Roti — Whole-wheat counterpart baked in a tandoor</li>
+<li>Kulcha — A close cousin, often leavened with baking powder rather than yeast</li>
+<li>Roti Canai — Malaysian/Indonesian flaky flatbread of Tamil origin</li>
+<li>Lavash — Persian/Armenian thin flatbread sharing tandoor heritage</li>
+<li>Bazlama — Turkish leavened flatbread</li>
+<li>Pita — Middle Eastern leavened flatbread</li>
+<li>Naan Bya — Burmese teahouse adaptation</li>
+</ul>
+<h2>References</h2>
+<ol>
+<li>Wikipedia contributors. "Naan." <em>Wikipedia, The Free Encyclopedia.</em> https://en.wikipedia.org/wiki/Naan</li>
+<li>Tooke, William. <em>Travelogue</em> (1803) — earliest known English-language reference to "nan."</li>
+<li>Khusrau, Amir. Memoirs (14th century) — earliest South Asian mention of <em>Naan-e-Tunuk</em> and <em>Naan-e-Tanuri</em>.</li>
+<li>Abu'l-Fazl ibn Mubarak. <em>Ain-i-Akbari</em> (16th century) — Mughal-era references to naan served with kebabs and kheema.</li>
+</ol>
+  </main>
+  <script>
+    function filterNav(q) {
+      q = q.toLowerCase();
+      document.querySelectorAll('#nav li').forEach(li => {
+        li.style.display = li.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+      document.querySelectorAll('#nav details').forEach(d => {
+        const visible = [...d.querySelectorAll('li')].some(li => li.style.display !== 'none');
+        d.style.display = visible || !q ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

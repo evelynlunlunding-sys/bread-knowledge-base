@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ciabatta — Bread Knowledge Base</title>
+  <style>
+    :root {
+      --bg: #fdf8f0; --surface: #fff; --text: #2c2416;
+      --accent: #c07a2a; --sidebar-bg: #3b2a1a; --sidebar-text: #f5e6d0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Georgia', serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; }
+    #sidebar { width: 260px; min-height: 100vh; background: var(--sidebar-bg); color: var(--sidebar-text); padding: 24px 16px; position: fixed; overflow-y: auto; }
+    #sidebar h1 { font-size: 1.1rem; margin-bottom: 4px; color: var(--accent); }
+    #sidebar .tagline { font-size: 0.75rem; opacity: 0.7; margin-bottom: 20px; }
+    #sidebar input { width: 100%; padding: 6px 8px; border-radius: 4px; border: none; font-size: 0.85rem; margin-bottom: 16px; }
+    #sidebar details summary { cursor: pointer; font-weight: bold; padding: 4px 0; color: var(--accent); font-size: 0.9rem; }
+    #sidebar ul { list-style: none; padding-left: 12px; margin-top: 4px; }
+    #sidebar ul li a { color: var(--sidebar-text); text-decoration: none; font-size: 0.85rem; line-height: 1.9; opacity: 0.85; }
+    #sidebar ul li a:hover { color: var(--accent); opacity: 1; }
+    #main { margin-left: 260px; flex: 1; padding: 40px 60px; max-width: 900px; }
+    #main h1 { font-size: 2rem; color: var(--text); border-bottom: 2px solid var(--accent); padding-bottom: 8px; margin-bottom: 24px; }
+    #main h2 { font-size: 1.4rem; margin-top: 32px; margin-bottom: 12px; color: var(--accent); }
+    #main h3 { font-size: 1.1rem; margin-top: 20px; margin-bottom: 8px; }
+    #main p { line-height: 1.8; margin-bottom: 12px; }
+    #main table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+    #main th { background: var(--accent); color: white; padding: 8px 12px; text-align: left; }
+    #main td { padding: 7px 12px; border-bottom: 1px solid #e8d5b0; }
+    #main tr:nth-child(even) td { background: #faf4e8; }
+    #main ul, #main ol { padding-left: 24px; margin-bottom: 12px; line-height: 1.9; }
+    #main img { max-width: 100%; border-radius: 6px; margin: 12px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+    #main code { background: #f0e8d5; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 0.9em; }
+    #main pre { background: #f0e8d5; padding: 16px; border-radius: 6px; overflow-x: auto; margin: 12px 0; }
+    #main blockquote { border-left: 3px solid var(--accent); padding-left: 16px; color: #5a4030; margin: 12px 0; }
+    .tag { display: inline-block; background: var(--accent); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin: 2px; }
+    .frontmatter { background: #faf0d8; border: 1px solid #e0c890; border-radius: 6px; padding: 12px 16px; margin-bottom: 24px; font-size: 0.85rem; }
+    a { color: var(--accent); }
+    @media (max-width: 768px) { #sidebar { display: none; } #main { margin-left: 0; padding: 24px 20px; } }
+  </style>
+</head>
+<body>
+  <nav id="sidebar">
+    <h1>🍞 Bread KB</h1>
+    <p class="tagline">Global Bread Knowledge Base</p>
+    <input type="text" id="search" placeholder="Search breads…" oninput="filterNav(this.value)">
+    <div id="nav"><details open><summary>🏳 France</summary><ul>
+<li><a href="../France/baguette.html">Baguette</a></li>
+<li><a href="../France/brioche.html">Brioche</a></li>
+<li><a href="../France/croissant.html">Croissant</a></li>
+<li><a href="../France/pain_de_campagne.html">Pain De Campagne</a></li>
+</ul></details>
+<details open><summary>🏳 Germany</summary><ul>
+<li><a href="../Germany/pretzel.html">Pretzel</a></li>
+<li><a href="../Germany/pumpernickel.html">Pumpernickel</a></li>
+<li><a href="../Germany/rye_bread.html">Rye Bread</a></li>
+<li><a href="../Germany/vollkornbrot.html">Vollkornbrot</a></li>
+</ul></details>
+<details open><summary>🏳 India</summary><ul>
+<li><a href="../India/chapati.html">Chapati</a></li>
+<li><a href="../India/naan.html">Naan</a></li>
+<li><a href="../India/parotta.html">Parotta</a></li>
+<li><a href="../India/pav.html">Pav</a></li>
+</ul></details>
+<details open><summary>🏳 Italy</summary><ul>
+<li><a href="../Italy/ciabatta.html">Ciabatta</a></li>
+<li><a href="../Italy/focaccia.html">Focaccia</a></li>
+<li><a href="../Italy/grissini.html">Grissini</a></li>
+<li><a href="../Italy/pane_di_casa.html">Pane Di Casa</a></li>
+</ul></details>
+<details open><summary>🏳 USA</summary><ul>
+<li><a href="../USA/bagel.html">Bagel</a></li>
+<li><a href="../USA/cornbread.html">Cornbread</a></li>
+<li><a href="../USA/pretzel.html">Pretzel</a></li>
+<li><a href="../USA/sourdough.html">Sourdough</a></li>
+</ul></details></div>
+  </nav>
+  <main id="main">
+    <div class="frontmatter"><strong>Country:</strong> Italy &nbsp;|&nbsp; <strong>Updated:</strong> 2026-05-06 &nbsp;|&nbsp; <span class="tag">italian</span> <span class="tag">artisan</span> <span class="tag">olive-oil</span> <span class="tag">yeast</span> <span class="tag">wheat</span> <span class="tag">soft-crumb</span></div><h1>Ciabatta</h1>
+<h2>Overview</h2>
+<p>Ciabatta (Italian: <em>slipper bread</em>) is a white Italian bread made with wheat flour, water, olive oil, salt, and yeast. Its hallmarks are an extremely open, irregular crumb dotted with large air pockets, a thin crisp crust, and a flat, elongated shape that resembles an old Italian slipper — hence the name. Despite its rustic appearance and ancient-feeling character, ciabatta is a relatively modern invention, created to compete with the baguette's rising popularity in Italy.</p>
+<h2>Origin &amp; Country</h2>
+<p><strong>Country:</strong> Italy<br />
+<strong>Region of Origin:</strong> Veneto (Adria, Province of Rovigo)<br />
+<strong>Creator:</strong> Arnaldo Cavallari, a baker and miller, who developed the recipe in <strong>1982</strong>.</p>
+<p>Ciabatta was born in the Veneto region of northern Italy. Arnaldo Cavallari, working at his family bakery, spent months experimenting to create a bread with a softer, more open crumb than existing Italian loaves — one that could absorb olive oil and fillings without becoming soggy.</p>
+<h2>History &amp; Evolution</h2>
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Event</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1982</td>
+<td>Arnaldo Cavallari invents ciabatta in Adria, Veneto</td>
+</tr>
+<tr>
+<td>1985</td>
+<td>Recipe trademarked; licensing begins across Italy</td>
+</tr>
+<tr>
+<td>1985–1990</td>
+<td>Spread to bakeries across northern and central Italy</td>
+</tr>
+<tr>
+<td>1990s</td>
+<td>Introduced to UK, USA, and wider Europe</td>
+</tr>
+<tr>
+<td>2000s</td>
+<td>Becomes the default bread for panini sandwiches globally</td>
+</tr>
+</tbody>
+</table>
+<p>The bread's rapid popularization was partly commercial: Cavallari licensed the name and recipe to around 2,000 bakeries across Italy. By the 1990s it had crossed to the UK and North America, where it became synonymous with upscale sandwiches and restaurant bread baskets.</p>
+<p>The key technical breakthrough was the use of a very wet dough (<em>biga</em> starter + high hydration), which produces the signature open crumb. Ciabatta dough is so wet it cannot be kneaded by hand and must be stretched and folded rather than shaped conventionally.</p>
+<h2>Recipe</h2>
+<h3>Ingredients</h3>
+<p><strong>Biga (Pre-ferment) — make 12–16 h ahead</strong></p>
+<table>
+<thead>
+<tr>
+<th>Ingredient</th>
+<th>Amount</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bread flour (high protein)</td>
+<td>200 g</td>
+</tr>
+<tr>
+<td>Water (room temp)</td>
+<td>130 ml</td>
+</tr>
+<tr>
+<td>Instant yeast</td>
+<td>0.1 g (tiny pinch)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Main Dough</strong></p>
+<table>
+<thead>
+<tr>
+<th>Ingredient</th>
+<th>Amount</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bread flour</td>
+<td>300 g</td>
+</tr>
+<tr>
+<td>Water (warm, ~28 °C)</td>
+<td>270 ml</td>
+</tr>
+<tr>
+<td>Instant yeast</td>
+<td>5 g</td>
+</tr>
+<tr>
+<td>Fine sea salt</td>
+<td>10 g</td>
+</tr>
+<tr>
+<td>Extra-virgin olive oil</td>
+<td>25 ml</td>
+</tr>
+<tr>
+<td>All of the biga</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3>Method</h3>
+<ol>
+<li>
+<p><strong>Make the biga:</strong> Mix flour, water, and yeast until shaggy. Cover and ferment at room temperature for 12–16 hours until bubbly and at least doubled.</p>
+</li>
+<li>
+<p><strong>Autolyse:</strong> Combine biga, main flour, and 220 ml of the water. Mix until just combined. Rest 30 minutes.</p>
+</li>
+<li>
+<p><strong>Add yeast &amp; salt:</strong> Dissolve yeast in remaining 50 ml water; add to dough along with salt and olive oil. Mix vigorously with dough hook (or by hand using the "slap and fold" method) for 8–10 minutes until dough is smooth but still very tacky.</p>
+</li>
+<li>
+<p><strong>Bulk fermentation (stretch &amp; fold):</strong> Transfer dough to oiled container. Perform 4 rounds of stretch-and-fold every 30 minutes. Total bulk: 2–2.5 hours at 24 °C until dough has puffed and feels airy.</p>
+</li>
+<li>
+<p><strong>Divide &amp; shape:</strong> Generously flour work surface. Tip dough gently — do NOT degas. Cut into 2 rectangles. Stretch each gently to slipper shape (~30 × 10 cm). Dust heavily with flour.</p>
+</li>
+<li>
+<p><strong>Final proof:</strong> Rest on floured couche or parchment for 45–60 minutes.</p>
+</li>
+<li>
+<p><strong>Bake:</strong> Preheat oven to 240 °C (465 °F) with a baking stone or steel and steam pan. Slide ciabattas in. Add 1 cup boiling water to steam pan. Bake 20–22 minutes until deep golden and hollow-sounding when tapped. Cool on wire rack for 20 minutes before cutting.</p>
+</li>
+</ol>
+<p><strong>Baker's percentages:</strong> 100 % flour, 80 % hydration, 2 % salt, 1 % yeast, 5 % olive oil.</p>
+<h2>Variations</h2>
+<table>
+<thead>
+<tr>
+<th>Variation</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Ciabatta al latte</strong></td>
+<td>Made with milk instead of water; softer crust</td>
+</tr>
+<tr>
+<td><strong>Ciabatta integrale</strong></td>
+<td>Whole wheat version; denser crumb</td>
+</tr>
+<tr>
+<td><strong>Ciabatta con olive</strong></td>
+<td>Studded with Kalamata or Taggiasca olives</td>
+</tr>
+<tr>
+<td><strong>Ciabatta con rosmarino</strong></td>
+<td>Fresh rosemary folded into dough</td>
+</tr>
+<tr>
+<td><strong>Ciabattina</strong></td>
+<td>Miniature rolls for individual panini</td>
+</tr>
+<tr>
+<td><strong>Frozen par-baked</strong></td>
+<td>Industrial version sold globally in supermarkets</td>
+</tr>
+</tbody>
+</table>
+<h2>Cultural Context</h2>
+<p>Ciabatta arrived at a moment of anxiety in Italian baking: baguettes imported from France were displacing traditional Italian loaves in the 1970s–80s. Cavallari's creation was an explicit counter-move — an Italian bread that matched the baguette's lightness and versatility while showcasing olive oil, a quintessentially Italian ingredient.</p>
+<p>Today ciabatta is Italy's most internationally recognized bread, appearing on restaurant menus worldwide and forming the foundation of the modern panini (pressed sandwich). In Italy itself, it remains a staple of the <em>tavola calda</em> (fast-lunch counters) and home baking.</p>
+<h2>Images</h2>
+<p><img alt="Ciabatta loaf with open crumb" src="../../data/images/italy/ciabatta/ciabatta_main.jpg" /></p>
+<p><em>(Image: Cross-section showing the characteristic large, irregular air pockets)</em></p>
+<h2>Related Breads</h2>
+<ul>
+<li>Focaccia — another Italian olive-oil bread, but thicker and baked in a pan</li>
+<li>Baguette — the French rival that inspired ciabatta's creation</li>
+<li>Pain de campagne — French country bread with similar open crumb</li>
+<li>Sourdough — shares the open-crumb philosophy but uses wild fermentation</li>
+<li>Pane di Casa — traditional Italian house bread, denser than ciabatta</li>
+</ul>
+<h2>References</h2>
+<ol>
+<li>Cavallari, A. (1982). <em>La ciabatta: origini e tecnica</em>. Bakery Archives, Adria.</li>
+<li>Reinhart, P. (2001). <em>The Bread Baker's Apprentice</em>. Ten Speed Press. pp. 163–170.</li>
+<li>Hamelman, J. (2004). <em>Bread: A Baker's Book of Techniques and Recipes</em>. Wiley. pp. 87–90.</li>
+<li>Wikipedia contributors. "Ciabatta." <em>Wikipedia, The Free Encyclopedia</em>. https://en.wikipedia.org/wiki/Ciabatta</li>
+<li>The Spruce Eats. "How to Make Ciabatta Bread." https://www.thespruceeats.com/ciabatta-bread-recipe-1448784</li>
+</ol>
+  </main>
+  <script>
+    function filterNav(q) {
+      q = q.toLowerCase();
+      document.querySelectorAll('#nav li').forEach(li => {
+        li.style.display = li.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+      document.querySelectorAll('#nav details').forEach(d => {
+        const visible = [...d.querySelectorAll('li')].some(li => li.style.display !== 'none');
+        d.style.display = visible || !q ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>
